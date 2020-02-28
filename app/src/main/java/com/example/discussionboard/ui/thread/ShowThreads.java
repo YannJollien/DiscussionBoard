@@ -1,0 +1,87 @@
+package com.example.discussionboard.ui.thread;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import com.example.discussionboard.R;
+import com.example.discussionboard.adapter.ThreadAdapter;
+import com.example.discussionboard.database.entity.Thread;
+import com.example.discussionboard.database.viewmodel.ThreadViewModel;
+import com.example.discussionboard.ui.post.ShowPosts;
+
+import java.util.List;
+
+public class ShowThreads extends AppCompatActivity {
+
+    private ThreadViewModel threadViewModel;
+
+    int userId;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_show_threads);
+        setTitle("Threads");
+
+        userId = getIntent().getExtras().getInt("userId");
+
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        final ThreadAdapter adapter = new ThreadAdapter();
+
+        recyclerView.setAdapter(adapter);
+
+        threadViewModel = new ViewModelProvider(this).get(ThreadViewModel.class);
+        threadViewModel.getAllThread().observe(this, new Observer<List<Thread>>() {
+            @Override
+            public void onChanged(List<Thread> threads) {
+                adapter.setThreads(threads);
+            }
+        });
+
+        adapter.setOnItemClickListener(new ThreadAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Thread thread) {
+                Intent intent = new Intent(ShowThreads.this, ShowPosts.class);
+                intent.putExtra("threadId", thread.getId());
+                intent.putExtra("userId",userId);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_thread_actionbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                Intent inent= new Intent(ShowThreads.this,AddThread.class);
+                startActivity(inent);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+}
