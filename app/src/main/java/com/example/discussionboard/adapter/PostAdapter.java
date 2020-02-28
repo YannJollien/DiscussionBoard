@@ -14,15 +14,16 @@ import com.example.discussionboard.database.entity.Post;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
 
     private List<Post> posts = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
     public PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.post_cardview,parent,false);
+                .inflate(R.layout.post_cardview, parent, false);
         return new PostHolder(itemView);
     }
 
@@ -39,12 +40,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
         return posts.size();
     }
 
-    public void setPosts(List<Post> posts){
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
         notifyDataSetChanged();
     }
 
-    class PostHolder extends RecyclerView.ViewHolder{
+    public Post getPostAt(int position) {
+        return posts.get(position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Post post);
+    }
+
+    class PostHolder extends RecyclerView.ViewHolder {
 
         private TextView submitter;
         private TextView date;
@@ -54,10 +67,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
             super(itemView);
             submitter = itemView.findViewById(R.id.submitter_view);
             date = itemView.findViewById(R.id.date_view);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(posts.get(position));
+                    }
+
+                }
+            });
         }
-    }
-    public Post getPostAt(int position){
-        return posts.get(position);
     }
 
 }

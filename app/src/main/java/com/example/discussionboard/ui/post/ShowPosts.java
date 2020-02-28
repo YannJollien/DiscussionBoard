@@ -51,6 +51,8 @@ public class ShowPosts extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
+        ArrayList <Post> postsOk = new ArrayList<>();
+
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
         postViewModel.getAllPosts().observe(this, new Observer<List<Post>>() {
             @Override
@@ -92,6 +94,19 @@ public class ShowPosts extends AppCompatActivity {
 
             }
         }).attachToRecyclerView(recyclerView);
+
+        adapter.setOnItemClickListener(new PostAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Post post) {
+                System.out.println("ID vom Adapter "+post.getUserId());
+                System.out.println("Submitter "+post.getSubmitter());
+                Intent intent = new Intent(ShowPosts.this,ShowPostsDetail.class);
+                intent.putExtra("submitter",post.getSubmitter());
+                intent.putExtra("text",post.getText());
+                intent.putExtra("date",post.getDate());
+                startActivity(intent);
+            }
+        });
 
 
     }

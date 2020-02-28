@@ -49,7 +49,7 @@ public abstract class PostDatabase extends RoomDatabase{
         @Override
         protected Void doInBackground(Void... voids) {
             postDao.insert(new Post("Yann","Nice Game","13.02.2020",1,1));
-            postDao.insert(new Post("Peter","Hello there","14.02.2020",2,2));
+            postDao.insert(new Post("Hans","Best Game","13.02.2020",1,2));
             return null;
         }
     }

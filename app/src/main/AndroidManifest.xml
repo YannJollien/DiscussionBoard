@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.post.AddPost"></activity>
+        <activity android:name=".ui.post.ShowPostsDetail"></activity>
+        <activity android:name=".ui.post.AddPost" />
         <activity android:name=".ui.post.ShowPosts" />
         <activity android:name=".ui.thread.AddThread" />
         <activity android:name=".ui.thread.ShowThreads" />

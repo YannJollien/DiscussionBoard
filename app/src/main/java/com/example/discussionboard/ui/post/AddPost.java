@@ -42,7 +42,7 @@ public class AddPost extends AppCompatActivity {
                 savePost();
                 Toast.makeText(getApplicationContext(), "Post Added",
                         Toast.LENGTH_LONG).show();
-                Intent inent= new Intent(AddPost.this,ShowPosts.class);
+                Intent inent= new Intent(AddPost.this,MenuActivity.class);
                 startActivity(inent);
             }
         });
