@@ -21,6 +21,7 @@ import com.example.discussionboard.adapter.PostAdapter;
 import com.example.discussionboard.database.entity.Post;
 import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.ui.MenuActivity;
+import com.example.discussionboard.ui.thread.ShowThreads;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,13 +36,20 @@ public class ShowPosts extends AppCompatActivity {
     private Button delete;
     private Button update;
 
+    MenuActivity menuActivity;
+    ShowThreads showThreads;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_posts);
         setTitle("Posts");
 
-        userId = getIntent().getExtras().getInt("userId");
+        menuActivity = new MenuActivity();
+
+        userId = menuActivity.userId;
+
+        System.out.println("User Id from Show Port "+userId);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_post);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -57,15 +65,14 @@ public class ShowPosts extends AppCompatActivity {
         postViewModel.getAllPosts().observe(this, new Observer<List<Post>>() {
             @Override
             public void onChanged(List<Post> posts) {
-                idThread = getIntent().getExtras().getInt("threadId");
-                System.out.println("IDTHREAD "+idThread);
-                ArrayList <Post> postsOk = new ArrayList<>();
+                showThreads = new ShowThreads();
+                idThread =  showThreads.threadId;
                 for (int i = 0; i < posts.size();i++){
-                    if (posts.get(i).getThreadId()==idThread){
-                        System.out.println(posts.get(i).getSubmitter());
-                        postsOk.add(posts.get(i));
-                        adapter.setPosts(postsOk);
+                    if (posts.get(i).getThreadId()!= idThread){
+                        posts.remove(i);
+
                     }
+                    adapter.setPosts(posts);
                 }
             }
         });

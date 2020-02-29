@@ -15,7 +15,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private Button thread;
 
-    public int userId;
+    public static int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

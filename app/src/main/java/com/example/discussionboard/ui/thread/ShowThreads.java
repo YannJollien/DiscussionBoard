@@ -17,6 +17,7 @@ import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.database.entity.Thread;
 import com.example.discussionboard.database.viewmodel.ThreadViewModel;
+import com.example.discussionboard.ui.MenuActivity;
 import com.example.discussionboard.ui.post.ShowPosts;
 
 import java.util.List;
@@ -26,6 +27,9 @@ public class ShowThreads extends AppCompatActivity {
     private ThreadViewModel threadViewModel;
 
     int userId;
+    public static int threadId;
+
+    MenuActivity menuActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +37,9 @@ public class ShowThreads extends AppCompatActivity {
         setContentView(R.layout.activity_show_threads);
         setTitle("Threads");
 
-        userId = getIntent().getExtras().getInt("userId");
+        menuActivity = new MenuActivity();
 
+        userId = menuActivity.userId;
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,8 +61,7 @@ public class ShowThreads extends AppCompatActivity {
             @Override
             public void onItemClick(Thread thread) {
                 Intent intent = new Intent(ShowThreads.this, ShowPosts.class);
-                intent.putExtra("threadId", thread.getId());
-                intent.putExtra("userId",userId);
+                threadId = thread.getId();
                 startActivity(intent);
             }
         });
