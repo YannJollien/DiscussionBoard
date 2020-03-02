@@ -4,28 +4,47 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.discussionboard.R;
+import com.example.discussionboard.database.entity.Thread;
+import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 import com.example.discussionboard.ui.login.LoginActivity;
+import com.example.discussionboard.ui.rest.ProfileActivity;
 import com.example.discussionboard.ui.thread.ShowThreads;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
 
     public static int userId;
     private DrawerLayout drawerLayout;
+    private ThreadViewModel threadViewModel;
+    int amountThreads;
+
+    private TextView amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        userId = getIntent().getExtras().getInt("userId");
+        amount = findViewById(R.id.amount);
+
+        Intent intent = getIntent();
+        if (intent.getExtras() != null) {
+            userId = getIntent().getExtras().getInt("userId");
+        }
 
         System.out.println("User id :"+userId);
 
@@ -70,10 +89,35 @@ public class MenuActivity extends AppCompatActivity {
                     }
                 });
 
+        getAmountThreads(amount);
+
+        ImageButton ib = (ImageButton) navigationView.getHeaderView(0).findViewById(R.id.nav_button);
+        ib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i6 = new Intent(MenuActivity.this, ProfileActivity.class);
+                startActivity(i6);
+            }
+        });
+
 
     }
 
     public int getUserId() {
         return userId;
+    }
+
+    public void getAmountThreads(final TextView textView){
+        threadViewModel = new ViewModelProvider(this).get(ThreadViewModel.class);
+        threadViewModel.getAllThread().observe(this, new Observer<List<Thread>>() {
+            @Override
+            public void onChanged(List<Thread> threads) {
+                amountThreads = threads.size();
+                System.out.println("Size "+amountThreads);
+                textView.setText(amountThreads+ " Threads online");
+            }
+
+        });
+
     }
 }

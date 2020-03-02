@@ -25,8 +25,6 @@ public class ThreadRepository {
 
     }
 
-
-
     public void insert(Thread thread){
         new InsertThreadAsyncTask(threadDao).execute(thread);
     }
