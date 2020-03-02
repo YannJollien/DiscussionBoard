@@ -7,6 +7,16 @@
     android:orientation="vertical"
     tools:context=".ui.thread.AddThread">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/add_thread_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#790000"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"
+        android:visibility="visible"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <!--New-->
     <TextView
         android:id="@+id/textView1"

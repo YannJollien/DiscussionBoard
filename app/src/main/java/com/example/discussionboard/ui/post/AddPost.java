@@ -1,6 +1,8 @@
 package com.example.discussionboard.ui.post;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -46,6 +48,14 @@ public class AddPost extends AppCompatActivity {
                 startActivity(inent);
             }
         });
+
+        //Back
+        Toolbar myChildToolbar =
+                (Toolbar) findViewById(R.id.add_post_toolbar);
+        setSupportActionBar(myChildToolbar);
+        ActionBar ab = getSupportActionBar();
+
+        ab.setDisplayHomeAsUpEnabled(true);
 
     }
 

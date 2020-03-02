@@ -1,6 +1,8 @@
 package com.example.discussionboard.ui.thread;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,12 +12,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.database.entity.Thread;
+import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 import com.example.discussionboard.ui.MenuActivity;
 import com.example.discussionboard.ui.post.ShowPosts;
@@ -25,6 +27,9 @@ import java.util.List;
 public class ShowThreads extends AppCompatActivity {
 
     private ThreadViewModel threadViewModel;
+    private PostViewModel postViewModel;
+
+    private TextView amount;
 
     int userId;
     public static int threadId;
@@ -36,6 +41,8 @@ public class ShowThreads extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_threads);
         setTitle("Threads");
+
+        amount = findViewById(R.id.category_in);
 
         menuActivity = new MenuActivity();
 
@@ -65,6 +72,14 @@ public class ShowThreads extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Back
+        Toolbar myChildToolbar =
+                (Toolbar) findViewById(R.id.thread_toolbar);
+        setSupportActionBar(myChildToolbar);
+        ActionBar ab = getSupportActionBar();
+
+        ab.setDisplayHomeAsUpEnabled(true);
 
 
     }
