@@ -7,38 +7,49 @@
     android:orientation="vertical"
     tools:context=".ui.thread.AddThread">
 
+    <!--New-->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Thread"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Thread name"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp"
+        android:text="Thread name" />
 
     <EditText
         android:id="@+id/thread_in"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:ems="10"
+        android:inputType="text" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Category"/>
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp"
+        android:text="Category" />
 
     <EditText
         android:id="@+id/category_in"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"/>
-
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:ems="10"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"/>
+        android:text="Add"/>
 
 </LinearLayout>

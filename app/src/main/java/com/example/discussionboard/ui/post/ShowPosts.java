@@ -59,7 +59,6 @@ public class ShowPosts extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-        ArrayList <Post> postsOk = new ArrayList<>();
 
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
         postViewModel.getAllPosts().observe(this, new Observer<List<Post>>() {
@@ -97,6 +96,7 @@ public class ShowPosts extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Can't delete, you are not the owner of the post",
                             Toast.LENGTH_LONG).show();
+                    return;
                 }
 
             }
@@ -111,6 +111,9 @@ public class ShowPosts extends AppCompatActivity {
                 intent.putExtra("submitter",post.getSubmitter());
                 intent.putExtra("text",post.getText());
                 intent.putExtra("date",post.getDate());
+                intent.putExtra("userId",post.getUserId());
+                intent.putExtra("postId",post.getId());
+                intent.putExtra("threadId",post.getThreadId());
                 startActivity(intent);
             }
         });
