@@ -11,7 +11,7 @@
         android:id="@+id/show_post_details_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#790000"
+        android:background="#8FB4DE"
         android:elevation="4dp"
         android:theme="@style/AppTheme"
         android:visibility="visible"
@@ -80,13 +80,19 @@
         android:id="@+id/update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update" />
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:text="Update"
+        android:background="@drawable/custom_button"/>
 
     <Button
         android:id="@+id/save_changes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save" />
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Save"
+        android:background="@drawable/custom_button"/>
 
 
 </LinearLayout>

@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#7A9AAF">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/post_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#790000"
+        android:background="#8FB4DE"
         android:elevation="4dp"
         android:theme="@style/AppTheme"
         android:visibility="visible"

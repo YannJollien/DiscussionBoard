@@ -3,8 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.login.RegisterActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/register_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#8FB4DE"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"
+        android:visibility="visible"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <!--New-->
     <TextView
@@ -88,6 +99,9 @@
         android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register" />
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:text="Register"
+        android:background="@drawable/custom_button"/>
 
 </LinearLayout>

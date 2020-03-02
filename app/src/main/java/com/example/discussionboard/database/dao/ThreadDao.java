@@ -29,4 +29,5 @@ public interface ThreadDao {
     @Query("SELECT * FROM threads")
     LiveData<List<Thread>> getAllThreads();
 
+
 }
