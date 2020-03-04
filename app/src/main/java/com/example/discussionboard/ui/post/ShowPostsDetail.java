@@ -37,6 +37,7 @@ public class ShowPostsDetail extends AppCompatActivity {
     PostViewModel postViewModel;
 
 
+    int id;
     String sub;
     String txt;
     String dt;
@@ -63,6 +64,7 @@ public class ShowPostsDetail extends AppCompatActivity {
         text.setEnabled(false);
         date.setEnabled(false);
 
+        id = getIntent().getExtras().getInt("id");
         sub = getIntent().getExtras().getString("submitter");
         txt = getIntent().getExtras().getString("text");
         dt = getIntent().getExtras().getString("date");
@@ -99,7 +101,9 @@ public class ShowPostsDetail extends AppCompatActivity {
                 String subString = submitter.getText().toString();
                 String textString = text.getText().toString();
                 String dateText = date.getText().toString();
+                System.out.println("New text: "+textString);
                 Post post = new Post(subString,textString,dateText,threadId,userId);
+                post.setId(id);
                 postViewModel.update(post);
                 Intent intent = new Intent(ShowPostsDetail.this,ShowPosts.class);
                 startActivity(intent);

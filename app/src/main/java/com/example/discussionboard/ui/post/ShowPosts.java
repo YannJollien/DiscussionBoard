@@ -110,6 +110,7 @@ public class ShowPosts extends AppCompatActivity {
                 System.out.println("ID vom Adapter "+post.getUserId());
                 System.out.println("Submitter "+post.getSubmitter());
                 Intent intent = new Intent(ShowPosts.this,ShowPostsDetail.class);
+                intent.putExtra("id",post.getId());
                 intent.putExtra("submitter",post.getSubmitter());
                 intent.putExtra("text",post.getText());
                 intent.putExtra("date",post.getDate());

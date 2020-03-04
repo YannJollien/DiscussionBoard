@@ -49,6 +49,7 @@ public abstract class ThreadDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             threadDao.insert(new Thread("Fortnite","Gaming"));
+            threadDao.insert(new Thread("Malware","It"));
             return null;
         }
     }
