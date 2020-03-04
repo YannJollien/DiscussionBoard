@@ -1,5 +1,12 @@
 package com.example.discussionboard.ui.post;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,14 +17,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.PostAdapter;
 import com.example.discussionboard.database.entity.Post;
@@ -25,21 +24,17 @@ import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.ui.MenuActivity;
 import com.example.discussionboard.ui.thread.ShowThreads;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShowPosts extends AppCompatActivity {
 
-    private PostViewModel postViewModel;
-
     int idThread;
     int userId;
-
-    private Button delete;
-    private Button update;
-
     MenuActivity menuActivity;
     ShowThreads showThreads;
+    private PostViewModel postViewModel;
+    private Button delete;
+    private Button update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +46,7 @@ public class ShowPosts extends AppCompatActivity {
 
         userId = menuActivity.userId;
 
-        System.out.println("User Id from Show Port "+userId);
+        System.out.println("User Id from Show Port " + userId);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_post);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -67,9 +62,9 @@ public class ShowPosts extends AppCompatActivity {
             @Override
             public void onChanged(List<Post> posts) {
                 showThreads = new ShowThreads();
-                idThread =  showThreads.threadId;
-                for (int i = 0; i < posts.size();i++){
-                    if (posts.get(i).getThreadId()!= idThread){
+                idThread = showThreads.threadId;
+                for (int i = 0; i < posts.size(); i++) {
+                    if (posts.get(i).getThreadId() != idThread) {
                         posts.remove(i);
 
                     }
@@ -81,7 +76,8 @@ public class ShowPosts extends AppCompatActivity {
         update = findViewById(R.id.update);
 
         //Delete
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -89,9 +85,9 @@ public class ShowPosts extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                System.out.println("ID vom Menu her "+userId);
-                System.out.println("ID vom Adapter "+adapter.getPostAt(viewHolder.getAdapterPosition()).getUserId());
-                if (adapter.getPostAt(viewHolder.getAdapterPosition()).getUserId() == userId){
+                System.out.println("ID vom Menu her " + userId);
+                System.out.println("ID vom Adapter " + adapter.getPostAt(viewHolder.getAdapterPosition()).getUserId());
+                if (adapter.getPostAt(viewHolder.getAdapterPosition()).getUserId() == userId) {
                     postViewModel.delete(adapter.getPostAt(viewHolder.getAdapterPosition()));
                     Toast.makeText(getApplicationContext(), "Post deleted",
                             Toast.LENGTH_LONG).show();
@@ -107,16 +103,16 @@ public class ShowPosts extends AppCompatActivity {
         adapter.setOnItemClickListener(new PostAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Post post) {
-                System.out.println("ID vom Adapter "+post.getUserId());
-                System.out.println("Submitter "+post.getSubmitter());
-                Intent intent = new Intent(ShowPosts.this,ShowPostsDetail.class);
-                intent.putExtra("id",post.getId());
-                intent.putExtra("submitter",post.getSubmitter());
-                intent.putExtra("text",post.getText());
-                intent.putExtra("date",post.getDate());
-                intent.putExtra("userId",post.getUserId());
-                intent.putExtra("postId",post.getId());
-                intent.putExtra("threadId",post.getThreadId());
+                System.out.println("ID vom Adapter " + post.getUserId());
+                System.out.println("Submitter " + post.getSubmitter());
+                Intent intent = new Intent(ShowPosts.this, ShowPostsDetail.class);
+                intent.putExtra("id", post.getId());
+                intent.putExtra("submitter", post.getSubmitter());
+                intent.putExtra("text", post.getText());
+                intent.putExtra("date", post.getDate());
+                intent.putExtra("userId", post.getUserId());
+                intent.putExtra("postId", post.getId());
+                intent.putExtra("threadId", post.getThreadId());
                 startActivity(intent);
             }
         });
@@ -140,7 +136,7 @@ public class ShowPosts extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-                Intent intent= new Intent(ShowPosts.this,AddPost.class);
+                Intent intent = new Intent(ShowPosts.this, AddPost.class);
                 intent.putExtra("threadId", idThread);
                 startActivity(intent);
                 return true;

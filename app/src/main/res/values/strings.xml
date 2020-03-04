@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">DiscussionBoard</string>
+
+    <!--Login and Register-->
+    <string name="login">Login!</string>
+    <string name="email">E-mail</string>
+    <string name="pass">Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Register</string>
+
+    <string name="fname">First name</string>
+    <string name="lname">Last name</string>
+
+    <!--Thread-->
+    <string name="thread">Thread name</string>
+    <string name="category">Category</string>
+    <string name="add">Add</string>
+
+    <!--Post-->
+    <string name="submitter">Submitter name</string>
+    <string name="text">Text</string>
+    <string name="date">Date</string>
+    <string name="button_update">Update</string>
+    <string name="button_save">Save</string>
+
+    <!--Profile-->
+    <string name="login_profile">Logged in as</string>
+    <string name="status">Status</string>
+
+
+
 </resources>

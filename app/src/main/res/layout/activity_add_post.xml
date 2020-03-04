@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.post.AddPost">
+    tools:context=".ui.post.AddPost"
+    android:background="@color/colorBackground">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/add_post_toolbar"
@@ -26,7 +27,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="Submitter name" />
+        android:text="@string/submitter" />
 
     <EditText
         android:id="@+id/submitter_in"
@@ -45,7 +46,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="Your text" />
+        android:text="@string/text" />
 
     <EditText
         android:id="@+id/text_in"
@@ -64,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/custom_button"
-        android:text="Add"/>
+        android:background="@drawable/custom_button2"
+        android:text="@string/add"/>
 
 </LinearLayout>

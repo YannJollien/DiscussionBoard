@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.post.ShowPostsDetail">
+    tools:context=".ui.post.ShowPostsDetail"
+    android:background="@color/colorBackground">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/show_post_details_toolbar"
@@ -25,7 +26,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="Submitter" />
+        android:text="@string/submitter" />
 
     <EditText
         android:id="@+id/submitter_details"
@@ -44,7 +45,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="Text" />
+        android:text="@string/text" />
 
     <EditText
         android:id="@+id/text_details"
@@ -63,7 +64,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="Text" />
+        android:text="@string/date" />
 
     <EditText
         android:id="@+id/date_details"
@@ -82,8 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="10dp"
-        android:text="Update"
-        android:background="@drawable/custom_button"/>
+        android:text="@string/button_update"
+        android:background="@drawable/custom_button2"/>
 
     <Button
         android:id="@+id/save_changes"
@@ -91,8 +92,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:text="Save"
-        android:background="@drawable/custom_button"/>
+        android:text="@string/button_save"
+        android:background="@drawable/custom_button2"/>
 
 
 </LinearLayout>

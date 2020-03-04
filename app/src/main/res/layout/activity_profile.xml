@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.rest.ProfileActivity">
+    tools:context=".ui.rest.ProfileActivity"
+    android:background="@color/colorBackground">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/profile_toolbar"
@@ -23,7 +24,7 @@
         android:layout_marginLeft="150dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logged in as"/>
+        android:text="@string/login_profile"/>
 
     <TextView
         android:id="@+id/profile_mail"
@@ -44,7 +45,7 @@
             android:layout_marginLeft="150dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status"/>
+            android:text="@string/status"/>
 
         <ImageView
             android:id="@+id/status_profile"
@@ -55,6 +56,16 @@
             android:src="@drawable/online" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change password"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:padding="3dp"
+        android:background="@drawable/custom_button2"/>
 
 
 

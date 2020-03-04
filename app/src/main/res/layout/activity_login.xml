@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login!"
+        android:text="@string/login"
         android:textSize="40dp"
         android:textAlignment="center"
         android:layout_marginLeft="150dp"
@@ -26,7 +26,7 @@
         android:layout_marginRight="5dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="E-mail" />
+        android:text="@string/email" />
 
     <EditText
         android:id="@+id/mail"
@@ -35,8 +35,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
-        android:ems="10"
-        android:hint="E-mail" />
+        android:ems="10"/>
 
     <TextView
         android:id="@+id/viewPass"
@@ -45,7 +44,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="5dp"
-        android:text="Password" />
+        android:text="@string/pass" />
 
 
     <EditText
@@ -56,7 +55,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:ems="10"
-        android:hint="password"
         android:inputType="textPassword" />
 
     <LinearLayout
@@ -70,7 +68,7 @@
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/button_login"
             android:background="@drawable/custom_button"/>
 
         <Button
@@ -78,7 +76,7 @@
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Register"
+            android:text="@string/button_register"
             android:background="@drawable/custom_button"/>
 
     </LinearLayout>

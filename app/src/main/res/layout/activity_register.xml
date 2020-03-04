@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.login.RegisterActivity">
+    tools:context=".ui.login.RegisterActivity"
+    android:background="@color/colorBackground">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/register_toolbar"
@@ -25,7 +26,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:text="First name" />
+        android:text="@string/fname" />
 
     <EditText
         android:id="@+id/fname_in"
@@ -44,7 +45,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:text="First name" />
+        android:text="@string/lname" />
 
     <EditText
         android:id="@+id/lname_in"
@@ -63,7 +64,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:text="E-mail" />
+        android:text="@string/email" />
 
     <EditText
         android:id="@+id/email_in"
@@ -82,7 +83,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:text="Password" />
+        android:text="@string/pass" />
 
     <EditText
         android:id="@+id/pwd_in"
@@ -101,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="10dp"
-        android:text="Register"
-        android:background="@drawable/custom_button"/>
+        android:text="@string/button_register"
+        android:background="@drawable/custom_button2"/>
 
 </LinearLayout>

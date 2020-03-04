@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.thread.AddThread">
+    tools:context=".ui.thread.AddThread"
+    android:background="@color/colorBackground">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/add_thread_toolbar"
@@ -25,7 +26,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="Thread name" />
+        android:text="@string/thread" />
 
     <EditText
         android:id="@+id/thread_in"
@@ -44,7 +45,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="Category" />
+        android:text="@string/category" />
 
     <EditText
         android:id="@+id/category_in"
@@ -62,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/custom_button"
-        android:text="Add"/>
+        android:background="@drawable/custom_button2"
+        android:text="@string/add"/>
 
 </LinearLayout>
