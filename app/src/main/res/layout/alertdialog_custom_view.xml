@@ -6,24 +6,32 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     tools:context=".ui.rest.ProfileActivity"
-    android:background="#e9f1ba"
+    android:background="@color/colorBackground"
     >
     <TextView
         android:id="@+id/dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirmation."
+        android:text="Change password"
         android:padding="5dp"
-        android:background="#d5dda6"
         android:textSize="15dp"
         />
     <EditText
-        android:id="@+id/et_name"
+        android:id="@+id/passwordOld"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Input your name."
+        android:hint="Old password"
         android:textSize="15dp"
         android:layout_below="@id/dialog_title"
+        />
+
+    <EditText
+        android:id="@+id/passwordNew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New password"
+        android:textSize="15dp"
+        android:layout_below="@id/passwordOld"
         />
     <Button
         android:id="@+id/dialog_positive_btn"
@@ -31,8 +39,8 @@
         android:layout_height="wrap_content"
         android:text="OK"
         android:layout_alignParentRight="true"
-        android:background="#dde5ad"
-        android:layout_below="@id/et_name"
+        android:background="@drawable/custom_button2"
+        android:layout_below="@id/passwordNew"
         />
     <Button
         android:id="@+id/dialog_negative_btn"
@@ -40,7 +48,7 @@
         android:layout_height="wrap_content"
         android:text="No"
         android:layout_toLeftOf="@id/dialog_positive_btn"
-        android:background="#dde5ad"
+        android:background="@drawable/custom_button2"
         android:layout_marginRight="3dp"
         android:layout_alignBaseline="@id/dialog_positive_btn"
         />

@@ -1,6 +1,7 @@
 package com.example.discussionboard.ui.rest;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -32,6 +33,14 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView mail;
     private Button change;
 
+    EditText passOld;
+    EditText passNew;
+
+    String firstName;
+    String lastName;
+    String email;
+    String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +59,11 @@ public class ProfileActivity extends AppCompatActivity {
                 for (int i = 0; i < users.size(); i++) {
                     if (users.get(i).getId() == userId) {
                         mail.setText(users.get(i).getEmail());
+                        email = users.get(i).getEmail();
+                        firstName = users.get(i).getFirstName();
+                        lastName = users.get(i).getLastName();
+                        password = users.get(i).getPassword();
+
                     }
                 }
             }
@@ -80,7 +94,8 @@ public class ProfileActivity extends AppCompatActivity {
                 // Get the custom alert dialog view widgets reference
                 Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
                 Button btn_negative = (Button) dialogView.findViewById(R.id.dialog_negative_btn);
-                final EditText et_name = (EditText) dialogView.findViewById(R.id.et_name);
+                passOld = (EditText) dialogView.findViewById(R.id.passwordOld);
+                passNew = (EditText) dialogView.findViewById(R.id.passwordNew);
 
                 // Create the alert dialog
                 final AlertDialog dialog = builder.create();
@@ -90,12 +105,29 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // Dismiss the alert dialog
-                        dialog.cancel();
-                        String name = et_name.getText().toString();
-                        Toast.makeText(getApplication(),
-                                "Submitted name : " + name, Toast.LENGTH_SHORT).show();
-                        // Say hello to the submitter
-                        System.out.println("Hello "+name);
+                        System.out.println(password);
+                        System.out.println(passOld);
+                        String passOldString = passOld.getText().toString();
+                        String passNewString = passNew.getText().toString();
+                        if (passOldString.equals(password) && !passOldString.equals(passNewString)){
+                            User user = new User(firstName,lastName,email,passNew.getText().toString());
+                            user.setId(userId);
+                            userViewModel.update(user);
+                            Toast.makeText(getApplicationContext(), "Password Changed!",
+                                    Toast.LENGTH_LONG).show();
+                            dialog.cancel();
+                        }
+                        if (passOldString.equals(passNewString)){
+                            Toast.makeText(getApplicationContext(), "Same password!",
+                                    Toast.LENGTH_LONG).show();
+                            passNew.setTextColor(Color.RED);
+                        }
+                        if (!passOldString.equals(password)){
+                            Toast.makeText(getApplicationContext(), "Wrong password!",
+                                    Toast.LENGTH_LONG).show();
+                            passOld.setTextColor(Color.RED);
+                        }
+
                     }
                 });
 
@@ -106,8 +138,6 @@ public class ProfileActivity extends AppCompatActivity {
                         // Dismiss/cancel the alert dialog
                         //dialog.cancel();
                         dialog.dismiss();
-                        Toast.makeText(getApplication(),
-                                "No button clicked", Toast.LENGTH_SHORT).show();
                     }
                 });
 
