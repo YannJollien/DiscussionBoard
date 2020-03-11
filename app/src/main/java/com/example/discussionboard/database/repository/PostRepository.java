@@ -7,9 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.discussionboard.database.PostDatabase;
 import com.example.discussionboard.database.dao.PostDao;
-import com.example.discussionboard.database.dao.ThreadDao;
 import com.example.discussionboard.database.entity.Post;
-import com.example.discussionboard.database.entity.Thread;
 
 import java.util.List;
 
@@ -25,8 +23,6 @@ public class PostRepository {
         allPost = postDao.getAllPosts();
 
     }
-
-
 
     public void insert(Post post){
         new InsertPostAsyncTask(postDao).execute(post);

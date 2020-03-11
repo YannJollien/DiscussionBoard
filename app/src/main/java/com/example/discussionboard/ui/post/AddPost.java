@@ -13,7 +13,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.discussionboard.R;
+import com.example.discussionboard.database.entity.Feed;
 import com.example.discussionboard.database.entity.Post;
+import com.example.discussionboard.database.viewmodel.FeedViewModel;
 import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.ui.MenuActivity;
 
@@ -28,6 +30,7 @@ public class AddPost extends AppCompatActivity {
     private Button addPost;
 
     PostViewModel postViewModel;
+    FeedViewModel feedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +79,15 @@ public class AddPost extends AppCompatActivity {
 
         Post post = new Post(submitterString,textString,date,idThread,idUser);
 
+        //Add to post
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
         postViewModel.insert(post);
+
+        //Add to feed
+        Feed feed = new Feed(submitterString,"New post added",1);
+
+        feedViewModel = new ViewModelProvider(this).get(FeedViewModel.class);
+        feedViewModel.insert(feed);
 
     }
 }

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.discussionboard.R;
 import com.example.discussionboard.database.entity.Thread;
 import com.example.discussionboard.database.viewmodel.ThreadViewModel;
+import com.example.discussionboard.ui.feed.FeedActivity;
 import com.example.discussionboard.ui.login.LoginActivity;
 import com.example.discussionboard.ui.rest.ProfileActivity;
 import com.example.discussionboard.ui.thread.ShowThreads;
@@ -76,10 +77,10 @@ public class MenuActivity extends AppCompatActivity {
                                 Toast.makeText(MenuActivity.this, "Logged out",
                                         Toast.LENGTH_LONG).show();
                                 break;
-                            /*case R.id.nav_about:
-                                Intent i5 = new Intent(MenuActivity.this, SettingsAboutActivity.class);
+                            case R.id.nav_chat:
+                                Intent i5 = new Intent(MenuActivity.this, FeedActivity.class);
                                 startActivity(i5);
-                                break;*/
+                                break;
                             /*case R.id.nav_lang:
                                 System.out.println(R.id.nav_lang);
                                 //calling changing langugage method
