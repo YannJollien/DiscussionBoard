@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.feed.FeedActivity"></activity>
-        <activity android:name=".ui.rest.ProfileActivity" />
+        <activity
+            android:name=".ui.feed.FeedActivity"
+            android:parentActivityName=".ui.MenuActivity"/>
+        <activity
+            android:name=".ui.rest.ProfileActivity"
+            android:parentActivityName=".ui.MenuActivity"/>
         <activity
             android:name=".ui.post.ShowPostsDetail"
             android:parentActivityName=".ui.post.ShowPosts" />

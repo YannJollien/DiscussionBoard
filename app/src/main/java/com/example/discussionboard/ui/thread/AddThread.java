@@ -92,6 +92,8 @@ public class AddThread extends AppCompatActivity {
         menuActivity = new MenuActivity();
         userId = menuActivity.userId;
 
+        feedViewModel = new ViewModelProvider(this).get(FeedViewModel.class);
+
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
             @Override
@@ -99,17 +101,17 @@ public class AddThread extends AppCompatActivity {
                 for (int i = 0; i < users.size(); i++) {
                     if (users.get(i).getId() == userId) {
                         submitterString = users.get(i).getFirstName().toString();
+
                     }
                 }
+                //Add to feed
+                Feed feed = new Feed(submitterString,"New thread added",2);
+                feedViewModel.insert(feed);
             }
         });
 
 
 
-        Feed feed = new Feed(submitterString,"New thread added",2);
-
-        feedViewModel = new ViewModelProvider(this).get(FeedViewModel.class);
-        feedViewModel.insert(feed);
 
     }
 }
