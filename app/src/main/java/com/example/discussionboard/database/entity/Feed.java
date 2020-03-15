@@ -12,11 +12,15 @@ public class Feed {
     private String submitter;
     private String context;
     private int imageCode;
+    private String date;
+    private String time;
 
-    public Feed(String submitter, String context, int imageCode) {
+    public Feed(String submitter, String context, int imageCode, String date, String time) {
         this.submitter = submitter;
         this.context = context;
         this.imageCode = imageCode;
+        this.date = date;
+        this.time = time;
     }
 
     public int getId() {
@@ -49,5 +53,21 @@ public class Feed {
 
     public void setImageCode(int imageCode) {
         this.imageCode = imageCode;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

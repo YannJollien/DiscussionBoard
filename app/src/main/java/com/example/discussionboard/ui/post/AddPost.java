@@ -32,6 +32,9 @@ public class AddPost extends AppCompatActivity {
     PostViewModel postViewModel;
     FeedViewModel feedViewModel;
 
+    String dateFeed;
+    String time;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +87,12 @@ public class AddPost extends AppCompatActivity {
         postViewModel.insert(post);
 
         //Add to feed
-        Feed feed = new Feed(submitterString,"New post added",1);
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
+        dateFeed = sdfDate.format(new Date());
+        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+        time = sdfTime.format(new Date());
+
+        Feed feed = new Feed(submitterString,"New post added",1,dateFeed,time);
 
         feedViewModel = new ViewModelProvider(this).get(FeedViewModel.class);
         feedViewModel.insert(feed);

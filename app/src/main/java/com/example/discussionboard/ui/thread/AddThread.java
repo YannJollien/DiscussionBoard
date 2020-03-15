@@ -22,6 +22,8 @@ import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 import com.example.discussionboard.database.viewmodel.UserViewModel;
 import com.example.discussionboard.ui.MenuActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AddThread extends AppCompatActivity {
@@ -38,6 +40,8 @@ public class AddThread extends AppCompatActivity {
 
     int userId;
     String submitterString;
+    String date;
+    String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +109,13 @@ public class AddThread extends AppCompatActivity {
                     }
                 }
                 //Add to feed
-                Feed feed = new Feed(submitterString,"New thread added",2);
+                SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
+                date = sdfDate.format(new Date());
+                SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+                time = sdfTime.format(new Date());
+
+
+                Feed feed = new Feed(submitterString,"New thread added",2,date,time);
                 feedViewModel.insert(feed);
             }
         });

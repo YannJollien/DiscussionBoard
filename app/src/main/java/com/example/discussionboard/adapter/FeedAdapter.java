@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.discussionboard.R;
 import com.example.discussionboard.database.entity.Feed;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedHolder>{
     public void onBindViewHolder(@NonNull FeedHolder holder, int position) {
         Feed currentFeed = feeds.get(position);
         holder.context.setText(currentFeed.getSubmitter()+" "+currentFeed.getContext());
+        holder.date_time.setText(currentFeed.getDate()+" "+currentFeed.getTime());
         if (currentFeed.getImageCode()==1){
             holder.image.setImageResource(R.drawable.ic_message_black_24dp);
         }
@@ -56,11 +59,13 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedHolder>{
     class FeedHolder extends RecyclerView.ViewHolder{
 
         private TextView context;
+        private TextView date_time;
         private ImageView image;
 
         public FeedHolder(@NonNull View itemView) {
             super(itemView);
             context = itemView.findViewById(R.id.feed_context);
+            date_time = itemView.findViewById(R.id.feed_date_time);
             image = itemView.findViewById(R.id.feed_image);
 
         }

@@ -48,8 +48,8 @@ public abstract class FeedDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            feedDao.insert(new Feed("Yann","New post added",1));
-            feedDao.insert(new Feed("Hans","New post added",1));
+            feedDao.insert(new Feed("Yann","New post added",1,"12-01-2020","16:16"));
+            feedDao.insert(new Feed("Hans","New post added",1,"13-01-2020","17:16"));
             return null;
         }
     }
