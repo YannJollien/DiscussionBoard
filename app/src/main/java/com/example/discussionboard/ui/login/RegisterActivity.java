@@ -31,6 +31,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        startActivity();
+
+    }
+
+    public void startActivity(){
         fname = findViewById(R.id.fname_in);
         lname = findViewById(R.id.lname_in);
         mail = findViewById(R.id.email_in);
@@ -57,7 +62,6 @@ public class RegisterActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
-
     }
 
     public void saveUser(){

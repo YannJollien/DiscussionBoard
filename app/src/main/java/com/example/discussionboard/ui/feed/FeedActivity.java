@@ -27,10 +27,15 @@ public class FeedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-
         setTitle("Feed");
 
+        startAcitivty();
 
+    }
+
+
+    public void startAcitivty(){
+        //Setting up the recyclerView
         RecyclerView recyclerView = findViewById(R.id.recycler_view_feed);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -44,7 +49,7 @@ public class FeedActivity extends AppCompatActivity {
         feedViewModel.getAllFeed().observe(this, new Observer<List<Feed>>() {
             @Override
             public void onChanged(List<Feed> feeds) {
-                    adapter.setFeeds(feeds);
+                adapter.setFeeds(feeds);
             }
         });
 
@@ -55,6 +60,5 @@ public class FeedActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
-
     }
 }

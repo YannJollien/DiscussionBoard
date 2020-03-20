@@ -1,7 +1,6 @@
 package com.example.discussionboard.ui.login;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        startActivity();
+    }
+
+    public void startActivity() {
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
 
@@ -55,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(inent);
             }
         });
-
     }
 
     //Login Method
@@ -81,21 +83,13 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("userId", users.get(i).getId());
                         startActivity(intent);
 
-                    }
-                    if (!userViewModel.getAllUsers().getValue().get(i).getEmail().equals(mailString)) {
-                        Toast.makeText(getApplicationContext(), "E-Mail does not exist",
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please verrify E-Mail and Password",
                                 Toast.LENGTH_LONG).show();
-                        mail.setTextColor(Color.RED);
-                    }
-                    if (userViewModel.getAllUsers().getValue().get(i).getEmail().equals(mailString) && !userViewModel.getAllUsers().getValue().get(i).getPassword().equals(passString)){
-                        Toast.makeText(getApplicationContext(), "Wrong password",
-                                Toast.LENGTH_LONG).show();
-                        pwd.setTextColor(Color.RED);
                     }
                 }
             }
         });
-
 
     }
 }

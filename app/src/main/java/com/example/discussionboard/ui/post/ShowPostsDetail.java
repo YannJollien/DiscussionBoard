@@ -51,6 +51,11 @@ public class ShowPostsDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_posts_detail);
 
+        startActivity();
+
+    }
+
+    public void startActivity(){
         submitter = findViewById(R.id.submitter_details);
         text = findViewById(R.id.text_details);
         date = findViewById(R.id.date_details);
@@ -117,9 +122,6 @@ public class ShowPostsDetail extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
-
-
-
     }
 
     public void setVisible(Button button){

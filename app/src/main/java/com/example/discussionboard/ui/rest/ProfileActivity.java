@@ -46,6 +46,17 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+
+        //Activity start
+        startActivity();;
+
+        //Password change
+        changePwd();
+
+
+    }
+
+    public void startActivity(){
         mail = findViewById(R.id.profile_mail);
         change = findViewById(R.id.change);
 
@@ -76,7 +87,10 @@ public class ProfileActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
+    }
 
+    //Method to change the password
+    public void changePwd(){
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,6 +160,5 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }

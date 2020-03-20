@@ -40,6 +40,11 @@ public class AddPost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 
+        startActivity();
+
+    }
+
+    public void startActivity(){
         submitter = findViewById(R.id.submitter_in);
         text = findViewById(R.id.text_in);
         addPost = findViewById(R.id.add);
@@ -62,7 +67,6 @@ public class AddPost extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
-
     }
 
     public void savePost(){
