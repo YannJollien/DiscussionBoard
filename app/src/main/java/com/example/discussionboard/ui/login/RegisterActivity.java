@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        User user = new User(fnameString,lnameString,mailString,passString);
+        User user = new User(fnameString,lnameString,mailString,passString,false);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.insert(user);

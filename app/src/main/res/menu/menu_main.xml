@@ -21,6 +21,10 @@
             android:icon="@drawable/ic_new_releases_black_24dp"
             android:title="Feed"/>
         <item
+            android:id="@+id/nav_admin"
+            android:icon="@drawable/ic_domain_black_24dp"
+            android:title="Admin" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_call_missed_outgoing_black_24dp"
             android:title="Logout" />

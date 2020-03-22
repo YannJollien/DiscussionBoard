@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.discussionboard.R;
 import com.example.discussionboard.database.entity.Thread;
 import com.example.discussionboard.database.viewmodel.ThreadViewModel;
+import com.example.discussionboard.ui.admin.AdminActivity;
 import com.example.discussionboard.ui.feed.FeedActivity;
 import com.example.discussionboard.ui.login.LoginActivity;
 import com.example.discussionboard.ui.rest.ProfileActivity;
@@ -80,6 +81,10 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.nav_chat:
                                 Intent i5 = new Intent(MenuActivity.this, FeedActivity.class);
                                 startActivity(i5);
+                                break;
+                            case R.id.nav_admin:
+                                Intent i6 = new Intent(MenuActivity.this, AdminActivity.class);
+                                startActivity(i6);
                                 break;
                             /*case R.id.nav_lang:
                                 System.out.println(R.id.nav_lang);

@@ -124,7 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
                         String passOldString = passOld.getText().toString();
                         String passNewString = passNew.getText().toString();
                         if (passOldString.equals(password) && !passOldString.equals(passNewString)){
-                            User user = new User(firstName,lastName,email,passNew.getText().toString());
+                            User user = new User(firstName,lastName,email,passNew.getText().toString(),false);
                             user.setId(userId);
                             userViewModel.update(user);
                             Toast.makeText(getApplicationContext(), "Password Changed!",

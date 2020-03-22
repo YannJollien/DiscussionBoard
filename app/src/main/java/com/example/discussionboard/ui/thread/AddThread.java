@@ -14,22 +14,19 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.discussionboard.R;
-import com.example.discussionboard.database.entity.Feed;
-import com.example.discussionboard.database.entity.Thread;
+import com.example.discussionboard.database.entity.ThreadTemp;
 import com.example.discussionboard.database.entity.User;
 import com.example.discussionboard.database.viewmodel.FeedViewModel;
-import com.example.discussionboard.database.viewmodel.ThreadViewModel;
+import com.example.discussionboard.database.viewmodel.ThreadTempViewModel;
 import com.example.discussionboard.database.viewmodel.UserViewModel;
 import com.example.discussionboard.ui.MenuActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class AddThread extends AppCompatActivity {
 
     MenuActivity menuActivity;
-    ThreadViewModel threadViewModel;
+    ThreadTempViewModel threadTempViewModel;
     FeedViewModel feedViewModel;
     UserViewModel userViewModel;
     int userId;
@@ -87,17 +84,8 @@ public class AddThread extends AppCompatActivity {
             return;
         }
 
-        Thread thread = new Thread(threadString, categoryString);
-
-        threadViewModel = new ViewModelProvider(this).get(ThreadViewModel.class);
-        threadViewModel.insert(thread);
-
-        //Add to feed
-
         menuActivity = new MenuActivity();
         userId = menuActivity.userId;
-
-        feedViewModel = new ViewModelProvider(this).get(FeedViewModel.class);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
@@ -108,18 +96,12 @@ public class AddThread extends AppCompatActivity {
                         submitterString = users.get(i).getFirstName().toString();
                     }
                 }
-                //Add to feed
-                SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
-                date = sdfDate.format(new Date());
-                SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
-                time = sdfTime.format(new Date());
-
-
-                Feed feed = new Feed(submitterString, "New thread added", 2, date, time);
-                feedViewModel.insert(feed);
             }
         });
 
+        ThreadTemp threadTemp = new ThreadTemp(threadString, categoryString,submitterString);
 
+        threadTempViewModel = new ViewModelProvider(this).get(ThreadTempViewModel.class);
+        threadTempViewModel.insert(threadTemp);
     }
 }
