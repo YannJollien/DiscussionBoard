@@ -16,17 +16,22 @@ import android.widget.Toast;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadTempAdapter;
+import com.example.discussionboard.database.entity.Feed;
 import com.example.discussionboard.database.entity.Thread;
 import com.example.discussionboard.database.entity.ThreadTemp;
+import com.example.discussionboard.database.viewmodel.FeedViewModel;
 import com.example.discussionboard.database.viewmodel.ThreadTempViewModel;
 import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ThreadsAdminActivity extends AppCompatActivity {
 
     ThreadTempViewModel threadTempViewModel;
     ThreadViewModel threadViewModel;
+    FeedViewModel feedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,7 @@ public class ThreadsAdminActivity extends AppCompatActivity {
         });
 
         threadViewModel = new ViewModelProvider(this).get(ThreadViewModel.class);
+        feedViewModel = new ViewModelProvider(this).get(FeedViewModel.class);
 
 
         //Delete
@@ -83,10 +89,22 @@ public class ThreadsAdminActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                //Add to threads
                 String threadString = adapter.getThreadTempAt(viewHolder.getAdapterPosition()).getThread();
                 String categoryString = adapter.getThreadTempAt(viewHolder.getAdapterPosition()).getCategory();
+                String submitterString = adapter.getThreadTempAt(viewHolder.getAdapterPosition()).getSubmitter();
                 Thread thread = new Thread(threadString,categoryString);
                 threadViewModel.insert(thread);
+
+                //Add to feed
+                //Add to feed
+                SimpleDateFormat sdfDate = new SimpleDateFormat("dd.MM.yyyy");
+                String dateFeed = sdfDate.format(new Date());
+                SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+                String time = sdfTime.format(new Date());
+
+                Feed feed = new Feed(submitterString,"New thread added",2,dateFeed,time);
+                feedViewModel.insert(feed);
                 threadTempViewModel.delete(adapter.getThreadTempAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getApplicationContext(), "Thread validated",
                         Toast.LENGTH_LONG).show();
@@ -103,24 +121,4 @@ public class ThreadsAdminActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_thread_actionbar, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add:
-                Intent intent = new Intent(ShowPosts.this, AddPost.class);
-                intent.putExtra("threadId", idThread);
-                startActivity(intent);
-                return true;
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }*/
 }

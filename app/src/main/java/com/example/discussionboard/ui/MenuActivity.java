@@ -3,12 +3,17 @@ package com.example.discussionboard.ui;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -26,15 +31,20 @@ import com.example.discussionboard.ui.thread.ShowThreads;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class MenuActivity extends AppCompatActivity {
 
     public static int userId;
+    public static boolean admin;
     private DrawerLayout drawerLayout;
     private ThreadViewModel threadViewModel;
     int amountThreads;
 
     private TextView amount;
+
+    String currentLanguage = "en", currentLang;
+    private Locale locale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +56,7 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
             userId = getIntent().getExtras().getInt("userId");
+            admin = getIntent().getExtras().getBoolean("admin");
         }
 
         System.out.println("User id :"+userId);
@@ -62,6 +73,11 @@ public class MenuActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        //Hide Admin menu if not admin
+        if (admin == false){
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_admin).setVisible(false);
+        }
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -86,10 +102,10 @@ public class MenuActivity extends AppCompatActivity {
                                 Intent i6 = new Intent(MenuActivity.this, AdminActivity.class);
                                 startActivity(i6);
                                 break;
-                            /*case R.id.nav_lang:
+                            case R.id.nav_lang:
                                 System.out.println(R.id.nav_lang);
                                 //calling changing langugage method
-                                setLocale("de");*/
+                                setLocale("de");
                         }
                         return true;
                     }
@@ -125,5 +141,34 @@ public class MenuActivity extends AppCompatActivity {
 
         });
 
+    }
+
+
+    //Open the drawer
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    //Change language method
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLanguage)) {
+            locale = new Locale(localeName);
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = locale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(this, LoginActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        } else {
+            Toast.makeText(MenuActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -8,18 +8,32 @@
     tools:context=".ui.admin.AdminActivity"
     android:background="@color/colorBackground">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/admin_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#8FB4DE"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"
+        android:visibility="visible"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <Button
         android:id="@+id/button_users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Users"
+        android:text="@string/admin_users"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="170dp"
         android:background="@drawable/custom_button2"/>
 
     <Button
         android:id="@+id/button_threads"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Threads"
+        android:text="@string/admin_threads"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="170dp"
         android:background="@drawable/custom_button2" />
 
 </LinearLayout>

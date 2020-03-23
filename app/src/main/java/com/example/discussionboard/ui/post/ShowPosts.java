@@ -1,14 +1,20 @@
 package com.example.discussionboard.ui.post;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -20,8 +26,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.PostAdapter;
 import com.example.discussionboard.database.entity.Post;
+import com.example.discussionboard.database.entity.User;
 import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.ui.MenuActivity;
+import com.example.discussionboard.ui.rest.ProfileActivity;
 import com.example.discussionboard.ui.thread.ShowThreads;
 
 import java.util.List;
@@ -35,12 +43,24 @@ public class ShowPosts extends AppCompatActivity {
     private PostViewModel postViewModel;
     private Button delete;
     private Button update;
+    private CheckBox show;
+
+    boolean showMessage = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_posts);
         setTitle("Posts");
+
+        System.out.println("Status "+showMessage);
+
+        //Show message
+        if(showMessage==true){
+            infoAtStart();
+        }
+
 
         menuActivity = new MenuActivity();
 
@@ -147,4 +167,38 @@ public class ShowPosts extends AppCompatActivity {
 
         }
     }
+
+    public void infoAtStart(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ShowPosts.this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alertdialog_start_post,null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(true);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        // Get the custom alert dialog view widgets reference
+        Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
+        show = dialogView.findViewById(R.id.dialog_checkbox);
+
+        // Create the alert dialog
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Set positive/yes button click listener
+        btn_positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss the alert dialog
+                if (show.isChecked()){
+                    showMessage = false;
+                }
+                dialog.cancel();
+            }
+        });
+    }
+
 }

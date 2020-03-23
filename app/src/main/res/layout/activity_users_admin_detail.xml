@@ -26,7 +26,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="Firstname" />
+        android:text="@string/admin_fname" />
 
     <EditText
         android:id="@+id/fname_details"
@@ -45,7 +45,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="Lastname" />
+        android:text="@string/admin_lname" />
 
     <EditText
         android:id="@+id/lname_details"
@@ -64,7 +64,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="E-Mail" />
+        android:text="@string/admin_mail" />
 
     <EditText
         android:id="@+id/mail_details"
@@ -79,7 +79,7 @@
     <CheckBox android:id="@+id/admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Make admin" />
+        android:text="@string/admin_checkbox" />
 
 
     <Button
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="10dp"
-        android:text="Save"
+        android:text="@string/button_save"
         android:background="@drawable/custom_button2"/>
 
 </LinearLayout>

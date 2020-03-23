@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DiscussionBoard</string>
+
+    <!--Login and Register-->
+    <string name="login">Login!</string>
+    <string name="email">E-mail</string>
+    <string name="pass">Passwort</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Registrieren</string>
+
+    <string name="fname">Vorname</string>
+    <string name="lname">Nachname</string>
+
+    <!--Thread-->
+    <string name="thread">Thread</string>
+    <string name="category">Kategorie</string>
+    <string name="add">Hinzufügen</string>
+
+    <!--Post-->
+    <string name="submitter">Name</string>
+    <string name="text">Text</string>
+    <string name="date">Datum</string>
+    <string name="button_update">Andern</string>
+    <string name="button_save">Speichern</string>
+
+    <!--Profile-->
+    <string name="login_profile">Eingeloggt als</string>
+    <string name="status">Status</string>
+
+    <!--Admin-->
+    <string name="admin_users">Benutzer</string>
+    <string name="admin_threads">Threads</string>
+    <string name="admin_fname">Vorname</string>
+    <string name="admin_lname">Nachname</string>
+    <string name="admin_mail">E-Mail</string>
+    <string name="admin_checkbox">Admin</string>
+
+    <!--Change password-->
+    <string name="change_pwd">Passwort ändern</string>
+    <string name="hint_old">Altes Passwort</string>
+    <string name="hint_new">Neues Passwort</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Abbrechen</string>
+
+    //MEnu
+    <string name="menu_thread">Thread</string>
+    <string name="menu_feed">Feed</string>
+    <string name="menu_language">Sprache</string>
+    <string name="menu_about">Info</string>
+    <string name="menu_admin">Admin</string>
+    <string name="menu_logout">Ausloggen</string>
+
+</resources>

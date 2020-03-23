@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- action button profile -->
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_thread"
             android:icon="@drawable/ic_message_black_24dp"
-            android:title="Threads" />
-        <item
-            android:id="@+id/nav_lang"
-            android:icon="@drawable/ic_language_black_24dp"
-            android:title="Language"/>
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_info_black_24dp"
-            android:title="About"/>
+            android:title="@string/menu_thread" />
         <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_new_releases_black_24dp"
-            android:title="Feed"/>
+            android:title="@string/menu_feed" />
+        <item
+            android:id="@+id/nav_lang"
+            android:icon="@drawable/ic_language_black_24dp"
+            android:title="@string/menu_language" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/menu_about" />
         <item
             android:id="@+id/nav_admin"
             android:icon="@drawable/ic_domain_black_24dp"
-            android:title="Admin" />
+            android:title="@string/menu_admin" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_call_missed_outgoing_black_24dp"
-            android:title="Logout" />
+            android:title="@string/menu_logout" />
     </group>
 
 </menu>
