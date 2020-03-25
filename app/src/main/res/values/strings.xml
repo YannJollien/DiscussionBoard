@@ -50,5 +50,13 @@
     <string name="menu_admin">Admin</string>
     <string name="menu_logout">Logout</string>
 
+    //Info popup
+    <string name="alert_dont">Ok please do not show again.</string>
+    <string name="alert_info">Information</string>
+    <string name="alert_text">Swipe left to delete the thread</string>
+    <string name="alert_text1">Swipe right to validate the thread</string>
+    <string name="alert_ok">Ok</string>
+    <string name="alert_cancel">Cancel</string>
+
 
 </resources>

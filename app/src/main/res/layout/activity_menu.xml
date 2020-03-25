@@ -25,8 +25,8 @@
             android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="200dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="150dp"
             android:textSize="30dp"
             android:text="Threads"/>
 

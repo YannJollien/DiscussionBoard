@@ -2,6 +2,7 @@ package com.example.discussionboard.ui.admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -10,8 +11,14 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.discussionboard.R;
@@ -32,6 +39,9 @@ public class ThreadsAdminActivity extends AppCompatActivity {
     ThreadTempViewModel threadTempViewModel;
     ThreadViewModel threadViewModel;
     FeedViewModel feedViewModel;
+
+    public static final String PREFS_NAME = "MyPrefsFile1";
+    public CheckBox dontShowAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +129,68 @@ public class ThreadsAdminActivity extends AppCompatActivity {
 
         ab.setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    //Message start of activity
+    @Override
+    protected void onResume() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        LayoutInflater adbInflater = LayoutInflater.from(this);
+        View eulaLayout = adbInflater.inflate(R.layout.checkbox_post, null);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String skipMessage = settings.getString("skipMessage", "NOT checked");
+
+
+        dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
+        adb.setView(eulaLayout);
+        adb.setTitle(getString(R.string.alert_info));
+        adb.setMessage(Html.fromHtml(getString(R.string.alert_text)+"\n"+(Html.fromHtml(getString(R.string.alert_text1)))));
+
+        adb.setPositiveButton(getString(R.string.alert_ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String checkBoxResult = "NOT checked";
+
+                if (dontShowAgain.isChecked()) {
+                    checkBoxResult = "checked";
+                }
+
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+
+                editor.putString("skipMessage", checkBoxResult);
+                editor.commit();
+
+                // Do what you want to do on "OK" action
+
+                return;
+            }
+        });
+
+        adb.setNegativeButton(getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String checkBoxResult = "NOT checked";
+
+                if (dontShowAgain.isChecked()) {
+                    checkBoxResult = "checked";
+                }
+
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+
+                editor.putString("skipMessage", checkBoxResult);
+                editor.commit();
+
+                // Do what you want to do on "CANCEL" action
+
+                return;
+            }
+        });
+
+        if (!skipMessage.equals("checked")) {
+            adb.show();
+        }
+
+        super.onResume();
     }
 
 }

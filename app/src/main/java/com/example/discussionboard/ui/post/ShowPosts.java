@@ -1,8 +1,11 @@
 package com.example.discussionboard.ui.post;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,9 +46,8 @@ public class ShowPosts extends AppCompatActivity {
     private PostViewModel postViewModel;
     private Button delete;
     private Button update;
-    private CheckBox show;
-
-    boolean showMessage = true;
+    public static final String PREFS_NAME = "MyPrefsFile1";
+    public CheckBox dontShowAgain;
 
 
     @Override
@@ -54,12 +56,9 @@ public class ShowPosts extends AppCompatActivity {
         setContentView(R.layout.activity_show_posts);
         setTitle("Posts");
 
-        System.out.println("Status "+showMessage);
 
         //Show message
-        if(showMessage==true){
-            infoAtStart();
-        }
+
 
 
         menuActivity = new MenuActivity();
@@ -168,37 +167,68 @@ public class ShowPosts extends AppCompatActivity {
         }
     }
 
-    public void infoAtStart(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(ShowPosts.this);
 
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.alertdialog_start_post,null);
+    //Message start of activity
+    @Override
+    protected void onResume() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        LayoutInflater adbInflater = LayoutInflater.from(this);
+        View eulaLayout = adbInflater.inflate(R.layout.checkbox_post, null);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String skipMessage = settings.getString("skipMessage", "NOT checked");
 
-        // Specify alert dialog is not cancelable/not ignorable
-        builder.setCancelable(true);
 
-        // Set the custom layout as alert dialog view
-        builder.setView(dialogView);
+        dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
+        adb.setView(eulaLayout);
+        adb.setTitle(getString(R.string.alert_info));
+        adb.setMessage(Html.fromHtml(getString(R.string.alert_text)));
 
-        // Get the custom alert dialog view widgets reference
-        Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
-        show = dialogView.findViewById(R.id.dialog_checkbox);
+        adb.setPositiveButton(getString(R.string.alert_ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String checkBoxResult = "NOT checked";
 
-        // Create the alert dialog
-        final AlertDialog dialog = builder.create();
-        dialog.show();
-
-        // Set positive/yes button click listener
-        btn_positive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Dismiss the alert dialog
-                if (show.isChecked()){
-                    showMessage = false;
+                if (dontShowAgain.isChecked()) {
+                    checkBoxResult = "checked";
                 }
-                dialog.cancel();
+
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+
+                editor.putString("skipMessage", checkBoxResult);
+                editor.commit();
+
+                // Do what you want to do on "OK" action
+
+                return;
             }
         });
+
+        adb.setNegativeButton(getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String checkBoxResult = "NOT checked";
+
+                if (dontShowAgain.isChecked()) {
+                    checkBoxResult = "checked";
+                }
+
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+
+                editor.putString("skipMessage", checkBoxResult);
+                editor.commit();
+
+                // Do what you want to do on "CANCEL" action
+
+                return;
+            }
+        });
+
+        if (!skipMessage.equals("checked")) {
+            adb.show();
+        }
+
+        super.onResume();
     }
+
 
 }
