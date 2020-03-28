@@ -7,33 +7,63 @@
     <string name="pass">Password</string>
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
+    <string name="toast_login_true">Login successful</string>
+    <string name="toast_login_false">Please verrify E-Mail and Password</string>
 
     <string name="fname">First name</string>
     <string name="lname">Last name</string>
+    <string name="toast_user_added">User added</string>
+    <string name="toast_add_error">Please enter all informations</string>
+
+    <string name="register_title">Add user</string>
+
+
 
     <!--Thread-->
+    <string name="thread_add_title">Add Thread</string>
+    <string name="thread_title">Threads</string>
     <string name="thread">Thread name</string>
     <string name="category">Category</string>
     <string name="add">Add</string>
+    <string name="toast_thread_added">Thread added</string>
+    <string name="toast_thread_error">Please enter all informations</string>
+
 
     <!--Post-->
+    <string name="post_add_title">Add post</string>
+    <string name="post_title">Posts</string>
+    <string name="post_detail_title">Post detail</string>
     <string name="submitter">Submitter name</string>
     <string name="text">Text</string>
     <string name="date">Date</string>
     <string name="button_update">Update</string>
     <string name="button_save">Save</string>
+    <string name="toast_post_added">Post added</string>
+    <string name="toast_post_error">Post added</string>
+    <string name="toast_post_delete">Post deleted</string>
+    <string name="toast_post_notdelete">Can\'t delete, you are not the owner of the post</string>
+    <string name="toast_post_update">Post updated</string>
+
 
     <!--Profile-->
+    <string name="profile_title">Profile</string>
     <string name="login_profile">Logged in as</string>
     <string name="status">Status</string>
+    <string name="password_ok">Password Changed!</string>
+    <string name="password_same">Same password!</string>
+    <string name="password_wrong">Wrong password!</string>
 
     <!--Admin-->
+    <string name="admin_tile">Admin</string>
+    <string name="admin_tile_users">Users</string>
     <string name="admin_users">Users</string>
     <string name="admin_threads">Threads</string>
     <string name="admin_fname">Firstname</string>
     <string name="admin_lname">Lastname</string>
     <string name="admin_mail">E-Mail</string>
     <string name="admin_checkbox">Admin</string>
+    <string name="toast_thread_delete">Thread deleted</string>
+    <string name="toast_thread_ok">Thread validated</string>
 
     <!--Change password-->
     <string name="change_pwd">Change Password</string>
@@ -42,7 +72,7 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
 
-    //MEnu
+    <!--Menu-->
     <string name="menu_thread">Thread</string>
     <string name="menu_feed">Feed</string>
     <string name="menu_language">Language</string>
@@ -50,7 +80,7 @@
     <string name="menu_admin">Admin</string>
     <string name="menu_logout">Logout</string>
 
-    //Info popup
+    <!--Info popup-->
     <string name="alert_dont">Ok please do not show again.</string>
     <string name="alert_info">Information</string>
     <string name="alert_text">Swipe left to delete the thread</string>
@@ -58,5 +88,9 @@
     <string name="alert_ok">Ok</string>
     <string name="alert_cancel">Cancel</string>
 
+    <!--Feed-->
+    <string name="feed_title">Feed</string>
+    <string name="feed_post_added">New Post added</string>
+    <string name="feed_thread_added">New Thread added</string>
 
 </resources>

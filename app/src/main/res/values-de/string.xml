@@ -8,33 +8,62 @@
     <string name="pass">Passwort</string>
     <string name="button_login">Login</string>
     <string name="button_register">Registrieren</string>
+    <string name="toast_login_true">Willkommen</string>
+    <string name="toast_login_false">Bitte überprüfen Sie E-Mail und Password</string>
+
+    <string name="toast_user_added">Benutzer hinzugefügt</string>
+    <string name="toast_add_error">Bitte alle Informationen angeben</string>
 
     <string name="fname">Vorname</string>
     <string name="lname">Nachname</string>
 
+    <string name="register_title">Benutzer hinzufügen</string>
+
     <!--Thread-->
+    <string name="thread_add_title">Thread hinzufügen</string>
+    <string name="thread_title">Threads</string>
     <string name="thread">Thread</string>
     <string name="category">Kategorie</string>
     <string name="add">Hinzufügen</string>
+    <string name="toast_thread_added">Thread hinzugefügt</string>
+    <string name="toast_thread_error">Bitte alle Informationen angeben</string>
 
     <!--Post-->
+    <string name="post_add_title">Post hinzufügen</string>
+    <string name="post_title">Posts</string>
+    <string name="post_detail_title">Post Detail</string>
     <string name="submitter">Name</string>
     <string name="text">Text</string>
     <string name="date">Datum</string>
     <string name="button_update">Andern</string>
     <string name="button_save">Speichern</string>
+    <string name="toast_post_added">Post hinzugefütg</string>
+    <string name="toast_post_error">Bitte alle Informationen angeben</string>
+    <string name="toast_post_delete">Post gelöscht</string>
+    <string name="toast_post_notdelete">Post kann nicht gelöscht werden, Sie sind gazu nicht berechtigt</string>
+    <string name="toast_post_update">Post aktualisiert</string>
+
 
     <!--Profile-->
+    <string name="profile_title">Profil</string>
     <string name="login_profile">Eingeloggt als</string>
     <string name="status">Status</string>
+    <string name="password_ok">Password geändert!</string>
+    <string name="password_same">Gleiches Passwort!</string>
+    <string name="password_wrong">Falsches Passwort!</string>
+
 
     <!--Admin-->
+    <string name="admin_tile">Admin</string>
+    <string name="admin_tile_users">Benutzer</string>
     <string name="admin_users">Benutzer</string>
     <string name="admin_threads">Threads</string>
     <string name="admin_fname">Vorname</string>
     <string name="admin_lname">Nachname</string>
     <string name="admin_mail">E-Mail</string>
     <string name="admin_checkbox">Admin</string>
+    <string name="toast_thread_delete">Thread gelöscht</string>
+    <string name="toast_thread_ok">Thread validiert</string>
 
     <!--Change password-->
     <string name="change_pwd">Passwort ändern</string>
@@ -43,7 +72,7 @@
     <string name="ok">Ok</string>
     <string name="cancel">Abbrechen</string>
 
-    //MEnu
+    <!--Menu-->
     <string name="menu_thread">Thread</string>
     <string name="menu_feed">Feed</string>
     <string name="menu_language">Sprache</string>
@@ -51,12 +80,17 @@
     <string name="menu_admin">Admin</string>
     <string name="menu_logout">Ausloggen</string>
 
-    //Info popup
+    <!--Info popup-->
     <string name="alert_dont">Ok, nicht erneut anzeigen.</string>
     <string name="alert_info">Information</string>
     <string name="alert_text">Nach links wischen um den Thread zu löschen</string>
     <string name="alert_text1">Nach rechts wischen um den Thread zu validieren</string>
     <string name="alert_ok">Ok</string>
     <string name="alert_cancel">Abbrechen</string>
+
+    <!--Feed-->
+    <string name="feed_title">Feed</string>
+    <string name="feed_post_added">Neuer Post hinzugefügt</string>
+    <string name="feed_thread_added">Neuer Thread hinzugefügt</string>
 
 </resources>

@@ -42,13 +42,13 @@ public class RegisterActivity extends AppCompatActivity {
         pass = findViewById(R.id.pwd_in);
         save = findViewById(R.id.add);
 
-        setTitle("Add User");
+        setTitle(getString(R.string.register_title));
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveUser();
-                Toast.makeText(getApplicationContext(), "User Added",
+                Toast.makeText(getApplicationContext(), getString(R.string.toast_user_added),
                         Toast.LENGTH_LONG).show();
                 Intent inent= new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(inent);
@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (fnameString.trim().isEmpty() ||lnameString.trim().isEmpty() || mailString.trim().isEmpty() ||
         passString.trim().isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please enter all informations",
+            Toast.makeText(getApplicationContext(), getString(R.string.toast_add_error),
                     Toast.LENGTH_LONG).show();
             return;
         }

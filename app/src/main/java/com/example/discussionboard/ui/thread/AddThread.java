@@ -41,7 +41,7 @@ public class AddThread extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_thread);
-        setTitle("Add Thread");
+        setTitle(getString(R.string.thread_add_title));
 
 
         startActivity();
@@ -58,7 +58,7 @@ public class AddThread extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveThread();
-                Toast.makeText(getApplicationContext(), "Thread Added",
+                Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_added),
                         Toast.LENGTH_LONG).show();
                 Intent inent = new Intent(AddThread.this, ShowThreads.class);
                 startActivity(inent);
@@ -79,7 +79,7 @@ public class AddThread extends AppCompatActivity {
         String categoryString = category.getText().toString();
 
         if (threadString.trim().isEmpty() || categoryString.trim().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Please enter all informations",
+            Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_error),
                     Toast.LENGTH_LONG).show();
             return;
         }

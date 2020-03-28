@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (userViewModel.getAllUsers().getValue().get(i).getEmail().equals(mailString)
                             && userViewModel.getAllUsers().getValue().get(i).getPassword().equals(passString)) {
 
-                        Toast.makeText(getApplicationContext(), "Login successful",
+                        Toast.makeText(getApplicationContext(),getString(R.string.toast_login_true),
                                 Toast.LENGTH_LONG).show();
 
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Please verrify E-Mail and Password",
+                        Toast.makeText(getApplicationContext(), getString(R.string.toast_login_false),
                                 Toast.LENGTH_LONG).show();
                     }
                 }

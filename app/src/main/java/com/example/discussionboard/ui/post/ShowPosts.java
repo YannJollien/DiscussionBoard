@@ -54,7 +54,7 @@ public class ShowPosts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_posts);
-        setTitle("Posts");
+        setTitle(getString(R.string.post_title));
 
 
         //Show message
@@ -108,10 +108,10 @@ public class ShowPosts extends AppCompatActivity {
                 System.out.println("ID vom Adapter " + adapter.getPostAt(viewHolder.getAdapterPosition()).getUserId());
                 if (adapter.getPostAt(viewHolder.getAdapterPosition()).getUserId() == userId) {
                     postViewModel.delete(adapter.getPostAt(viewHolder.getAdapterPosition()));
-                    Toast.makeText(getApplicationContext(), "Post deleted",
+                    Toast.makeText(getApplicationContext(), getString(R.string.toast_post_delete),
                             Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Can't delete, you are not the owner of the post",
+                    Toast.makeText(getApplicationContext(), getString(R.string.toast_post_notdelete),
                             Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -166,8 +166,6 @@ public class ShowPosts extends AppCompatActivity {
 
         }
     }
-
-
     //Message start of activity
     @Override
     protected void onResume() {

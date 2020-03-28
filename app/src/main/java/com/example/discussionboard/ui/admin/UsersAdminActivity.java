@@ -26,7 +26,7 @@ public class UsersAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_admin);
-        setTitle("Users");
+        setTitle(getString(R.string.admin_tile_users));
 
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_user);
@@ -70,24 +70,4 @@ public class UsersAdminActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_thread_actionbar, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add:
-                Intent intent = new Intent(ShowPosts.this, AddPost.class);
-                intent.putExtra("threadId", idThread);
-                startActivity(intent);
-                return true;
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }*/
 }

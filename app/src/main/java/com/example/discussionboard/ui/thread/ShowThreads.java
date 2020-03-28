@@ -41,7 +41,7 @@ public class ShowThreads extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_threads);
-        setTitle("Threads");
+        setTitle(getString(R.string.thread_title));
 
         amount = findViewById(R.id.category_in);
 

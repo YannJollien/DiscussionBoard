@@ -20,6 +20,7 @@ public class AdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+        setTitle(getString(R.string.admin_tile));
 
         user = findViewById(R.id.button_users);
         thread = findViewById(R.id.button_threads);

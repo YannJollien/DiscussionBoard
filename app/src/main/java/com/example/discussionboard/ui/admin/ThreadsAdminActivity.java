@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
@@ -47,7 +46,7 @@ public class ThreadsAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_threads_admin);
-        setTitle("Threads");
+        setTitle(getString(R.string.thread_title));
 
 
 
@@ -84,7 +83,7 @@ public class ThreadsAdminActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 threadTempViewModel.delete(adapter.getThreadTempAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getApplicationContext(), "Thread deleted",
+                Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_delete),
                         Toast.LENGTH_LONG).show();
             }
         }).attachToRecyclerView(recyclerView);
@@ -113,10 +112,10 @@ public class ThreadsAdminActivity extends AppCompatActivity {
                 SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
                 String time = sdfTime.format(new Date());
 
-                Feed feed = new Feed(submitterString,"New thread added",2,dateFeed,time);
+                Feed feed = new Feed(submitterString,getString(R.string.feed_thread_added),2,dateFeed,time);
                 feedViewModel.insert(feed);
                 threadTempViewModel.delete(adapter.getThreadTempAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(getApplicationContext(), "Thread validated",
+                Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_ok),
                         Toast.LENGTH_LONG).show();
             }
         }).attachToRecyclerView(recyclerView);

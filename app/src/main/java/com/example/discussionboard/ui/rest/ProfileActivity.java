@@ -45,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        setTitle(getString(R.string.profile_title));
 
 
         //Activity start
@@ -127,17 +128,17 @@ public class ProfileActivity extends AppCompatActivity {
                             User user = new User(firstName,lastName,email,passNew.getText().toString(),false);
                             user.setId(userId);
                             userViewModel.update(user);
-                            Toast.makeText(getApplicationContext(), "Password Changed!",
+                            Toast.makeText(getApplicationContext(), getString(R.string.password_ok),
                                     Toast.LENGTH_LONG).show();
                             dialog.cancel();
                         }
                         if (passOldString.equals(passNewString)){
-                            Toast.makeText(getApplicationContext(), "Same password!",
+                            Toast.makeText(getApplicationContext(), getString(R.string.password_same),
                                     Toast.LENGTH_LONG).show();
                             passNew.setTextColor(Color.RED);
                         }
                         if (!passOldString.equals(password)){
-                            Toast.makeText(getApplicationContext(), "Wrong password!",
+                            Toast.makeText(getApplicationContext(), getString(R.string.password_wrong),
                                     Toast.LENGTH_LONG).show();
                             passOld.setTextColor(Color.RED);
                         }

@@ -39,6 +39,7 @@ public class AddPost extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
+        setTitle(getString(R.string.post_add_title));
 
         startActivity();
 
@@ -53,7 +54,7 @@ public class AddPost extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 savePost();
-                Toast.makeText(getApplicationContext(), "Post Added",
+                Toast.makeText(getApplicationContext(), getString(R.string.toast_post_added),
                         Toast.LENGTH_LONG).show();
                 Intent inent= new Intent(AddPost.this, ShowPosts.class);
                 startActivity(inent);
@@ -79,7 +80,7 @@ public class AddPost extends AppCompatActivity {
         int idUser = m.getUserId();
 
         if (submitterString.trim().isEmpty() ||textString.trim().isEmpty()){
-            Toast.makeText(getApplicationContext(), "Please enter all informations",
+            Toast.makeText(getApplicationContext(), getString(R.string.toast_post_error),
                     Toast.LENGTH_LONG).show();
             return;
         }
@@ -96,7 +97,7 @@ public class AddPost extends AppCompatActivity {
         SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
         time = sdfTime.format(new Date());
 
-        Feed feed = new Feed(submitterString,"New post added",1,dateFeed,time);
+        Feed feed = new Feed(submitterString,getString(R.string.feed_post_added),1,dateFeed,time);
 
         feedViewModel = new ViewModelProvider(this).get(FeedViewModel.class);
         feedViewModel.insert(feed);

@@ -50,6 +50,7 @@ public class ShowPostsDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_posts_detail);
+        setTitle(getString(R.string.post_detail_title));
 
         startActivity();
 
@@ -110,6 +111,8 @@ public class ShowPostsDetail extends AppCompatActivity {
                 Post post = new Post(subString,textString,dateText,threadId,userId);
                 post.setId(id);
                 postViewModel.update(post);
+                Toast.makeText(getApplicationContext(), getString(R.string.toast_post_update),
+                        Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(ShowPostsDetail.this,ShowPosts.class);
                 startActivity(intent);
             }
