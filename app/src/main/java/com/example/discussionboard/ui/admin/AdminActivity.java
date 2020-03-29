@@ -14,7 +14,8 @@ import com.example.discussionboard.R;
 public class AdminActivity extends AppCompatActivity {
 
     Button user;
-    Button thread;
+    Button thread1;
+    Button thread2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,8 @@ public class AdminActivity extends AppCompatActivity {
         setTitle(getString(R.string.admin_tile));
 
         user = findViewById(R.id.button_users);
-        thread = findViewById(R.id.button_threads);
+        thread1 = findViewById(R.id.button_threads);
+        thread2 = findViewById(R.id.button_threads1);
 
         user.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,10 +35,18 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        thread.setOnClickListener(new View.OnClickListener() {
+        thread1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AdminActivity.this, ThreadsAdminActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        thread2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminActivity.this, ThreadsAdminActivity1.class);
                 startActivity(intent);
             }
         });

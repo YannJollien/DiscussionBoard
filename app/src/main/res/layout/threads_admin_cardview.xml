@@ -17,22 +17,19 @@
         <TextView
             android:id="@+id/thread_admin_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thread" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/category_admin_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/submitter_admin_view"
-            android:text="Category" />
+            android:layout_toRightOf="@+id/submitter_admin_view" />
 
         <TextView
             android:id="@+id/submitter_admin_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/thread_admin_view"
-            android:text="Submitter" />
+            android:layout_below="@+id/thread_admin_view" />
 
 
     </RelativeLayout>

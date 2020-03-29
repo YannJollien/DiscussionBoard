@@ -11,16 +11,19 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.admin.ThreadsAdminActivity"
-            android:parentActivityName=".ui.admin.AdminActivity"/>
+            android:parentActivityName=".ui.admin.AdminActivity" />
+        <activity
+            android:name=".ui.admin.ThreadsAdminActivity1"
+            android:parentActivityName=".ui.admin.AdminActivity" />
         <activity
             android:name=".ui.admin.UsersAdminActivityDetail"
-            android:parentActivityName=".ui.admin.UsersAdminActivity"/>
+            android:parentActivityName=".ui.admin.UsersAdminActivity" />
         <activity
             android:name=".ui.admin.UsersAdminActivity"
             android:parentActivityName=".ui.admin.AdminActivity" />
         <activity
             android:name=".ui.admin.AdminActivity"
-            android:parentActivityName=".ui.MenuActivity"/>
+            android:parentActivityName=".ui.MenuActivity" />
         <activity
             android:name=".ui.feed.FeedActivity"
             android:parentActivityName=".ui.MenuActivity" />

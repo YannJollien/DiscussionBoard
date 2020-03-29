@@ -57,7 +57,8 @@
     <string name="admin_tile">Admin</string>
     <string name="admin_tile_users">Benutzer</string>
     <string name="admin_users">Benutzer</string>
-    <string name="admin_threads">Threads</string>
+    <string name="admin_threads">Zu validierende Threads</string>
+    <string name="admin_threads1">Existierende Threads</string>
     <string name="admin_fname">Vorname</string>
     <string name="admin_lname">Nachname</string>
     <string name="admin_mail">E-Mail</string>

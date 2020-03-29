@@ -45,6 +45,10 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.ThreadHold
 
     }
 
+    public Thread getThreadAt(int position) {
+        return threads.get(position);
+    }
+
     @Override
     public int getItemCount() {
         return threads.size();
