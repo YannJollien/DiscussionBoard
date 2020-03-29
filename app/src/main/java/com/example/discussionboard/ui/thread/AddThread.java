@@ -37,6 +37,8 @@ public class AddThread extends AppCompatActivity {
     private EditText category;
     private Button addThread;
 
+    ThreadTemp threadTemp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +77,8 @@ public class AddThread extends AppCompatActivity {
     }
 
     public void saveThread() {
-        String threadString = thread.getText().toString();
-        String categoryString = category.getText().toString();
+        final String threadString = thread.getText().toString();
+        final String categoryString = category.getText().toString();
 
         if (threadString.trim().isEmpty() || categoryString.trim().isEmpty()) {
             Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_error),
@@ -87,6 +89,8 @@ public class AddThread extends AppCompatActivity {
         menuActivity = new MenuActivity();
         userId = menuActivity.userId;
 
+        threadTempViewModel = new ViewModelProvider(this).get(ThreadTempViewModel.class);
+
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
             @Override
@@ -96,12 +100,20 @@ public class AddThread extends AppCompatActivity {
                         submitterString = users.get(i).getFirstName().toString();
                     }
                 }
+                System.out.println("Submitter "+submitterString);
+                threadTemp = new ThreadTemp(threadString, categoryString,submitterString);
+                threadTempViewModel.insert(threadTemp);
+
             }
         });
 
-        ThreadTemp threadTemp = new ThreadTemp(threadString, categoryString,submitterString);
 
-        threadTempViewModel = new ViewModelProvider(this).get(ThreadTempViewModel.class);
-        threadTempViewModel.insert(threadTemp);
+
+
+
+
+
+
+
     }
 }

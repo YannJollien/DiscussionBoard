@@ -11,6 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.discussionboard.database.dao.PostDao;
 import com.example.discussionboard.database.entity.Post;
+import com.example.discussionboard.database.entity.Thread;
 
 @Database(entities = {Post.class}, version = 1)
 public abstract class PostDatabase extends RoomDatabase{

@@ -31,7 +31,7 @@ public class ThreadTempAdapter extends RecyclerView.Adapter<ThreadTempAdapter.Th
     public void onBindViewHolder(@NonNull ThreadTempHolder holder, int position) {
         ThreadTemp currentThreadTemp = threadsTemp.get(position);
         holder.thread.setText(currentThreadTemp.getThread());
-        holder.thread.setText(currentThreadTemp.getCategory());
+        holder.category.setText(currentThreadTemp.getCategory());
         holder.submitter.setText(currentThreadTemp.getSubmitter());
 
 

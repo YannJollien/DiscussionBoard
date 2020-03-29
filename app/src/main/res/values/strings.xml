@@ -93,5 +93,8 @@
     <string name="feed_post_added">New Post added</string>
     <string name="feed_thread_added">New Thread added</string>
 
+    <!--Info-->
+    <string name="creator">Created by Yann</string>
+    <string name="version">Version: </string>
 
 </resources>

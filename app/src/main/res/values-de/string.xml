@@ -94,4 +94,8 @@
     <string name="feed_post_added">Neuer Post hinzugefügt</string>
     <string name="feed_thread_added">Neuer Thread hinzugefügt</string>
 
+    <!--Info-->
+    <string name="creator">Created by</string>
+    <string name="version">Version: </string>
+
 </resources>
