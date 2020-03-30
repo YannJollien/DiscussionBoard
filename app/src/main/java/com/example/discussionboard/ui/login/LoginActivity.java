@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,6 +27,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mail;
     private EditText pwd;
 
+    private CheckBox rem;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mail = findViewById(R.id.mail);
         pwd = findViewById(R.id.pass);
+        rem = findViewById(R.id.remember);
 
         //Login
         login.setOnClickListener(new View.OnClickListener() {

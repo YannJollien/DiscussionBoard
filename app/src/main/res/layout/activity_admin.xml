@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:padding="5dp"
             android:text="@string/admin_users"
             android:background="@drawable/custom_button2"/>
 
@@ -37,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:padding="5dp"
             android:layout_marginTop="20dp"
             android:text="@string/admin_threads"
             android:background="@drawable/custom_button2" />
@@ -46,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:padding="5dp"
             android:layout_marginTop="20dp"
             android:text="@string/admin_threads1"
             android:background="@drawable/custom_button2" />

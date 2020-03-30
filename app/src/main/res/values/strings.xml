@@ -84,9 +84,16 @@
     <string name="alert_dont">Ok please do not show again.</string>
     <string name="alert_info">Information</string>
     <string name="alert_text">Swipe left to delete the thread</string>
+    <string name="alert_text_post">Swipe left to delete the post</string>
     <string name="alert_text1">Swipe right to validate the thread</string>
     <string name="alert_ok">Ok</string>
     <string name="alert_cancel">Cancel</string>
+
+    <string name="alert_change">Change language</string>
+    <string name="en">Englisch</string>
+    <string name="de">Deutsch</string>
+
+
 
     <!--Feed-->
     <string name="feed_title">Feed</string>

@@ -3,7 +3,6 @@ package com.example.discussionboard.ui.post;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,10 +27,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.PostAdapter;
 import com.example.discussionboard.database.entity.Post;
-import com.example.discussionboard.database.entity.User;
 import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.ui.MenuActivity;
-import com.example.discussionboard.ui.rest.ProfileActivity;
 import com.example.discussionboard.ui.thread.ShowThreads;
 
 import java.util.List;
@@ -179,7 +175,7 @@ public class ShowPosts extends AppCompatActivity {
         dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
         adb.setView(eulaLayout);
         adb.setTitle(getString(R.string.alert_info));
-        adb.setMessage(Html.fromHtml(getString(R.string.alert_text)));
+        adb.setMessage(Html.fromHtml(getString(R.string.alert_text_post)));
 
         adb.setPositiveButton(getString(R.string.alert_ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {

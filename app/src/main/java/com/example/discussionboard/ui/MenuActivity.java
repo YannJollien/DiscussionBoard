@@ -1,28 +1,26 @@
 package com.example.discussionboard.ui;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.discussionboard.R;
-import com.example.discussionboard.database.entity.Thread;
 import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 import com.example.discussionboard.ui.admin.AdminActivity;
 import com.example.discussionboard.ui.feed.FeedActivity;
@@ -32,20 +30,21 @@ import com.example.discussionboard.ui.rest.ProfileActivity;
 import com.example.discussionboard.ui.thread.ShowThreads;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.List;
 import java.util.Locale;
 
 public class MenuActivity extends AppCompatActivity {
 
     public static int userId;
     public static boolean admin;
+    public static final String KEY_PREF_LANGUAGE = "pref_language";
+    public String languagePref_ID;
     private DrawerLayout drawerLayout;
     private ThreadViewModel threadViewModel;
-
     private ImageView image;
-
-    String currentLanguage = "en", currentLang;
     private Locale locale;
+
+    private CheckBox en;
+    private CheckBox de;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class MenuActivity extends AppCompatActivity {
             admin = getIntent().getExtras().getBoolean("admin");
         }
 
-        System.out.println("User id :"+userId);
+        System.out.println("User id :" + userId);
 
         //Display the drawer
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -75,7 +74,7 @@ public class MenuActivity extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         //Hide Admin menu if not admin
-        if (admin == false){
+        if (admin == false) {
             Menu nav_Menu = navigationView.getMenu();
             nav_Menu.findItem(R.id.nav_admin).setVisible(false);
         }
@@ -110,7 +109,8 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.nav_lang:
                                 System.out.println(R.id.nav_lang);
                                 //calling changing langugage method
-                                setLocale("de");
+                                changeLanguage();
+
                         }
                         return true;
                     }
@@ -144,20 +144,84 @@ public class MenuActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Change language method
-    public void setLocale(String localeName) {
-        if (!localeName.equals(currentLanguage)) {
-            locale = new Locale(localeName);
-            Resources res = getResources();
-            DisplayMetrics dm = res.getDisplayMetrics();
-            Configuration conf = res.getConfiguration();
-            conf.locale = locale;
-            res.updateConfiguration(conf, dm);
-            Intent refresh = new Intent(this, LoginActivity.class);
-            refresh.putExtra(currentLang, localeName);
-            startActivity(refresh);
-        } else {
-            Toast.makeText(MenuActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
-        }
+
+
+
+
+    //Method to change the language
+    public void changeLanguage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MenuActivity.this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alertdialog_language, null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        // Get the custom alert dialog view widgets reference
+        en = dialogView.findViewById(R.id.check_en);
+        de = dialogView.findViewById(R.id.check_de);
+
+
+        Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
+        Button btn_negative = (Button) dialogView.findViewById(R.id.dialog_negative_btn);
+
+        // Create the alert dialog
+        final AlertDialog dialog = builder.create();
+
+        // Set positive/yes button click listener
+        btn_positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (en.isChecked()){
+                    String languageToLoad = "en"; // your language
+                    Locale locale = new Locale(languageToLoad);
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.locale = locale;
+                    getBaseContext().getResources().updateConfiguration(config,
+                            getBaseContext().getResources().getDisplayMetrics());
+                    dialog.dismiss();
+
+
+                    Intent refresh = new Intent(MenuActivity.this, LoginActivity.class);
+                    startActivity(refresh);
+                    finish();
+                }
+                if (de.isChecked()){
+                    String languageToLoad = "de"; // your language
+                    Locale locale = new Locale(languageToLoad);
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.locale = locale;
+                    getBaseContext().getResources().updateConfiguration(config,
+                            getBaseContext().getResources().getDisplayMetrics());
+                    dialog.dismiss();
+
+
+                    Intent refresh = new Intent(MenuActivity.this, LoginActivity.class);
+                    startActivity(refresh);
+                    finish();
+                }
+            }
+        });
+
+        // Set negative/no button click listener
+        btn_negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss/cancel the alert dialog
+                //dialog.cancel();
+                dialog.dismiss();
+            }
+        });
+
+        // Display the custom alert dialog on interface
+        dialog.show();
+
     }
+
 }

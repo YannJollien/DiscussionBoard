@@ -65,7 +65,7 @@
             android:text="Change password"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="10dp"
-            android:padding="3dp"
+            android:padding="10dp"
             android:background="@drawable/custom_button2"/>
 
     </LinearLayout>

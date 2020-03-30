@@ -65,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="10dp"
+        android:padding="5dp"
         android:background="@drawable/custom_button2"
         android:text="@string/add"/>
 

@@ -22,23 +22,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadAdapter;
-import com.example.discussionboard.database.entity.Feed;
+import com.example.discussionboard.database.entity.Post;
 import com.example.discussionboard.database.entity.Thread;
-import com.example.discussionboard.database.viewmodel.FeedViewModel;
 import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ThreadsAdminActivity1 extends AppCompatActivity {
 
     ThreadViewModel threadViewModel;
     PostViewModel postViewModel;
+    RecyclerView recyclerView;
+
+    ThreadAdapter adapter;
 
     public static final String PREFS_NAME = "MyPrefsFile1";
     public CheckBox dontShowAgain;
+    int threadId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +50,13 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
         setTitle(getString(R.string.thread_title));
 
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_threads_admin);
+        recyclerView = findViewById(R.id.recycler_view_threads_admin);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        final ThreadAdapter adapter = new ThreadAdapter();
-
+        adapter = new ThreadAdapter();
 
         recyclerView.setAdapter(adapter);
-
 
         threadViewModel = new ViewModelProvider(this).get(ThreadViewModel.class);
         threadViewModel.getAllThread().observe(this, new Observer<List<Thread>>() {
@@ -67,6 +68,31 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
 
         postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
 
+
+        //Back
+        Toolbar myChildToolbar =
+                (Toolbar) findViewById(R.id.thread_admin_toolbar);
+        setSupportActionBar(myChildToolbar);
+        ActionBar ab = getSupportActionBar();
+
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        delete();
+
+    }
+
+    public void delete(){
+
+        final ArrayList<Post> listToDelete = new ArrayList<Post>();
+        postViewModel.getAllPosts().observe(this, new Observer<List<Post>>() {
+            @Override
+            public void onChanged(List<Post> posts) {
+                System.out.println("Thread Id im post "+threadId);
+                for (int i = 0; i < posts.size(); i++) {
+                    listToDelete.add(posts.get(i));
+                }
+            }
+        });
 
         //Delete
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -81,17 +107,16 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
                 threadViewModel.delete(adapter.getThreadAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_delete),
                         Toast.LENGTH_LONG).show();
-
+                threadId = adapter.getThreadAt(viewHolder.getAdapterPosition()).getId();
+                for (int i = 0 ; i < listToDelete.size();i++){
+                    if (listToDelete.get(i).getThreadId()==threadId){
+                        postViewModel.delete(listToDelete.get(i));
+                        System.out.println("Post deleted");
+                    }
+                }
+                System.out.println(threadId);
             }
         }).attachToRecyclerView(recyclerView);
-
-        //Back
-        Toolbar myChildToolbar =
-                (Toolbar) findViewById(R.id.thread_admin_toolbar);
-        setSupportActionBar(myChildToolbar);
-        ActionBar ab = getSupportActionBar();
-
-        ab.setDisplayHomeAsUpEnabled(true);
 
     }
 
