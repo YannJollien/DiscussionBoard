@@ -1,5 +1,6 @@
 package com.example.discussionboard.database.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,7 +10,9 @@ public class Feed {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @ColumnInfo(name = "submitter_name")
     private String submitter;
+
     private String context;
     private int imageCode;
     private String date;

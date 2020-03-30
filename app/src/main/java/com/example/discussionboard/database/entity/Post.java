@@ -1,5 +1,6 @@
 package com.example.discussionboard.database.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -13,7 +14,9 @@ public class Post {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    @ColumnInfo(name = "submitter_name")
     private String submitter;
+
     private String text;
     private String date;
     private int threadId;

@@ -1,6 +1,7 @@
 package com.example.discussionboard.database.entity;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "threads")
