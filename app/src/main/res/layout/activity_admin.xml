@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.admin.AdminActivity"
-    android:background="@color/colorBackground">
+    android:background="@drawable/background_color">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/admin_toolbar"

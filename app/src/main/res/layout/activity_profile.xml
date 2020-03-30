@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.rest.ProfileActivity"
-    android:background="@color/colorBackground">
+    android:background="@drawable/background_color">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/profile_toolbar"

@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +41,8 @@ public class MenuActivity extends AppCompatActivity {
     public static boolean admin;
     private DrawerLayout drawerLayout;
     private ThreadViewModel threadViewModel;
-    int amountThreads;
 
-    private TextView amount;
+    private ImageView image;
 
     String currentLanguage = "en", currentLang;
     private Locale locale;
@@ -52,7 +52,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        amount = findViewById(R.id.amount);
+        image = findViewById(R.id.image_menu);
 
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
@@ -116,8 +116,6 @@ public class MenuActivity extends AppCompatActivity {
                     }
                 });
 
-        getAmountThreads(amount);
-
         ImageButton ib = (ImageButton) navigationView.getHeaderView(0).findViewById(R.id.nav_button);
         ib.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,20 +130,6 @@ public class MenuActivity extends AppCompatActivity {
 
     public int getUserId() {
         return userId;
-    }
-
-    public void getAmountThreads(final TextView textView){
-        threadViewModel = new ViewModelProvider(this).get(ThreadViewModel.class);
-        threadViewModel.getAllThread().observe(this, new Observer<List<Thread>>() {
-            @Override
-            public void onChanged(List<Thread> threads) {
-                amountThreads = threads.size();
-                System.out.println("Size "+amountThreads);
-                textView.setText(amountThreads+ " Threads online");
-            }
-
-        });
-
     }
 
 

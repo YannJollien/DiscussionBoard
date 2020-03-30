@@ -25,6 +25,7 @@ import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.database.entity.Feed;
 import com.example.discussionboard.database.entity.Thread;
 import com.example.discussionboard.database.viewmodel.FeedViewModel;
+import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 
 import java.text.SimpleDateFormat;
@@ -34,7 +35,7 @@ import java.util.List;
 public class ThreadsAdminActivity1 extends AppCompatActivity {
 
     ThreadViewModel threadViewModel;
-    FeedViewModel feedViewModel;
+    PostViewModel postViewModel;
 
     public static final String PREFS_NAME = "MyPrefsFile1";
     public CheckBox dontShowAgain;
@@ -64,6 +65,8 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
             }
         });
 
+        postViewModel = new ViewModelProvider(this).get(PostViewModel.class);
+
 
         //Delete
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -78,6 +81,7 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
                 threadViewModel.delete(adapter.getThreadAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_delete),
                         Toast.LENGTH_LONG).show();
+
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -104,7 +108,7 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
         dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
         adb.setView(eulaLayout);
         adb.setTitle(getString(R.string.alert_info));
-        adb.setMessage(Html.fromHtml(getString(R.string.alert_text)+"\n"+(Html.fromHtml(getString(R.string.alert_text1)))));
+        adb.setMessage(Html.fromHtml(getString(R.string.alert_text)));
 
         adb.setPositiveButton(getString(R.string.alert_ok), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
