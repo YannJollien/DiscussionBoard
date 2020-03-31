@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.rest.InfoActivity"></activity>
+        <activity
+            android:name=".ui.rest.InfoActivity"
+            android:parentActivityName=".ui.MenuActivity"/>
         <activity
             android:name=".ui.admin.ThreadsAdminActivity"
             android:parentActivityName=".ui.admin.AdminActivity" />

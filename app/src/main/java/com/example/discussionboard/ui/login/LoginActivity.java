@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,8 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mail;
     private EditText pwd;
 
-    private CheckBox rem;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mail = findViewById(R.id.mail);
         pwd = findViewById(R.id.pass);
-        rem = findViewById(R.id.remember);
 
         //Login
         login.setOnClickListener(new View.OnClickListener() {
@@ -81,12 +77,12 @@ public class LoginActivity extends AppCompatActivity {
                     if (userViewModel.getAllUsers().getValue().get(i).getEmail().equals(mailString)
                             && userViewModel.getAllUsers().getValue().get(i).getPassword().equals(passString)) {
 
-                        Toast.makeText(getApplicationContext(),getString(R.string.toast_login_true),
+                        Toast.makeText(getApplicationContext(), getString(R.string.toast_login_true),
                                 Toast.LENGTH_LONG).show();
 
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         intent.putExtra("userId", users.get(i).getId());
-                        intent.putExtra("admin",users.get(i).isAdmin());
+                        intent.putExtra("admin", users.get(i).isAdmin());
                         startActivity(intent);
                         break;
 
