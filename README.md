@@ -52,5 +52,8 @@ See informations about application
 -A thread has to be validated by an admin 
 -The whole archtiecture is slightly different from the example app on cyberlearn, the inspiration comes from https://www.youtube.com/channel/UC_Fh8kvtkVPkeihBs42jGcA
 
+#Testing device during developpement
+Google Pixel XL / Samsung Galaxy S10
+
 
 
