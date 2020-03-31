@@ -12,22 +12,35 @@
         android:id="@+id/dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/change_pwd"
+        android:text="@string/alert_change"
         android:padding="5dp"
         android:textSize="15dp"
         />
-    <CheckBox
-        android:id="@+id/check_en"
+
+    <RadioGroup
+        android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dialog_title"
-        android:text="@string/en"/>
-    <CheckBox
-        android:id="@+id/check_de"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/check_en"
-        android:text="@string/de"/>
+        android:layout_below="@id/dialog_title">
+
+        <RadioButton
+            android:id="@+id/check_en"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dialog_title"
+            android:text="@string/en"/>
+
+        <RadioButton
+            android:id="@+id/check_de"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/check_en"
+            android:text="@string/de"/>
+
+
+    </RadioGroup>
+
+
 
     <Button
         android:id="@+id/dialog_positive_btn"
@@ -36,7 +49,7 @@
         android:text="@string/ok"
         android:layout_alignParentRight="true"
         android:background="@drawable/custom_button2"
-        android:layout_below="@id/check_de"
+        android:layout_below="@id/group"
         />
     <Button
         android:id="@+id/dialog_negative_btn"

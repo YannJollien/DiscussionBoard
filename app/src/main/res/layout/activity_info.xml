@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.rest.InfoActivity">
+    tools:context=".ui.rest.InfoActivity"
+    android:background="@drawable/background_color">
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -12,10 +12,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Checkable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.database.entity.User;
 import com.example.discussionboard.database.viewmodel.UserViewModel;
+import com.example.discussionboard.ui.MenuActivity;
 
 public class UsersAdminActivityDetail extends AppCompatActivity {
 
@@ -25,8 +27,10 @@ public class UsersAdminActivityDetail extends AppCompatActivity {
     private CheckBox admin;
 
     private Button save;
+    private Button delete;
 
     int id;
+    int currentId;
     String fname;
     String lname;
     String mail;
@@ -34,6 +38,8 @@ public class UsersAdminActivityDetail extends AppCompatActivity {
     boolean adm;
 
     UserViewModel userViewModel;
+
+    MenuActivity menuActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,7 @@ public class UsersAdminActivityDetail extends AppCompatActivity {
         admin = findViewById(R.id.admin);
 
         save = findViewById(R.id.save);
+        delete = findViewById(R.id.delete_user);
 
 
         //Disable the editText for the view only
@@ -63,6 +70,8 @@ public class UsersAdminActivityDetail extends AppCompatActivity {
         mail = getIntent().getExtras().getString("email");
         pass = getIntent().getExtras().getString("pwd");
         adm = getIntent().getExtras().getBoolean("admin");
+
+        currentId = menuActivity.userId;
 
         System.out.println("LNAME"+ lname);
 
@@ -94,8 +103,31 @@ public class UsersAdminActivityDetail extends AppCompatActivity {
                 User user = new User(fnameString,lnameString,mailString,pass,adm);
                 user.setId(id);
                 userViewModel.update(user);
+                Toast.makeText(getApplicationContext(), getString(R.string.toast_user_update),
+                        Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(UsersAdminActivityDetail.this,UsersAdminActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (id == currentId){
+                    Toast.makeText(getApplicationContext(), getString(R.string.toast_user_delete_false),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    String fnameString = firstName.getText().toString();
+                    String lnameString = lastName.getText().toString();
+                    String mailString = email.getText().toString();
+                    User user = new User(fnameString,lnameString,mailString,pass,adm);
+                    user.setId(id);
+                    userViewModel.delete(user);
+                    Toast.makeText(getApplicationContext(), getString(R.string.toast_user_delete),
+                            Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(UsersAdminActivityDetail.this,UsersAdminActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

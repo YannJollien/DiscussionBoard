@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -43,8 +45,9 @@ public class MenuActivity extends AppCompatActivity {
     private ImageView image;
     private Locale locale;
 
-    private CheckBox en;
-    private CheckBox de;
+    private RadioButton en;
+    private RadioButton de;
+    private TextView alertTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +167,17 @@ public class MenuActivity extends AppCompatActivity {
         // Get the custom alert dialog view widgets reference
         en = dialogView.findViewById(R.id.check_en);
         de = dialogView.findViewById(R.id.check_de);
+        alertTitle = dialogView.findViewById(R.id.dialog_title);
+
+        String currentLangauge = alertTitle.getText().toString();
+
+        if (currentLangauge.contains("Sprache")){
+            de.setChecked(true);
+        }
+
+        if (currentLangauge.contains("language")){
+            en.setChecked(true);
+        }
 
 
         Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);

@@ -65,6 +65,10 @@
     <string name="admin_checkbox">Admin</string>
     <string name="toast_thread_delete">Thread gelöscht</string>
     <string name="toast_thread_ok">Thread validiert</string>
+    <string name="delete_user">User löschen</string>
+    <string name="toast_user_update">User geändert</string>
+    <string name="toast_user_delete">User gelöscht</string>
+    <string name="toast_user_delete_false">Aktueller User kann nicht gelöscht werden</string>
 
     <!--Change password-->
     <string name="change_pwd">Passwort ändern</string>

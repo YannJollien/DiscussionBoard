@@ -64,6 +64,10 @@
     <string name="admin_checkbox">Admin</string>
     <string name="toast_thread_delete">Thread deleted</string>
     <string name="toast_thread_ok">Thread validated</string>
+    <string name="delete_user">Delete user</string>
+    <string name="toast_user_update">User updated</string>
+    <string name="toast_user_delete">User deleted</string>
+    <string name="toast_user_delete_false">Can\'t delete current user</string>
 
     <!--Change password-->
     <string name="change_pwd">Change Password</string>
