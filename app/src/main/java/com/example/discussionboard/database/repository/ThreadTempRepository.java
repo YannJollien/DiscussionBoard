@@ -44,6 +44,7 @@ public class ThreadTempRepository {
         return allThreadTemp;
     }
 
+    //Inner class Insert
     private static class InsertThreadTempAsyncTask extends AsyncTask<ThreadTemp, Void, Void> {
 
         private ThreadTempDao threadTempDao;
@@ -59,6 +60,7 @@ public class ThreadTempRepository {
         }
     }
 
+    //Inner class Update
     private static class UpdateThreadTempAsyncTask extends AsyncTask<ThreadTemp, Void, Void>{
 
         private ThreadTempDao threadTempDao;
@@ -74,6 +76,7 @@ public class ThreadTempRepository {
         }
     }
 
+    //Inner class Delete
     private static class DeleteThreadTempAsyncTask extends AsyncTask<ThreadTemp, Void, Void>{
 
         private ThreadTempDao threadTempDao;
@@ -89,6 +92,7 @@ public class ThreadTempRepository {
         }
     }
 
+    //Inner class Delete all
     private static class DeleteAllThreadTempAsyncTask extends AsyncTask<Void, Void, Void>{
 
         private ThreadTempDao threadTempDao;

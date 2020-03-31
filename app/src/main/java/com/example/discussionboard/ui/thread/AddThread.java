@@ -31,13 +31,10 @@ public class AddThread extends AppCompatActivity {
     UserViewModel userViewModel;
     int userId;
     String submitterString;
-    String date;
-    String time;
+    ThreadTemp threadTemp;
     private EditText thread;
     private EditText category;
     private Button addThread;
-
-    ThreadTemp threadTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,19 +97,13 @@ public class AddThread extends AppCompatActivity {
                         submitterString = users.get(i).getFirstName().toString();
                     }
                 }
-                System.out.println("Submitter "+submitterString);
-                threadTemp = new ThreadTemp(threadString, categoryString,submitterString);
+                //Add thread to temporary db
+                System.out.println("Submitter " + submitterString);
+                threadTemp = new ThreadTemp(threadString, categoryString, submitterString);
                 threadTempViewModel.insert(threadTemp);
 
             }
         });
-
-
-
-
-
-
-
 
 
     }

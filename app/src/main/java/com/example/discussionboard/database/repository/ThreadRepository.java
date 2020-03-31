@@ -45,6 +45,7 @@ public class ThreadRepository {
         return allThread;
     }
 
+    //Inner class Insert
     private static class InsertThreadAsyncTask extends AsyncTask<Thread, Void, Void>{
 
         private ThreadDao threadDao;
@@ -60,6 +61,7 @@ public class ThreadRepository {
         }
     }
 
+    //Inner class Update
     private static class UpdateThreadAsyncTask extends AsyncTask<Thread, Void, Void>{
 
         private ThreadDao threadDao;
@@ -75,6 +77,7 @@ public class ThreadRepository {
         }
     }
 
+    //Inner class Delete
     private static class DeleteThreadAsyncTask extends AsyncTask<Thread, Void, Void>{
 
         private ThreadDao threadDao;
@@ -90,6 +93,7 @@ public class ThreadRepository {
         }
     }
 
+    //Inner class Delete All
     private static class DeleteAllThreadAsyncTask extends AsyncTask<Void, Void, Void>{
 
         private ThreadDao threadDao;

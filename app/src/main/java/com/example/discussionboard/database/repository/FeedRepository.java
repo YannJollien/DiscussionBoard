@@ -44,6 +44,7 @@ public class FeedRepository {
         return allFeed;
     }
 
+    //Inner class Insert
     private static class InsertFeedAsyncTask extends AsyncTask<Feed, Void, Void> {
 
         private FeedDao feedDao;
@@ -59,6 +60,7 @@ public class FeedRepository {
         }
     }
 
+    //Inner class Update
     private static class UpdateFeedAsyncTask extends AsyncTask<Feed, Void, Void>{
 
         private FeedDao feedDao;
@@ -74,6 +76,7 @@ public class FeedRepository {
         }
     }
 
+    //Inner class Delete
     private static class DeleteFeedAsyncTask extends AsyncTask<Feed, Void, Void>{
 
         private FeedDao feedDao;
@@ -89,6 +92,7 @@ public class FeedRepository {
         }
     }
 
+    //Inner class delete all
     private static class DeleteAllFeedAsyncTask extends AsyncTask<Void, Void, Void>{
 
         private FeedDao feedDao;

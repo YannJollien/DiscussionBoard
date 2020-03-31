@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("userId", users.get(i).getId());
                         intent.putExtra("admin",users.get(i).isAdmin());
                         startActivity(intent);
+                        break;
 
                     } else {
                         Toast.makeText(getApplicationContext(), getString(R.string.toast_login_false),

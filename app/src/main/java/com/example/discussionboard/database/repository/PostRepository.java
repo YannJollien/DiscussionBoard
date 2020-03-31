@@ -44,6 +44,7 @@ public class PostRepository {
         return allPost;
     }
 
+    //Inner class Insert
     private static class InsertPostAsyncTask extends AsyncTask<Post, Void, Void>{
 
         private PostDao postDao;
@@ -59,6 +60,7 @@ public class PostRepository {
         }
     }
 
+    //Inner class Update
     private static class UpdatePostAsyncTask extends AsyncTask<Post, Void, Void>{
 
         private PostDao postDao;
@@ -74,6 +76,7 @@ public class PostRepository {
         }
     }
 
+    //Inner class Delete
     private static class DeletePostAsyncTask extends AsyncTask<Post, Void, Void>{
 
         private PostDao postDao;
@@ -89,6 +92,7 @@ public class PostRepository {
         }
     }
 
+    //Inner class DElete all
     private static class DeleteAllPostAsyncTask extends AsyncTask<Void, Void, Void>{
 
         private PostDao postDao;

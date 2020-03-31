@@ -27,20 +27,17 @@ import com.example.discussionboard.database.entity.Thread;
 import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ThreadsAdminActivity1 extends AppCompatActivity {
 
+    public static final String PREFS_NAME = "MyPrefsFile1";
+    public CheckBox dontShowAgain;
     ThreadViewModel threadViewModel;
     PostViewModel postViewModel;
     RecyclerView recyclerView;
-
     ThreadAdapter adapter;
-
-    public static final String PREFS_NAME = "MyPrefsFile1";
-    public CheckBox dontShowAgain;
     int threadId;
 
     @Override
@@ -81,13 +78,13 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
 
     }
 
-    public void delete(){
+    public void delete() {
 
         final ArrayList<Post> listToDelete = new ArrayList<Post>();
         postViewModel.getAllPosts().observe(this, new Observer<List<Post>>() {
             @Override
             public void onChanged(List<Post> posts) {
-                System.out.println("Thread Id im post "+threadId);
+                System.out.println("Thread Id im post " + threadId);
                 for (int i = 0; i < posts.size(); i++) {
                     listToDelete.add(posts.get(i));
                 }
@@ -102,14 +99,15 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
                 return false;
             }
 
+            //Delete thread
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 threadViewModel.delete(adapter.getThreadAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_delete),
                         Toast.LENGTH_LONG).show();
                 threadId = adapter.getThreadAt(viewHolder.getAdapterPosition()).getId();
-                for (int i = 0 ; i < listToDelete.size();i++){
-                    if (listToDelete.get(i).getThreadId()==threadId){
+                for (int i = 0; i < listToDelete.size(); i++) {
+                    if (listToDelete.get(i).getThreadId() == threadId) {
                         postViewModel.delete(listToDelete.get(i));
                         System.out.println("Post deleted");
                     }

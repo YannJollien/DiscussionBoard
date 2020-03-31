@@ -46,6 +46,7 @@ public class UserRepository {
         return allUser;
     }
 
+    //Inner class Insert
     private static class InsertUserAsyncTask extends AsyncTask<User, Void, Void>{
 
         private UserDao userDao;
@@ -61,6 +62,7 @@ public class UserRepository {
         }
     }
 
+    //Inner class Update
     private static class UpdateUserAsyncTask extends AsyncTask<User, Void, Void>{
 
         private UserDao userDao;
@@ -76,6 +78,7 @@ public class UserRepository {
         }
     }
 
+    //Inner class Delete
     private static class DeleteUserAsyncTask extends AsyncTask<User, Void, Void>{
 
         private UserDao userDao;
@@ -91,6 +94,7 @@ public class UserRepository {
         }
     }
 
+    //Inner class Delete all
     private static class DeleteAllUserAsyncTask extends AsyncTask<Void, Void, Void>{
 
         private UserDao userDao;
