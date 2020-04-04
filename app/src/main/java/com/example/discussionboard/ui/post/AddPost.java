@@ -15,8 +15,6 @@ import android.widget.Toast;
 import com.example.discussionboard.R;
 import com.example.discussionboard.database.entity.Feed;
 import com.example.discussionboard.database.entity.Post;
-import com.example.discussionboard.database.viewmodel.FeedViewModel;
-import com.example.discussionboard.database.viewmodel.PostViewModel;
 import com.example.discussionboard.ui.MenuActivity;
 
 import java.text.SimpleDateFormat;

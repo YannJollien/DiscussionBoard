@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.FeedAdapter;
 import com.example.discussionboard.database.entity.Feed;
-import com.example.discussionboard.database.viewmodel.FeedViewModel;
 
 import java.util.List;
 

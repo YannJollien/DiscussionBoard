@@ -1,27 +1,25 @@
 package com.example.discussionboard.database.entity;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users")
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
-    @PrimaryKey(autoGenerate = true)
+    @Exclude
     private int id;
 
-    @ColumnInfo(name = "first_name")
     private String firstName;
 
-    @ColumnInfo(name = "last_name")
     private String lastName;
 
     private String email;
     private String password;
     private boolean admin;
 
-    public User(@NonNull String firstName, String lastName, String email, String password, boolean admin) {
+    public User(String firstName, String lastName, String email, String password, boolean admin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -59,6 +57,16 @@ public class User {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("firstname", firstName);
+        result.put("lastname", lastName);
+        result.put("email", email);
+        result.put("password", password);
+        result.put("admin", admin);
+        return result;
     }
 }
 

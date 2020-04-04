@@ -1,12 +1,14 @@
 package com.example.discussionboard.database.entity;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "threads_temp")
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class ThreadTemp {
 
-    @PrimaryKey(autoGenerate = true)
+    @Exclude
     private int id;
 
     private String thread;
@@ -41,5 +43,14 @@ public class ThreadTemp {
 
     public void setSubmitter(String submitter) {
         this.submitter = submitter;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("thread", thread);
+        result.put("category", category);
+        result.put("submitter", submitter);
+
+        return result;
     }
 }

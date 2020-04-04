@@ -18,7 +18,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.database.entity.User;
-import com.example.discussionboard.database.viewmodel.UserViewModel;
 import com.example.discussionboard.ui.MenuActivity;
 
 import java.util.List;

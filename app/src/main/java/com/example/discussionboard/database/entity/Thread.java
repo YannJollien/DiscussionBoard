@@ -1,14 +1,15 @@
 package com.example.discussionboard.database.entity;
 
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "threads")
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Thread {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @Exclude
+    private String id;
 
     private String thread;
     private String category;
@@ -18,11 +19,11 @@ public class Thread {
         this.category = category;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -32,6 +33,14 @@ public class Thread {
 
     public String getCategory() {
         return category;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("thread", thread);
+        result.put("category", category);
+
+        return result;
     }
 }
 

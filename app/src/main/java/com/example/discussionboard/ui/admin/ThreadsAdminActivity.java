@@ -25,9 +25,6 @@ import com.example.discussionboard.adapter.ThreadTempAdapter;
 import com.example.discussionboard.database.entity.Feed;
 import com.example.discussionboard.database.entity.Thread;
 import com.example.discussionboard.database.entity.ThreadTemp;
-import com.example.discussionboard.database.viewmodel.FeedViewModel;
-import com.example.discussionboard.database.viewmodel.ThreadTempViewModel;
-import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

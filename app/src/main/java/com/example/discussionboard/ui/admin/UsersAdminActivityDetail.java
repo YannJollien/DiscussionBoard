@@ -10,13 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.database.entity.User;
-import com.example.discussionboard.database.viewmodel.UserViewModel;
 import com.example.discussionboard.ui.MenuActivity;
 
 public class UsersAdminActivityDetail extends AppCompatActivity {

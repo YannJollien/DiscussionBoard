@@ -2,29 +2,38 @@ package com.example.discussionboard.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.database.entity.User;
-import com.example.discussionboard.database.viewmodel.UserViewModel;
 import com.example.discussionboard.ui.MenuActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
-    UserViewModel userViewModel;
     private Button login;
     private Button register;
     private EditText mail;
     private EditText pwd;
+
+    public String password;
+    public String email;
+
+    private FirebaseAuth auth;
 
 
     @Override
@@ -41,6 +50,9 @@ public class LoginActivity extends AppCompatActivity {
 
         mail = findViewById(R.id.mail);
         pwd = findViewById(R.id.pass);
+
+        //Get Firebase auth instance
+        auth = FirebaseAuth.getInstance();
 
         //Login
         login.setOnClickListener(new View.OnClickListener() {
@@ -64,35 +76,39 @@ public class LoginActivity extends AppCompatActivity {
     //Login Method
     public void login() {
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                String mailString = mail.getText().toString();
-                String passString = pwd.getText().toString();
+        email = mail.getText().toString();
+        password = pwd.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //authenticate user
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
 
-                int nr = userViewModel.getAllUsers().getValue().size();
-                //Looping to check inputs
-                for (int i = 0; i < nr; i++) {
-                    if (userViewModel.getAllUsers().getValue().get(i).getEmail().equals(mailString)
-                            && userViewModel.getAllUsers().getValue().get(i).getPassword().equals(passString)) {
-
-                        Toast.makeText(getApplicationContext(), getString(R.string.toast_login_true),
-                                Toast.LENGTH_LONG).show();
-
-                        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                        intent.putExtra("userId", users.get(i).getId());
-                        intent.putExtra("admin", users.get(i).isAdmin());
-                        startActivity(intent);
-                        break;
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), getString(R.string.toast_login_false),
-                                Toast.LENGTH_LONG).show();
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            // there was an error
+                            if (password.length() < 6) {
+                                Toast.makeText(LoginActivity.this, "Password to short", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
-                }
-            }
-        });
+                });
 
     }
 }

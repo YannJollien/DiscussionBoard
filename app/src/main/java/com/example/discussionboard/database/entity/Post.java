@@ -1,20 +1,15 @@
 package com.example.discussionboard.database.entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+import com.google.firebase.database.Exclude;
 
-import static androidx.room.ForeignKey.CASCADE;
+import java.util.HashMap;
+import java.util.Map;
 
-@Entity(tableName = "posts")
 public class Post {
 
-    @PrimaryKey(autoGenerate = true)
+    @Exclude
     private int id;
 
-    @ColumnInfo(name = "submitter_name")
     private String submitter;
 
     private String text;
@@ -76,6 +71,16 @@ public class Post {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("submitter", submitter);
+        result.put("text", text);
+        result.put("date", date);
+        result.put("threadId", threadId);
+        result.put("userId", userId);
+        return result;
     }
 }
 

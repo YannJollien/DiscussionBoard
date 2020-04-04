@@ -14,7 +14,6 @@ import android.os.Bundle;
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.UsersAdapter;
 import com.example.discussionboard.database.entity.User;
-import com.example.discussionboard.database.viewmodel.UserViewModel;
 
 import java.util.List;
 

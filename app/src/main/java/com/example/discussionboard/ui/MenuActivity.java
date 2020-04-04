@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -23,7 +22,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.discussionboard.R;
-import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 import com.example.discussionboard.ui.admin.AdminActivity;
 import com.example.discussionboard.ui.feed.FeedActivity;
 import com.example.discussionboard.ui.login.LoginActivity;

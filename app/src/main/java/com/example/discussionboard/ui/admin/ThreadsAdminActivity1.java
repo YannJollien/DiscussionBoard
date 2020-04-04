@@ -24,8 +24,6 @@ import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.database.entity.Post;
 import com.example.discussionboard.database.entity.Thread;
-import com.example.discussionboard.database.viewmodel.PostViewModel;
-import com.example.discussionboard.database.viewmodel.ThreadViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

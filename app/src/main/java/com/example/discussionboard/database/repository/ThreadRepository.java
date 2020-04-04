@@ -1,112 +1,90 @@
 package com.example.discussionboard.database.repository;
 
-import android.app.Application;
-import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
 
-import com.example.discussionboard.database.ThreadDatabase;
-import com.example.discussionboard.database.UserDatabase;
-import com.example.discussionboard.database.dao.ThreadDao;
 import com.example.discussionboard.database.entity.Thread;
+import com.example.discussionboard.database.firebase.ThreadListLiveData;
+import com.example.discussionboard.database.firebase.ThreadLiveData;
+import com.example.discussionboard.util.OnAsyncEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class ThreadRepository {
 
-    private ThreadDao threadDao;
-    private LiveData<List<Thread>> allThread;
+    private static final String TAG = "ThreadRepository";
+    private static ThreadRepository instance;
 
-    public ThreadRepository(Application application){
+    private ThreadRepository() {}
 
-        ThreadDatabase database = ThreadDatabase.getInstance(application);
-        threadDao = database.threadDao();
-        allThread = threadDao.getAllThreads();
-
-    }
-
-    public void insert(Thread thread){
-        new InsertThreadAsyncTask(threadDao).execute(thread);
-    }
-
-    public void update(Thread thread){
-        new UpdateThreadAsyncTask(threadDao).execute(thread);
-    }
-
-    public void delete(Thread thread){
-        new DeleteThreadAsyncTask(threadDao).execute(thread);
-    }
-
-    public void deleteAllThreads(){
-        new DeleteAllThreadAsyncTask(threadDao).execute();
-    }
-
-    public LiveData<List<Thread>> getAllThread(){
-        return allThread;
-    }
-
-    //Inner class Insert
-    private static class InsertThreadAsyncTask extends AsyncTask<Thread, Void, Void>{
-
-        private ThreadDao threadDao;
-
-        private InsertThreadAsyncTask(ThreadDao threadDao){
-            this.threadDao=threadDao;
+    public static ThreadRepository getInstance() {
+        if (instance == null) {
+            synchronized (ThreadRepository.class) {
+                if (instance == null) {
+                    instance = new ThreadRepository();
+                }
+            }
         }
-
-        @Override
-        protected Void doInBackground(Thread... threads) {
-            threadDao.insert(threads[0]);
-            return null;
-        }
+        return instance;
     }
 
-    //Inner class Update
-    private static class UpdateThreadAsyncTask extends AsyncTask<Thread, Void, Void>{
-
-        private ThreadDao threadDao;
-
-        private UpdateThreadAsyncTask(ThreadDao threadDao){
-            this.threadDao=threadDao;
-        }
-
-        @Override
-        protected Void doInBackground(Thread... threads) {
-            threadDao.update(threads[0]);
-            return null;
-        }
+    public LiveData<Thread> getThread(final String name) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("plantation")
+                .child(name);
+        return new ThreadLiveData(reference);
     }
 
-    //Inner class Delete
-    private static class DeleteThreadAsyncTask extends AsyncTask<Thread, Void, Void>{
-
-        private ThreadDao threadDao;
-
-        private DeleteThreadAsyncTask(ThreadDao threadDao){
-            this.threadDao=threadDao;
-        }
-
-        @Override
-        protected Void doInBackground(Thread... threads) {
-            threadDao.delete(threads[0]);
-            return null;
-        }
+    public LiveData<List<Thread>> getAllThreads() {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("thread");
+        return new ThreadListLiveData(reference);
     }
 
-    //Inner class Delete All
-    private static class DeleteAllThreadAsyncTask extends AsyncTask<Void, Void, Void>{
+    public void insert(final Thread thread, final OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("thread")
+                .child(thread.getId())
+                .setValue(thread, (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
+    }
 
-        private ThreadDao threadDao;
+    public void update(final Thread thread, final OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("thread")
+                .child(thread.getId())
+                .updateChildren(thread.toMap(), (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
+    }
 
-        private DeleteAllThreadAsyncTask(ThreadDao threadDao){
-            this.threadDao=threadDao;
-        }
+    public void delete(final Thread thread, final OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("thread")
+                .child(thread.getId())
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
+    }
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            threadDao.deleteAllThreads();
-            return null;
-        }
+    public LiveData<List<Thread>> getAllThread(String showName) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("thread");
+        return new ThreadListLiveData(reference);
     }
 
 }

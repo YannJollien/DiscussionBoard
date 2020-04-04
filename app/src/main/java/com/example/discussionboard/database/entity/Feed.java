@@ -4,13 +4,16 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "feeds")
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Feed {
 
-    @PrimaryKey(autoGenerate = true)
+    @Exclude
     private int id;
 
-    @ColumnInfo(name = "submitter_name")
     private String submitter;
 
     private String context;
@@ -72,5 +75,16 @@ public class Feed {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("submitter", submitter);
+        result.put("context", context);
+        result.put("imageCode", imageCode);
+        result.put("date", date);
+        result.put("time", time);
+
+        return result;
     }
 }

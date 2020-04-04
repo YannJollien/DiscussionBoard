@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1034862433",
+    "firebase_url": "https://discussionboard-fcdae.firebaseio.com",
+    "project_id": "discussionboard-fcdae",
+    "storage_bucket": "discussionboard-fcdae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034862433:android:4d5f0d3f2cc9426d45cf20",
+        "android_client_info": {
+          "package_name": "com.example.discussionboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034862433-p1a0n9le6ro7mi3fg0rvrat5ivmqqtbi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwGuHcJhp72U-SsyfuTAfffmXofzC3HcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034862433-p1a0n9le6ro7mi3fg0rvrat5ivmqqtbi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
