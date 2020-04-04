@@ -29,7 +29,7 @@ public class ThreadViewModel extends AndroidViewModel {
         observableThread.setValue(null);
 
         if (idThread != null){
-            LiveData<Thread> account = repository.getThread(idThread);
+            LiveData<Thread> account = repository.getThread();
             observableThread.addSource(account, observableThread::setValue);
 
         }

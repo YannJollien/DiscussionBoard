@@ -12,26 +12,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.database.entity.ThreadTemp;
 import com.example.discussionboard.database.entity.User;
+import com.example.discussionboard.database.viewmodel.ThreadTempViewModel;
 import com.example.discussionboard.ui.MenuActivity;
+import com.example.discussionboard.ui.admin.AdminActivity;
+import com.example.discussionboard.util.OnAsyncEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class AddThread extends AppCompatActivity {
 
     MenuActivity menuActivity;
-    ThreadTempViewModel threadTempViewModel;
-    FeedViewModel feedViewModel;
-    UserViewModel userViewModel;
+
+
     int userId;
     String submitterString;
     ThreadTemp threadTemp;
     private EditText thread;
     private EditText category;
     private Button addThread;
+
+    DatabaseReference databaseThreadTemp;
+    ThreadTempViewModel threadTempViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,8 @@ public class AddThread extends AppCompatActivity {
         thread = findViewById(R.id.thread_in);
         category = findViewById(R.id.category_in);
         addThread = findViewById(R.id.add);
+
+        databaseThreadTemp = FirebaseDatabase.getInstance().getReference("threadTemp");
 
         addThread.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +84,7 @@ public class AddThread extends AppCompatActivity {
     public void saveThread() {
         final String threadString = thread.getText().toString();
         final String categoryString = category.getText().toString();
+        String id = databaseThreadTemp.push().getKey();
 
         if (threadString.trim().isEmpty() || categoryString.trim().isEmpty()) {
             Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_error),
@@ -80,27 +92,33 @@ public class AddThread extends AppCompatActivity {
             return;
         }
 
+        ThreadTemp threadTemp = new ThreadTemp(id,threadString,categoryString,"Yann");
+
         menuActivity = new MenuActivity();
         userId = menuActivity.userId;
 
         threadTempViewModel = new ViewModelProvider(this).get(ThreadTempViewModel.class);
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        userViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
+
+        ThreadTempViewModel.Factory factory = new ThreadTempViewModel.Factory(getApplication(), id);
+        threadTempViewModel = ViewModelProviders.of(this,factory).get(ThreadTempViewModel.class);
+        threadTempViewModel.createThreadTemp(threadTemp, new OnAsyncEventListener() {
             @Override
-            public void onChanged(List<User> users) {
-                for (int i = 0; i < users.size(); i++) {
-                    if (users.get(i).getId() == userId) {
-                        submitterString = users.get(i).getFirstName().toString();
-                    }
-                }
-                //Add thread to temporary db
-                System.out.println("Submitter " + submitterString);
-                threadTemp = new ThreadTemp(threadString, categoryString, submitterString);
-                threadTempViewModel.insert(threadTemp);
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
 
             }
         });
+
+        Toast.makeText(AddThread.this, "Saved",
+                Toast.LENGTH_LONG).show();
+        thread.setText("");
+        category.setText("");
+        startActivity(new Intent(getApplicationContext(), AdminActivity.class));
 
 
     }

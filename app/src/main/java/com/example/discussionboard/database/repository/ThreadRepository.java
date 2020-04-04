@@ -29,10 +29,9 @@ public class ThreadRepository {
         return instance;
     }
 
-    public LiveData<Thread> getThread(final String name) {
+    public LiveData<Thread> getThread() {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("plantation")
-                .child(name);
+                .getReference("plantation");
         return new ThreadLiveData(reference);
     }
 

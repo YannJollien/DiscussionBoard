@@ -9,7 +9,7 @@ import java.util.Map;
 public class ThreadTemp {
 
     @Exclude
-    private int id;
+    private String id;
 
     private String thread;
     private String category;
@@ -21,11 +21,18 @@ public class ThreadTemp {
         this.submitter = submitter;
     }
 
-    public void setId(int id) {
+    public ThreadTemp(String id, String thread, String category, String submitter) {
+        this.id = id;
+        this.thread = thread;
+        this.category = category;
+        this.submitter = submitter;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
