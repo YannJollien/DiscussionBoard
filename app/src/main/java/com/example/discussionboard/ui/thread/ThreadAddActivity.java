@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.discussionboard.R;
 import com.example.discussionboard.databse.entity.Thread;
 import com.example.discussionboard.util.OnAsyncEventListener;
-import com.example.discussionboard.viewmodel.plantation.ThreadViewModel;
+import com.example.discussionboard.viewmodel.thread.ThreadViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

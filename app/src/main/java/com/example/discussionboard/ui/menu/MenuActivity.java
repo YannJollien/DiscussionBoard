@@ -21,6 +21,8 @@ import com.example.discussionboard.settings.ProfileActivity;
 
 import com.example.discussionboard.ui.thread.ThreadViewActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Locale;
 
@@ -37,6 +39,8 @@ public class MenuActivity extends AppCompatActivity {
     Button profile;
     private Locale locale;
 
+
+
     DrawerLayout drawerLayout;
 
 
@@ -46,6 +50,8 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         setTitle("Dashboard");
+
+        System.out.println("Hello");
 
         //Display the drawer
         Toolbar toolbar = findViewById(R.id.toolbar);

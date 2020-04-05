@@ -21,7 +21,7 @@ import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.adapter.ThreadAdapterView;
 import com.example.discussionboard.databse.entity.Thread;
 import com.example.discussionboard.util.OnAsyncEventListener;
-import com.example.discussionboard.viewmodel.plantation.ThreadListViewModel;
+import com.example.discussionboard.viewmodel.thread.ThreadListViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -112,7 +112,7 @@ public class ThreadViewList extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 int position = viewHolder.getAdapterPosition();
 
-                Thread thread = adapter.getPlantation(position);
+                Thread thread = adapter.getThread(position);
 
                 reference.child(thread.getId()).removeValue();
                 startActivity(new Intent(ThreadViewList.this, ThreadViewActivity.class));

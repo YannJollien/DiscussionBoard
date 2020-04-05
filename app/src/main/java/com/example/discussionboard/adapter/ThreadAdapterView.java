@@ -60,7 +60,7 @@ public class ThreadAdapterView extends RecyclerView.Adapter<ThreadAdapterView.Th
 
     }
 
-    public Thread getPlantation(int position){
+    public Thread getThread(int position){
         Thread thread = threadList.get(position);
         return thread;
     }

@@ -40,8 +40,8 @@ public class ThreadAdapter extends RecyclerView.Adapter<ThreadAdapter.ThreadHold
         return threadList.size();
     }
 
-    public void setThread(List<Thread> plantations) {
-        this.threadList = plantations;
+    public void setThread(List<Thread> threads) {
+        this.threadList = threads;
         notifyDataSetChanged();
     }
 
