@@ -106,5 +106,10 @@
     <!--Info-->
     <string name="creator">Created by</string>
     <string name="version">Version: </string>
+    <string name="contact_us">Kontaktiert uns</string>
+
+    <!--Contact-->
+    <string name="mail_address">E-Mail :</string>
+    <string name="send_mail">E-Mail senden</string>
 
 </resources>

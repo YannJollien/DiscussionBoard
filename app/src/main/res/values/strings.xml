@@ -107,5 +107,11 @@
     <!--Info-->
     <string name="creator">Created by Yann</string>
     <string name="version">Version: </string>
+    <string name="contact_us">Contact us</string>
+
+    <!--Contact-->
+    <string name="mail_address">E-Mail :</string>
+    <string name="send_mail">Send E-Mail</string>
+
 
 </resources>

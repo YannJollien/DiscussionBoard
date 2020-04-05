@@ -1,21 +1,21 @@
 package com.example.discussionboard.ui.login;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.discussionboard.R;
-import com.example.discussionboard.database.entity.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,71 +23,63 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 public class RegisterActivity extends AppCompatActivity {
 
+    Button bSave;
 
-    private EditText fname;
-    private EditText lname;
-    private EditText mail;
-    private EditText pass;
-    private Button save;
+    private EditText editEmail;
+    private EditText editPassword;
 
     DatabaseReference databaseUser;
 
 
     FirebaseAuth auth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        startActivity();
+        // my_child_toolbar is defined in the layout file
+        Toolbar myChildToolbar =
+                (Toolbar) findViewById(R.id.register_toolbar);
+        setSupportActionBar(myChildToolbar);
 
-    }
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
 
-    public void startActivity(){
-        fname = findViewById(R.id.fname_in);
-        lname = findViewById(R.id.lname_in);
-        mail = findViewById(R.id.email_in);
-        pass = findViewById(R.id.pwd_in);
-        save = findViewById(R.id.add);
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        initializeUI();
+
+        setTitle("Registration");
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
         databaseUser = FirebaseDatabase.getInstance().getReference("user");
 
-        setTitle(getString(R.string.register_title));
+        bSave = (Button) findViewById(R.id.button_save);
 
-        save.setOnClickListener(new View.OnClickListener() {
+        bSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                saveUser();
-                Toast.makeText(getApplicationContext(), getString(R.string.toast_user_added),
-                        Toast.LENGTH_LONG).show();
-                Intent inent= new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(inent);
+            public void onClick(View v) {
+                //create user
+
+                registerNewUser();
+
             }
         });
 
-        //Back
-        Toolbar myChildToolbar =
-                (Toolbar) findViewById(R.id.register_toolbar);
-        setSupportActionBar(myChildToolbar);
-        ActionBar ab = getSupportActionBar();
-
-        ab.setDisplayHomeAsUpEnabled(true);
     }
 
-    public void saveUser(){
+    private void registerNewUser() {
 
-        String firstname, lastname, email, password;
-        firstname = fname.getText().toString();
-        lastname = lname.getText().toString();
-        email = mail.getText().toString();
-        password = pass.getText().toString();
+        String email, password;
+        email = editEmail.getText().toString();
+        password = editPassword.getText().toString();
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
@@ -117,4 +109,17 @@ public class RegisterActivity extends AppCompatActivity {
                 });
 
     }
+
+
+
+
+    private void initializeUI() {
+        editEmail = findViewById(R.id.mailRegister);
+        editPassword = findViewById(R.id.passRegister);
+
+    }
+
+
+
+
 }

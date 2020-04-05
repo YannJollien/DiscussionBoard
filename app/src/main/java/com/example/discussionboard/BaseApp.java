@@ -2,11 +2,8 @@ package com.example.discussionboard;
 
 import android.app.Application;
 
-import com.example.discussionboard.database.entity.Post;
-import com.example.discussionboard.database.repository.FeedRepository;
-import com.example.discussionboard.database.repository.PostRepository;
-import com.example.discussionboard.database.repository.ThreadRepository;
-import com.example.discussionboard.database.repository.ThreadTempRepository;
+
+import com.example.discussionboard.databse.rep.ThreadRepository;
 
 public class BaseApp extends Application {
 
@@ -14,16 +11,5 @@ public class BaseApp extends Application {
         return ThreadRepository.getInstance();
     }
 
-    public ThreadTempRepository getThreadTempRepository() {
-        return ThreadTempRepository.getInstance();
-    }
-
-    public PostRepository getPostRepository() {
-        return PostRepository.getInstance();
-    }
-
-    public FeedRepository getFeedRepository() {
-        return FeedRepository.getInstance();
-    }
 
 }
