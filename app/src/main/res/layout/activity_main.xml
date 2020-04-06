@@ -62,17 +62,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/custom_button2"
-        android:text="@string/button_login"
-        android:textColor="#b70f0f" />
+        android:text="@string/button_login" />
 
     <Button
         android:id="@+id/buttonReg"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:text="@string/button_register"
-        android:textColor="#ffffff" />
+        android:background="@drawable/custom_button2"
+        android:text="@string/button_register" />
 
     <ProgressBar
         android:id="@+id/load"

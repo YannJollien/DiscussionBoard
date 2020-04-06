@@ -18,8 +18,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.databse.entity.Thread;
+import com.example.discussionboard.databse.entity.ThreadTemp;
 import com.example.discussionboard.util.OnAsyncEventListener;
 import com.example.discussionboard.viewmodel.thread.ThreadViewModel;
+import com.example.discussionboard.viewmodel.threadTemp.ThreadTempViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,17 +39,17 @@ public class ThreadAddActivity extends AppCompatActivity {
     public static EditText category;
     public static TextView result;
     DatabaseReference databaseThread;
-    ThreadViewModel viewModel;
+    ThreadTempViewModel viewModel;
     Button save;
     Button date;
-    ArrayList<Thread> threadList;
+    ArrayList<ThreadTemp> threadTempList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_add);
 
-        databaseThread = FirebaseDatabase.getInstance().getReference("plantation");
+        databaseThread = FirebaseDatabase.getInstance().getReference("thread");
 
 
         setTitle("Add Thread");
@@ -67,7 +71,7 @@ public class ThreadAddActivity extends AppCompatActivity {
         thread = (EditText) findViewById(R.id.add_thread);
         category = (EditText) findViewById(R.id.add_category);
 
-        threadList = new ArrayList<>();
+        threadTempList = new ArrayList<>();
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +80,7 @@ public class ThreadAddActivity extends AppCompatActivity {
                     Toast.makeText(ThreadAddActivity.this, "empty fields",
                             Toast.LENGTH_LONG).show();
                 } else {
-                    savePlantation();
+                    saveThreadTemp();
                 }
 
             }
@@ -94,11 +98,11 @@ public class ThreadAddActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                threadList.clear();
+                threadTempList.clear();
 
                 for (DataSnapshot storageSnapshot : dataSnapshot.getChildren()) {
-                    Thread thread = storageSnapshot.getValue(Thread.class);
-                    threadList.add(thread);
+                    ThreadTemp threadTemp = storageSnapshot.getValue(ThreadTemp.class);
+                    threadTempList.add(threadTemp);
                 }
 
             }
@@ -110,18 +114,20 @@ public class ThreadAddActivity extends AppCompatActivity {
         });
     }
 
-    private void savePlantation() {
+    private void saveThreadTemp() {
 
         String threadString = (thread.getText().toString());
         String categoryString = (category.getText().toString());
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String submitterString = user.getEmail();
 
         String id = databaseThread.push().getKey();
 
-        Thread plantation = new Thread(id, threadString, categoryString);
+        ThreadTemp threadTemp = new ThreadTemp(id, threadString, categoryString,submitterString);
 
-        ThreadViewModel.Factory factory = new ThreadViewModel.Factory(getApplication(), id);
-        viewModel = ViewModelProviders.of(this, factory).get(ThreadViewModel.class);
-        viewModel.createThread(plantation, new OnAsyncEventListener() {
+        ThreadTempViewModel.Factory factory = new ThreadTempViewModel.Factory(getApplication(), id);
+        viewModel = ViewModelProviders.of(this, factory).get(ThreadTempViewModel.class);
+        viewModel.createThreadTemp(threadTemp, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
 

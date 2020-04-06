@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.adapter.ThreadAdapterView;
+import com.example.discussionboard.databse.entity.Post;
 import com.example.discussionboard.databse.entity.Thread;
 import com.example.discussionboard.ui.menu.MenuActivity;
 import com.example.discussionboard.ui.post.PostViewActivity;
@@ -103,35 +104,6 @@ public class ThreadViewActivity extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                int position = viewHolder.getAdapterPosition();
-
-                Thread thread = adapter.getThread(position);
-
-                reference.child(thread.getId()).removeValue();
-                startActivity(new Intent(ThreadViewActivity.this, MenuActivity.class));
-                Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
-
-            }
-        }).attachToRecyclerView(recyclerView);
-
-        threadAdapter.setOnItemClickListener(new ThreadAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Thread thread) {
-                System.out.println("Click");
-                Intent intent = new Intent(ThreadViewActivity.this, PostViewActivity.class);
-                intent.putExtra("threadId", thread.getId());
-                System.out.println("ThreadId "+thread.getId());
-                startActivity(intent);
-            }
-        });
 
 
     }

@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.admin.ThreadsAdminActivity1"
+            android:parentActivityName=".ui.admin.AdminActivity"/>
+        <activity
+            android:name=".ui.admin.ThreadsAdminActivity"
+            android:parentActivityName=".ui.admin.AdminActivity"/>
+        <activity
+            android:name=".ui.admin.AdminActivity"
+            android:parentActivityName=".ui.menu.MenuActivity"/>
+        <activity
             android:name=".ui.post.PostViewActivity"
             android:parentActivityName=".ui.thread.ThreadViewActivity"/>
         <activity

@@ -26,8 +26,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="@string/thread"
-        android:textColor="#ffffff" />
+        android:text="@string/thread" />
 
 
     <EditText
@@ -38,9 +37,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:ems="10"
-        android:inputType="text"
-        android:textColor="#ffffff"
-        android:textColorHint="#999999" />
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/textView7"
@@ -49,8 +46,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
-        android:text="@string/category"
-        android:textColor="#ffffff" />
+        android:text="@string/category" />
 
     <EditText
         android:id="@+id/add_category"
@@ -60,9 +56,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:ems="10"
-        android:inputType="text"
-        android:textColor="#ffffff"
-        android:textColorHint="#999999" />
+        android:inputType="text" />
 
 
 

@@ -19,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.discussionboard.R;
 import com.example.discussionboard.settings.ProfileActivity;
 
+import com.example.discussionboard.ui.admin.AdminActivity;
 import com.example.discussionboard.ui.thread.ThreadViewActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,11 +76,11 @@ public class MenuActivity extends AppCompatActivity {
                                 Intent i1 = new Intent(MenuActivity.this, ThreadViewActivity.class);
                                 startActivity(i1);
                                 break;
-                            /*case R.id.nav_plantation:
-                                Intent i2 = new Intent(MenuActivity.this, ThreadViewActivity.class);
+                            case R.id.nav_admin:
+                                Intent i2 = new Intent(MenuActivity.this, AdminActivity.class);
                                 startActivity(i2);
                                 break;
-                            case R.id.nav_settings:
+                            /*case R.id.nav_settings:
                                 Intent i3 = new Intent(MenuActivity.this, SettingsActivity.class);
                                 startActivity(i3);
                                 break;
