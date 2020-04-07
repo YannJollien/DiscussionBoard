@@ -6,6 +6,7 @@ import android.app.Application;
 import com.example.discussionboard.databse.rep.PostRepository;
 import com.example.discussionboard.databse.rep.ThreadRepository;
 import com.example.discussionboard.databse.rep.ThreadTempRepository;
+import com.example.discussionboard.databse.rep.UserRepository;
 
 public class BaseApp extends Application {
 
@@ -19,6 +20,10 @@ public class BaseApp extends Application {
 
     public ThreadTempRepository getThreadTempRepository() {
         return ThreadTempRepository.getInstance();
+    }
+
+    public UserRepository getUserRepository() {
+        return UserRepository.getInstance();
     }
 
 
