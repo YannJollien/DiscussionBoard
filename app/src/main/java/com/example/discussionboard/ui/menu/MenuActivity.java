@@ -20,6 +20,7 @@ import com.example.discussionboard.R;
 import com.example.discussionboard.settings.ProfileActivity;
 
 import com.example.discussionboard.ui.admin.AdminActivity;
+import com.example.discussionboard.ui.chat.ChatActivity;
 import com.example.discussionboard.ui.thread.ThreadViewActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,6 +80,10 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.nav_admin:
                                 Intent i2 = new Intent(MenuActivity.this, AdminActivity.class);
                                 startActivity(i2);
+                                break;
+                            case R.id.nav_chat:
+                                Intent i3 = new Intent(MenuActivity.this, ChatActivity.class);
+                                startActivity(i3);
                                 break;
                             /*case R.id.nav_settings:
                                 Intent i3 = new Intent(MenuActivity.this, SettingsActivity.class);

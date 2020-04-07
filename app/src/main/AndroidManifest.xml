@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.discussionboard">
+
     <application
         android:name=".BaseApp"
         android:allowBackup="false"
@@ -9,30 +10,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.chat.ChatActivity"></activity>
         <activity
             android:name=".ui.admin.ThreadsAdminActivity1"
-            android:parentActivityName=".ui.admin.AdminActivity"/>
+            android:parentActivityName=".ui.admin.AdminActivity" />
         <activity
             android:name=".ui.admin.ThreadsAdminActivity"
-            android:parentActivityName=".ui.admin.AdminActivity"/>
+            android:parentActivityName=".ui.admin.AdminActivity" />
         <activity
             android:name=".ui.admin.AdminActivity"
-            android:parentActivityName=".ui.menu.MenuActivity"/>
+            android:parentActivityName=".ui.menu.MenuActivity" />
         <activity
             android:name=".ui.post.PostViewActivity"
-            android:parentActivityName=".ui.thread.ThreadViewActivity"/>
+            android:parentActivityName=".ui.thread.ThreadViewActivity" />
         <activity
             android:name=".ui.post.PostAddActivity"
-            android:parentActivityName=".ui.post.PostViewActivity"/>
+            android:parentActivityName=".ui.post.PostViewActivity" />
         <activity
             android:name=".settings.SettingsAboutActivity"
-            android:parentActivityName=".settings.SettingsActivity"/>
+            android:parentActivityName=".settings.SettingsActivity" />
         <activity
             android:name=".settings.ContactActivity"
-            android:parentActivityName=".settings.SettingsActivity"/>
+            android:parentActivityName=".settings.SettingsActivity" />
         <activity
             android:name=".settings.SettingsActivity"
-            android:parentActivityName=".ui.menu.MenuActivity"/>
+            android:parentActivityName=".ui.menu.MenuActivity" />
         <activity
             android:name=".settings.ProfileActivity"
             android:parentActivityName=".ui.menu.MenuActivity" />
