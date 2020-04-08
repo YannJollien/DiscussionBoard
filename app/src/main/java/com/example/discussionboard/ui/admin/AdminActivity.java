@@ -27,13 +27,13 @@ public class AdminActivity extends AppCompatActivity {
         thread1 = findViewById(R.id.button_threads);
         thread2 = findViewById(R.id.button_threads1);
 
-        /*user.setOnClickListener(new View.OnClickListener() {
+        user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AdminActivity.this, UsersAdminActivity.class);
+                Intent intent = new Intent(AdminActivity.this, AdminUsersActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
 
         thread1.setOnClickListener(new View.OnClickListener() {
             @Override

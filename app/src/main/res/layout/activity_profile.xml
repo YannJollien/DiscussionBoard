@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b70d0d"
-    android:gravity=""
     android:orientation="vertical"
-    tools:context=".settings.ProfileActivity">
+    tools:context=".settings.ProfileActivity"
+    android:background="@drawable/background_color">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/profile_toolbar"
@@ -15,20 +14,30 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#8FB4DE"
         android:elevation="4dp"
-        android:theme="@style/AppTheme"
+        android:theme="@style/ToolBarStyle"
         android:visibility="visible"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/text_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="5dp"
-        android:textAlignment="center"
-        android:textColor="#ffffff" />
+        android:textAlignment="center" />
 
 
-</LinearLayout>
+    <Button
+        android:id="@+id/change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change password"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:background="@drawable/custom_button2"/>
+
+</RelativeLayout>

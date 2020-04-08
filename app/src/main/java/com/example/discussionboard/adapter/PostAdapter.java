@@ -39,7 +39,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
         return postList.size();
     }
 
-    public void setThread(List<Post> posts) {
+    public void setPost(List<Post> posts) {
         this.postList = posts;
         notifyDataSetChanged();
     }

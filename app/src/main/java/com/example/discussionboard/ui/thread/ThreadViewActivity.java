@@ -78,6 +78,15 @@ public class ThreadViewActivity extends AppCompatActivity {
             }
         });
 
+        threadAdapter.setOnItemClickListener(new ThreadAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Thread thread) {
+                Intent intent = new Intent(ThreadViewActivity.this, PostViewActivity.class);
+                intent.putExtra("threadId", thread.getId());
+                startActivity(intent);
+            }
+        });
+
         bAdd = findViewById(R.id.btn_add_thread);
 
 

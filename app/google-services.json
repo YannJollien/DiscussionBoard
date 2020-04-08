@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1034862433-i656vi1clq30lpbg8jutaoq5o1ng17mi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.discussionboard",
+            "certificate_hash": "911c6b7f7e7fbc17c081dc4a6e148dde95a06ed8"
+          }
+        },
+        {
           "client_id": "1034862433-p1a0n9le6ro7mi3fg0rvrat5ivmqqtbi.apps.googleusercontent.com",
           "client_type": 3
         }

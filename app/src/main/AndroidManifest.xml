@@ -10,7 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.chat.ChatActivity"></activity>
+        <activity
+            android:name=".ui.admin.AdminUsersActivity"
+            android:parentActivityName=".ui.admin.AdminActivity"/>
+        <activity
+            android:name=".ui.post.PostViewDetailActivity"
+            android:parentActivityName=".ui.post.PostViewActivity" />
+        <activity android:name=".ui.chat.ChatActivity" />
         <activity
             android:name=".ui.admin.ThreadsAdminActivity1"
             android:parentActivityName=".ui.admin.AdminActivity" />

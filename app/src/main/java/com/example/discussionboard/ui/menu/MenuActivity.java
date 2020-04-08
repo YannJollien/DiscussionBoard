@@ -2,25 +2,34 @@ package com.example.discussionboard.ui.menu;
 
 import android.content.Intent;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.discussionboard.R;
+import com.example.discussionboard.settings.ContactActivity;
 import com.example.discussionboard.settings.ProfileActivity;
 
 import com.example.discussionboard.ui.admin.AdminActivity;
 import com.example.discussionboard.ui.chat.ChatActivity;
+import com.example.discussionboard.ui.login.LoginActivity;
 import com.example.discussionboard.ui.thread.ThreadViewActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +49,10 @@ public class MenuActivity extends AppCompatActivity {
     String[] typ = {"Arabica", "Robusta", "Liberica"};
     Button profile;
     private Locale locale;
+
+    private RadioButton en;
+    private RadioButton de;
+    private TextView alertTitle;
 
 
 
@@ -85,11 +98,19 @@ public class MenuActivity extends AppCompatActivity {
                                 Intent i3 = new Intent(MenuActivity.this, ChatActivity.class);
                                 startActivity(i3);
                                 break;
-                            /*case R.id.nav_settings:
-                                Intent i3 = new Intent(MenuActivity.this, SettingsActivity.class);
-                                startActivity(i3);
-                                break;
                             case R.id.nav_logout:
+                                Intent i4 = new Intent(MenuActivity.this, LoginActivity.class);
+                                startActivity(i4);
+                                break;
+                            case R.id.nav_contact:
+                                Intent i5 = new Intent(MenuActivity.this, ContactActivity.class);
+                                startActivity(i5);
+                                break;
+                            case R.id.nav_lang:
+                                System.out.println(R.id.nav_lang);
+                                //calling changing langugage method
+                                changeLanguage();
+                            /*case R.id.nav_logout:
                                 Intent i4 = new Intent(MenuActivity.this, LoginActivity.class);
                                 startActivity(i4);
                                 Toast.makeText(MenuActivity.this, "Logged out",
@@ -98,11 +119,7 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.nav_about:
                                 Intent i5 = new Intent(MenuActivity.this, SettingsAboutActivity.class);
                                 startActivity(i5);
-                                break;
-                            case R.id.nav_lang:
-                                System.out.println(R.id.nav_lang);
-                                //calling changing langugage method
-                                setLocale("de");*/
+                                break;*/
                         }
                         return true;
                     }
@@ -128,22 +145,92 @@ public class MenuActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*Change language method
-    public void setLocale(String localeName) {
-        if (!localeName.equals(currentLanguage)) {
-            locale = new Locale(localeName);
-            Resources res = getResources();
-            DisplayMetrics dm = res.getDisplayMetrics();
-            Configuration conf = res.getConfiguration();
-            conf.locale = locale;
-            res.updateConfiguration(conf, dm);
-            Intent refresh = new Intent(this, LoginActivity.class);
-            refresh.putExtra(currentLang, localeName);
-            startActivity(refresh);
-        } else {
-            Toast.makeText(MenuActivity.this, "Language already selected!", Toast.LENGTH_SHORT).show();
+    //Method to change the language
+    public void changeLanguage() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MenuActivity.this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alertdialog_language, null);
+
+        // Specify alert dialog is not cancelable/not ignorable
+        builder.setCancelable(false);
+
+        // Set the custom layout as alert dialog view
+        builder.setView(dialogView);
+
+        // Get the custom alert dialog view widgets reference
+        en = dialogView.findViewById(R.id.check_en);
+        de = dialogView.findViewById(R.id.check_de);
+        alertTitle = dialogView.findViewById(R.id.dialog_title);
+
+        String currentLangauge = alertTitle.getText().toString();
+
+        if (currentLangauge.contains("Sprache")){
+            de.setChecked(true);
         }
-    }*/
+
+        if (currentLangauge.contains("language")){
+            en.setChecked(true);
+        }
+
+
+        Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
+        Button btn_negative = (Button) dialogView.findViewById(R.id.dialog_negative_btn);
+
+        // Create the alert dialog
+        final AlertDialog dialog = builder.create();
+
+        // Set positive/yes button click listener
+        btn_positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (en.isChecked()){
+                    String languageToLoad = "en"; // your language
+                    Locale locale = new Locale(languageToLoad);
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.locale = locale;
+                    getBaseContext().getResources().updateConfiguration(config,
+                            getBaseContext().getResources().getDisplayMetrics());
+                    dialog.dismiss();
+
+
+                    Intent refresh = new Intent(MenuActivity.this, LoginActivity.class);
+                    startActivity(refresh);
+                    finish();
+                }
+                if (de.isChecked()){
+                    String languageToLoad = "de"; // your language
+                    Locale locale = new Locale(languageToLoad);
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.locale = locale;
+                    getBaseContext().getResources().updateConfiguration(config,
+                            getBaseContext().getResources().getDisplayMetrics());
+                    dialog.dismiss();
+
+
+                    Intent refresh = new Intent(MenuActivity.this, LoginActivity.class);
+                    startActivity(refresh);
+                    finish();
+                }
+            }
+        });
+
+        // Set negative/no button click listener
+        btn_negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Dismiss/cancel the alert dialog
+                //dialog.cancel();
+                dialog.dismiss();
+            }
+        });
+
+        // Display the custom alert dialog on interface
+        dialog.show();
+
+    }
 
 
 

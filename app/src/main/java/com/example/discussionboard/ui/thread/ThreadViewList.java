@@ -102,45 +102,6 @@ public class ThreadViewList extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                int position = viewHolder.getAdapterPosition();
-
-                Thread thread = adapter.getThread(position);
-
-                reference.child(thread.getId()).removeValue();
-                startActivity(new Intent(ThreadViewList.this, ThreadViewActivity.class));
-                Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
-
-            }
-        }).attachToRecyclerView(recyclerView);
-
-
-    }
-
-    public void deletePlantation(Thread thread){
-        ThreadListViewModel.Factory factory = new ThreadListViewModel.Factory(
-                getApplication(), FirebaseAuth.getInstance().getCurrentUser().getUid());
-        model = ViewModelProviders.of(this, factory).get(ThreadListViewModel.class);
-        model.deleteThread(thread, new OnAsyncEventListener() {
-            @Override
-            public void onSuccess() {
-
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-
-            }
-        });
-        startActivity(new Intent(ThreadViewList.this, ThreadViewActivity.class));
-        Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
     }
 
 

@@ -74,15 +74,17 @@
     <string name="change_pwd">Passwort ändern</string>
     <string name="hint_old">Altes Passwort</string>
     <string name="hint_new">Neues Passwort</string>
+    <string name="password_short">Mindestens 6 Zeichen</string>
     <string name="ok">Ok</string>
     <string name="cancel">Abbrechen</string>
 
     <!--Menu-->
     <string name="menu_thread">Thread</string>
-    <string name="menu_feed">Feed</string>
+    <string name="menu_chat">Chat</string>
     <string name="menu_language">Sprache</string>
     <string name="menu_about">Info</string>
     <string name="menu_admin">Admin</string>
+    <string name="menu_contact">Kontakt</string>
     <string name="menu_logout">Ausloggen</string>
 
     <!--Info popup-->
@@ -90,6 +92,7 @@
     <string name="alert_info">Information</string>
     <string name="alert_text">Nach links wischen um den Thread zu löschen</string>
     <string name="alert_text_post">Nach links wischen um den Post zu löschen</string>
+    <string name="alert_text_user">Nach links wischen um den User zu löschen</string>
     <string name="alert_text1">Nach rechts wischen um den Thread zu validieren</string>
     <string name="alert_ok">Ok</string>
     <string name="alert_cancel">Abbrechen</string>
