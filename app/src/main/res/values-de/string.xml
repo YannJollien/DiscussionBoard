@@ -33,6 +33,7 @@
     <string name="post_title">Posts</string>
     <string name="post_detail_title">Post Detail</string>
     <string name="submitter">Name</string>
+    <string name="image">Bild</string>
     <string name="text">Text</string>
     <string name="date">Datum</string>
     <string name="button_update">Andern</string>

@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("CoffeStorage Application")
+                .setContentTitle("DiscussionBoard")
                 .setAutoCancel(true)
                 .setContentIntent(resultPendingIntent)
                 .setContentText("Welcome " + email);

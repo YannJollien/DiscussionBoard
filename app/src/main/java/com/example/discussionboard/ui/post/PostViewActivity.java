@@ -157,14 +157,26 @@ public class PostViewActivity extends AppCompatActivity {
         postAdapter.setOnItemClickListener(new PostAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Post post) {
-                Intent intent = new Intent(PostViewActivity.this, PostViewDetailActivity.class);
-                intent.putExtra("postId", post.getId());
-                intent.putExtra("submitter", post.getSubmitter());
-                intent.putExtra("text", post.getText());
-                intent.putExtra("date", post.getDate());
-                intent.putExtra("userId", post.getUserId());
-                intent.putExtra("threadId", post.getThreadId());
-                startActivity(intent);
+                if (post.getImageUrl() != null){
+                    Intent intent = new Intent(PostViewActivity.this, PostViewDetailActivity.class);
+                    intent.putExtra("postId", post.getId());
+                    intent.putExtra("submitter", post.getSubmitter());
+                    intent.putExtra("text", post.getText());
+                    intent.putExtra("date", post.getDate());
+                    intent.putExtra("imageUrl", post.getImageUrl());
+                    intent.putExtra("userId", post.getUserId());
+                    intent.putExtra("threadId", post.getThreadId());
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(PostViewActivity.this, PostViewDetailActivity.class);
+                    intent.putExtra("postId", post.getId());
+                    intent.putExtra("submitter", post.getSubmitter());
+                    intent.putExtra("text", post.getText());
+                    intent.putExtra("date", post.getDate());
+                    intent.putExtra("userId", post.getUserId());
+                    intent.putExtra("threadId", post.getThreadId());
+                    startActivity(intent);
+                }
             }
         });
 

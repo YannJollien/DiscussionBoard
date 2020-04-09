@@ -5,21 +5,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
+
 import android.content.Intent;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.databse.entity.Post;
 import com.example.discussionboard.util.OnAsyncEventListener;
 import com.example.discussionboard.viewmodel.post.PostListViewModel;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -28,6 +38,7 @@ public class PostViewDetailActivity extends AppCompatActivity {
     TextView submitter;
     TextView text;
     TextView date;
+    ImageView image;
 
     Button edit;
     Button save;
@@ -44,6 +55,8 @@ public class PostViewDetailActivity extends AppCompatActivity {
     String userId;
     String postId;
     String threadId;
+    String imageUrl;
+
 
     String currentUserId;
 
@@ -62,6 +75,7 @@ public class PostViewDetailActivity extends AppCompatActivity {
         submitter = findViewById(R.id.submitter_details);
         text = findViewById(R.id.text_details);
         date = findViewById(R.id.date_details);
+        image = findViewById(R.id.imgView);
         edit = findViewById(R.id.update);
         save = findViewById(R.id.save_changes);
 
@@ -75,6 +89,7 @@ public class PostViewDetailActivity extends AppCompatActivity {
         sub = getIntent().getExtras().getString("submitter");
         txt = getIntent().getExtras().getString("text");
         dt = getIntent().getExtras().getString("date");
+        imageUrl = getIntent().getExtras().getString("imageUrl");
         userId = getIntent().getExtras().getString("userId");
         postId = getIntent().getExtras().getString("postId");
         threadId = getIntent().getExtras().getString("threadId");
@@ -85,6 +100,11 @@ public class PostViewDetailActivity extends AppCompatActivity {
         text.setText(txt);
         date.setText(dt);
 
+        //Show image
+        // Load the image using Glide
+        //Glide.with(this).load(imageUrl).into(image);
+
+
         databasePost = FirebaseDatabase.getInstance().getReference("post");
         reference = FirebaseDatabase.getInstance().getReference().child("post");
 
@@ -94,8 +114,14 @@ public class PostViewDetailActivity extends AppCompatActivity {
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         currentUserId = currentFirebaseUser.getUid();
 
+
+
         //Set Button visible when id ok
         setVisible(edit);
+
+
+
+        System.out.println("Image URL "+imageUrl);
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,4 +201,5 @@ public class PostViewDetailActivity extends AppCompatActivity {
 
 
     }
+
 }

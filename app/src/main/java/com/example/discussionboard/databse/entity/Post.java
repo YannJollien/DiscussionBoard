@@ -14,24 +14,38 @@ public class Post {
     private String threadId;
     private String userId;
 
+    private String imageUrl;
+
 
 
     public Post(){
 
     }
     //Constructor
-    public Post(String submitter, String text, String date) {
+    public Post(String submitter, String text, String date, String imageUrl) {
         this.submitter = submitter;
         this.text = text;
         this.date = date;
+        this.imageUrl = imageUrl;
     }
 
-    //Constructor
+    //Constructor without image
     public Post(String id, String submitter, String text, String date, String threadId, String userId) {
         this.id = id;
         this.submitter = submitter;
         this.text = text;
         this.date = date;
+        this.threadId = threadId;
+        this.userId = userId;
+    }
+
+    //Constructor with image
+    public Post(String id, String submitter, String text, String date, String threadId, String userId, String imageUrl) {
+        this.id = id;
+        this.submitter = submitter;
+        this.text = text;
+        this.date = date;
+        this.imageUrl = imageUrl;
         this.threadId = threadId;
         this.userId = userId;
     }
@@ -84,6 +98,14 @@ public class Post {
         this.userId = userId;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("submitter", submitter);
@@ -91,6 +113,7 @@ public class Post {
         result.put("date", date);
         result.put("threadId", threadId);
         result.put("userId", userId);
+        result.put("imageUrl", imageUrl);
         result.put("id", id);
 
         return result;

@@ -18,8 +18,6 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
     private List<User> userList = new ArrayList<>();
-    private UserAdapter.OnItemClickListener listener;
-
     @NonNull
     @Override
     public UserAdapter.UserHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -49,13 +47,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         return userList.get(position);
     }
 
-    public void setOnItemClickListener(UserAdapter.OnItemClickListener listener) {
-        this.listener = listener;
-    }
 
-    public interface OnItemClickListener {
-        void onItemClick(User user);
-    }
 
     class UserHolder extends RecyclerView.ViewHolder {
         private TextView firstname;
@@ -68,15 +60,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
             firstname = itemView.findViewById(R.id.fname_view);
             lastname = itemView.findViewById(R.id.lname_view);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    //if (listener != null && position != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(userList.get(position));
-                    // }
-                }
-            });
 
         }
     }
