@@ -92,6 +92,9 @@ public class MenuActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
+        //Calling the items and tell them what to do
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
         //Check if
         reference = FirebaseDatabase.getInstance().getReference().child("users");
         reference.addValueEventListener(new ValueEventListener() {
@@ -102,11 +105,12 @@ public class MenuActivity extends AppCompatActivity {
                     if (user1.getId().equals(user.getUid())) {
                         System.out.println("UserID "+user1.getId());
                         if (user1.getAdmin()==true){
-                            admin = true;
+                            Menu nav_Menu = navigationView.getMenu();
+                            nav_Menu.findItem(R.id.nav_admin).setVisible(true);
                         } else {
-                            admin = false;
+                            Menu nav_Menu = navigationView.getMenu();
+                            nav_Menu.findItem(R.id.nav_admin).setVisible(false);
                         }
-                        System.out.println("Admin "+admin);
                     }
                 }
             }
@@ -116,21 +120,6 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
-
-        //Calling the items and tell them what to do
-        NavigationView navigationView = findViewById(R.id.nav_view);
-
-        //Hide Admin menu if not admin
-        if (!admin) {
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_admin).setVisible(false);
-        }
-
-        if (admin) {
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_admin).setVisible(true);
-        }
-
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
