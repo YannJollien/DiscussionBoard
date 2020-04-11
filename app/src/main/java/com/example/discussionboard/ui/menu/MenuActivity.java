@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +25,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.discussionboard.R;
+import com.example.discussionboard.databse.entity.User;
 import com.example.discussionboard.settings.ContactActivity;
 import com.example.discussionboard.settings.ProfileActivity;
 
@@ -34,6 +38,11 @@ import com.example.discussionboard.ui.thread.ThreadViewActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
@@ -53,6 +62,11 @@ public class MenuActivity extends AppCompatActivity {
     private RadioButton en;
     private RadioButton de;
     private TextView alertTitle;
+
+    public static boolean admin;
+
+    DatabaseReference reference;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
 
@@ -78,8 +92,46 @@ public class MenuActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
+        //Check if
+        reference = FirebaseDatabase.getInstance().getReference().child("users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    User user1 = dataSnapshot1.getValue(User.class);
+                    if (user1.getId().equals(user.getUid())) {
+                        System.out.println("UserID "+user1.getId());
+                        if (user1.getAdmin()==true){
+                            admin = true;
+                        } else {
+                            admin = false;
+                        }
+                        System.out.println("Admin "+admin);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         //Calling the items and tell them what to do
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        //Hide Admin menu if not admin
+        if (!admin) {
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_admin).setVisible(true);
+        }
+
+        if (admin) {
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_admin).setVisible(false);
+        }
+
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override

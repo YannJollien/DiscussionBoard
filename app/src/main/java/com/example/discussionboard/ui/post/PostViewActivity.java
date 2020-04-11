@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -25,11 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.PostAdapter;
 import com.example.discussionboard.adapter.PostAdapterView;
-import com.example.discussionboard.adapter.ThreadAdapter;
-import com.example.discussionboard.adapter.ThreadAdapterView;
 import com.example.discussionboard.databse.entity.Post;
-import com.example.discussionboard.databse.entity.Thread;
-import com.example.discussionboard.ui.thread.ThreadAddActivity;
 import com.example.discussionboard.ui.thread.ThreadViewActivity;
 import com.example.discussionboard.viewmodel.post.PostListViewModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,23 +39,16 @@ import java.util.ArrayList;
 
 public class PostViewActivity extends AppCompatActivity {
 
-    DatabaseReference reference;
-
-    ArrayList<Post> postList;
-    PostAdapterView adapter;
-
-    PostAdapter postAdapter = new PostAdapter();
-
-    PostListViewModel model;
-
-    String threadId;
-    String currentUserId;
-
-    FirebaseUser currentFirebaseUser;
-
     public static final String PREFS_NAME = "MyPrefsFile1";
     public CheckBox dontShowAgain;
-
+    DatabaseReference reference;
+    ArrayList<Post> postList;
+    PostAdapterView adapter;
+    PostAdapter postAdapter = new PostAdapter();
+    PostListViewModel model;
+    String threadId;
+    String currentUserId;
+    FirebaseUser currentFirebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +62,14 @@ public class PostViewActivity extends AppCompatActivity {
         recyclerView.setAdapter(postAdapter);
 
         //Get current user uid
-        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         currentUserId = currentFirebaseUser.getUid();
 
         //Check if incoming intent
         Intent intent = getIntent();
         if (intent.getExtras() != null) {
-            threadId = getIntent().getExtras().getString("threadId","defaultKey");
+            threadId = getIntent().getExtras().getString("threadId", "defaultKey");
         }
-
 
 
         postList = new ArrayList<>();
@@ -91,9 +78,9 @@ public class PostViewActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Post post = dataSnapshot1.getValue(Post.class);
-                    if (threadId.equals(post.getThreadId()) && intent.getExtras() != null){
+                    if (threadId.equals(post.getThreadId()) && intent.getExtras() != null) {
                         postList.add(post);
                     }
                 }
@@ -107,7 +94,6 @@ public class PostViewActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         //set Titel of View
@@ -137,7 +123,7 @@ public class PostViewActivity extends AppCompatActivity {
 
                 Post post = adapter.getPost(position);
 
-                if (post.getId().equals(currentUserId)){
+                if (post.getId().equals(currentUserId)) {
                     reference.child(post.getId()).removeValue();
                     startActivity(new Intent(PostViewActivity.this, ThreadViewActivity.class));
                     Toast.makeText(getApplicationContext(), getString(R.string.toast_post_delete),
@@ -149,35 +135,23 @@ public class PostViewActivity extends AppCompatActivity {
                 }
 
 
-
-
             }
         }).attachToRecyclerView(recyclerView);
 
         postAdapter.setOnItemClickListener(new PostAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Post post) {
-                if (post.getImageUrl() != null){
-                    Intent intent = new Intent(PostViewActivity.this, PostViewDetailActivity.class);
-                    intent.putExtra("postId", post.getId());
-                    intent.putExtra("submitter", post.getSubmitter());
-                    intent.putExtra("text", post.getText());
-                    intent.putExtra("date", post.getDate());
-                    intent.putExtra("imageUrl", post.getImageUrl());
-                    intent.putExtra("userId", post.getUserId());
-                    intent.putExtra("threadId", post.getThreadId());
-                    startActivity(intent);
-                }else{
-                    Intent intent = new Intent(PostViewActivity.this, PostViewDetailActivity.class);
-                    intent.putExtra("postId", post.getId());
-                    intent.putExtra("submitter", post.getSubmitter());
-                    intent.putExtra("text", post.getText());
-                    intent.putExtra("date", post.getDate());
-                    intent.putExtra("userId", post.getUserId());
-                    intent.putExtra("threadId", post.getThreadId());
-                    startActivity(intent);
-                }
+
+                Intent intent = new Intent(PostViewActivity.this, PostViewDetailActivity.class);
+                intent.putExtra("postId", post.getId());
+                intent.putExtra("submitter", post.getSubmitter());
+                intent.putExtra("text", post.getText());
+                intent.putExtra("date", post.getDate());
+                intent.putExtra("userId", post.getUserId());
+                intent.putExtra("threadId", post.getThreadId());
+                startActivity(intent);
             }
+
         });
 
     }

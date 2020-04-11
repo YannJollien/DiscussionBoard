@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,12 +19,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
+import com.bumptech.glide.Glide;
 import com.example.discussionboard.R;
+import com.example.discussionboard.databse.entity.User;
 import com.example.discussionboard.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -36,6 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     EditText passOld;
     EditText passNew;
+
+    ImageView image;
+    DatabaseReference reference;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -61,11 +72,32 @@ public class ProfileActivity extends AppCompatActivity {
 
         name = (TextView) findViewById(R.id.text_name);
         change = findViewById(R.id.change);
+        image = findViewById(R.id.showImage);
+
 
 
         if(user != null) {
             // Name, email address, and profile photo Url
             email = user.getEmail();
+
+            reference = FirebaseDatabase.getInstance().getReference().child("users");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        User user1 = dataSnapshot1.getValue(User.class);
+                        if (user1.getId().equals(user.getUid())) {
+                            Glide.with(ProfileActivity.this).load(user1.getUrl()).into(image);
+                            System.out.println("Image url; "+user1.getUrl());
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();

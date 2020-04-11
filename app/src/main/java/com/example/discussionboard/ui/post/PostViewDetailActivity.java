@@ -1,35 +1,26 @@
 package com.example.discussionboard.ui.post;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProviders;
-
-
 import android.content.Intent;
-
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.databse.entity.Post;
 import com.example.discussionboard.util.OnAsyncEventListener;
 import com.example.discussionboard.viewmodel.post.PostListViewModel;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -55,7 +46,6 @@ public class PostViewDetailActivity extends AppCompatActivity {
     String userId;
     String postId;
     String threadId;
-    String imageUrl;
 
 
     String currentUserId;
@@ -71,7 +61,7 @@ public class PostViewDetailActivity extends AppCompatActivity {
 
     }
 
-    public void startActivity(){
+    public void startActivity() {
         submitter = findViewById(R.id.submitter_details);
         text = findViewById(R.id.text_details);
         date = findViewById(R.id.date_details);
@@ -89,12 +79,11 @@ public class PostViewDetailActivity extends AppCompatActivity {
         sub = getIntent().getExtras().getString("submitter");
         txt = getIntent().getExtras().getString("text");
         dt = getIntent().getExtras().getString("date");
-        imageUrl = getIntent().getExtras().getString("imageUrl");
         userId = getIntent().getExtras().getString("userId");
         postId = getIntent().getExtras().getString("postId");
         threadId = getIntent().getExtras().getString("threadId");
 
-        System.out.println("PostId "+postId);
+        System.out.println("PostId " + postId);
 
         submitter.setText(sub);
         text.setText(txt);
@@ -111,17 +100,13 @@ public class PostViewDetailActivity extends AppCompatActivity {
         postList = new ArrayList<>();
 
         //Get current user uid
-        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         currentUserId = currentFirebaseUser.getUid();
-
 
 
         //Set Button visible when id ok
         setVisible(edit);
 
-
-
-        System.out.println("Image URL "+imageUrl);
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,15 +145,15 @@ public class PostViewDetailActivity extends AppCompatActivity {
 
 
         Post post = new Post(postId, submitterString, textString, dateString, threadId, userId);
-        for(int i = 0; i < postList.size(); i++){
-            if(postList.get(i).getId().equals(postId)){
+        for (int i = 0; i < postList.size(); i++) {
+            if (postList.get(i).getId().equals(postId)) {
                 postList.set(i, post);
             }
         }
 
         //reference.child(plantation.getId()).setValue(plantation);
         PostListViewModel.Factory factory = new PostListViewModel.Factory(getApplication(), postId);
-        model = ViewModelProviders.of(this,factory).get(PostListViewModel.class);
+        model = ViewModelProviders.of(this, factory).get(PostListViewModel.class);
         model.updatePost(post, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
@@ -190,11 +175,11 @@ public class PostViewDetailActivity extends AppCompatActivity {
 
     }
 
-    public void setVisible(Button button){
-        if (!currentUserId.equals(userId)){
+    public void setVisible(Button button) {
+        if (!currentUserId.equals(userId)) {
             //Hide button
             button.setVisibility(View.GONE);
-        }else {
+        } else {
             //Enable button
             button.setVisibility(View.VISIBLE);
         }

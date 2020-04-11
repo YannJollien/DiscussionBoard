@@ -52,10 +52,7 @@ public class PostAddActivity extends AppCompatActivity {
     PostViewModel viewModel;
     Button save;
     ArrayList<Post> postList;
-    private Button choose;
-    private ImageView imageView;
-    private StorageReference storageReference;
-    private Uri imageUri;
+
 
     private StorageTask mUploadTask;
 
@@ -82,15 +79,12 @@ public class PostAddActivity extends AppCompatActivity {
 
         //Get the info by id
         save = (Button) findViewById(R.id.add);
-        choose = findViewById(R.id.btnChoose);
-        imageView = findViewById(R.id.imgView);
 
         submitter = (EditText) findViewById(R.id.submitter_in);
         text = (EditText) findViewById(R.id.text_in);
 
         postList = new ArrayList<>();
 
-        storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
         /* on pressing btnSelect SelectImage() is called
         choose.setOnClickListener(new View.OnClickListener() {
@@ -183,94 +177,5 @@ public class PostAddActivity extends AppCompatActivity {
         startActivity(new Intent(PostAddActivity.this, ThreadViewActivity.class));
     }
 
-    /*private void savePostWithImage(String image) {
 
-        String submitterString = (submitter.getText().toString());
-        String textString = (text.getText().toString());
-        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-
-        //Get current user UID
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userId = currentFirebaseUser.getUid();
-
-        //Get thread id
-        String threadId = getIntent().getExtras().getString("threadId", "defaultKey");
-
-        String id = databasePost.push().getKey();
-
-        Post post = new Post(id, submitterString, textString, date, threadId, userId, image);
-
-        PostViewModel.Factory factory = new PostViewModel.Factory(getApplication(), id);
-        viewModel = ViewModelProviders.of(this, factory).get(PostViewModel.class);
-        viewModel.createPost(post, new OnAsyncEventListener() {
-            @Override
-            public void onSuccess() {
-
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-
-            }
-        });
-
-        Toast.makeText(PostAddActivity.this, "Saved",
-                Toast.LENGTH_LONG).show();
-        submitter.setText("");
-        text.setText("");
-        System.out.println(id);
-        startActivity(new Intent(PostAddActivity.this, ThreadViewActivity.class));
-
-    }
-
-    public void selectImage() {
-
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
-            imageUri = data.getData();
-
-            imageView.setImageURI(imageUri);
-        }
-    }
-
-    public void uploadImage() {
-
-        if (imageUri != null) {
-            StorageReference fileReference = storageReference.child(System.currentTimeMillis() +
-                    "." + getFileExtension(imageUri));
-            mUploadTask = fileReference.putFile(imageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            savePostWithImage(taskSnapshot.getUploadSessionUri().toString());
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(PostAddActivity.this, e.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    //Get extension (.jpg(.png)
-    private String getFileExtension(Uri uri) {
-        ContentResolver resolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(resolver.getType(uri));
-    }*/
 }
