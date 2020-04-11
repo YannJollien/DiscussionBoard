@@ -123,12 +123,12 @@ public class MenuActivity extends AppCompatActivity {
         //Hide Admin menu if not admin
         if (!admin) {
             Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_admin).setVisible(true);
+            nav_Menu.findItem(R.id.nav_admin).setVisible(false);
         }
 
         if (admin) {
             Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_admin).setVisible(false);
+            nav_Menu.findItem(R.id.nav_admin).setVisible(true);
         }
 
 

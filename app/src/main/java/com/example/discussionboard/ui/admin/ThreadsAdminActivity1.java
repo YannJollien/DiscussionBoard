@@ -1,9 +1,6 @@
 package com.example.discussionboard.ui.admin;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.adapter.ThreadAdapterView;
+import com.example.discussionboard.databse.entity.Post;
 import com.example.discussionboard.databse.entity.Thread;
 
 import com.example.discussionboard.viewmodel.thread.ThreadListViewModel;
@@ -30,9 +28,11 @@ import java.util.ArrayList;
 
 public class ThreadsAdminActivity1 extends AppCompatActivity {
 
-    DatabaseReference reference;
+    DatabaseReference referenceThread;
+    DatabaseReference referencePost;
 
     ArrayList<Thread> threadList;
+    ArrayList<Post> postList;
     ThreadAdapterView adapter;
 
     ThreadAdapter threadAdapter = new ThreadAdapter();
@@ -51,11 +51,26 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
         recyclerView.setAdapter(threadAdapter);
 
         threadList = new ArrayList<>();
+        postList = new ArrayList<>();
 
-        reference = FirebaseDatabase.getInstance().getReference().child("thread");
+        referencePost = FirebaseDatabase.getInstance().getReference().child("post");
+        referencePost.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    Post post = dataSnapshot1.getValue(Post.class);
+                    postList.add(post);
+                }
+            }
 
-        reference = FirebaseDatabase.getInstance().getReference().child("thread");
-        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        referenceThread = FirebaseDatabase.getInstance().getReference().child("thread");
+        referenceThread.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
@@ -103,7 +118,15 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
 
                 Thread thread = adapter.getThread(position);
 
-                reference.child(thread.getId()).removeValue();
+                for (int j = 0 ; i < postList.size();j++){
+                    if (thread.getId().equals(postList.get(j).getThreadId())){
+                        referencePost.child(postList.get(j).getId()).removeValue();
+                    }
+                }
+
+
+
+                referenceThread.child(thread.getId()).removeValue();
 
                 Toast.makeText(getApplicationContext(), getString(R.string.toast_thread_delete),
                         Toast.LENGTH_LONG).show();
