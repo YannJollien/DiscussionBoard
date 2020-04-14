@@ -52,8 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
     public TextView firstname;
     public TextView lastname;
     Button bSave;
-    DatabaseReference databaseUser;
-    DatabaseReference datebaserUser1;
     UserViewModel viewModel;
     FirebaseUser user;
     FirebaseAuth auth;
@@ -83,7 +81,6 @@ public class RegisterActivity extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
-        datebaserUser1 = FirebaseDatabase.getInstance().getReference("users");
 
         initializeUI();
 
@@ -92,7 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        databaseUser = FirebaseDatabase.getInstance().getReference("user");
 
         bSave = (Button) findViewById(R.id.button_save);
         choose = findViewById(R.id.btnChoose);
@@ -158,15 +154,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void saveUser(String id) {
+    public void saveUser(String idUser) {
         String firstNameString = (firstname.getText().toString());
         String lastNameString = (lastname.getText().toString());
 
-        User user = new User(id, firstNameString, lastNameString, false);
+        User userNew = new User(idUser, firstNameString, lastNameString, false);
 
-        UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), id);
+        UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), idUser);
         viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
-        viewModel.createUser(user, new OnAsyncEventListener() {
+        viewModel.createUser(userNew, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
 
@@ -246,6 +242,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                System.out.println("ID "+id);
                 saveUser(id);
             }
         });
