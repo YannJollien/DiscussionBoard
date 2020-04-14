@@ -1,9 +1,10 @@
 package com.example.discussionboard.settings;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import android.util.Log;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
 import com.bumptech.glide.Glide;
 import com.example.discussionboard.R;
 import com.example.discussionboard.databse.entity.User;
@@ -32,6 +32,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -39,17 +43,12 @@ public class ProfileActivity extends AppCompatActivity {
     LoginActivity main = new LoginActivity();
 
     String email;
-
-    private Button change;
-
     EditText passOld;
     EditText passNew;
-
     ImageView image;
     DatabaseReference reference;
-
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+    private Button change;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,36 +67,22 @@ public class ProfileActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
 
-
-
         name = (TextView) findViewById(R.id.text_name);
         change = findViewById(R.id.change);
         image = findViewById(R.id.showImage);
-
 
 
         if(user != null) {
             // Name, email address, and profile photo Url
             email = user.getEmail();
 
-            reference = FirebaseDatabase.getInstance().getReference().child("users");
-            reference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        User user1 = dataSnapshot1.getValue(User.class);
-                        if (user1.getId().equals(user.getUid())) {
-                            Glide.with(ProfileActivity.this).load(user1.getUrl()).into(image);
-                            System.out.println("Image url; "+user1.getUrl());
-                        }
-                    }
-                }
+            StorageReference pathReference = FirebaseStorage.getInstance().getReference().child("profiles/"+FirebaseAuth.getInstance().getCurrentUser().getUid()+".png");
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            System.out.println("PathRef: "+pathReference.getPath());
 
-                }
-            });
+            Bitmap bitmap = BitmapFactory.decodeFile(pathReference.getPath());
+            image.setImageBitmap(bitmap);
+
 
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();
@@ -121,14 +106,14 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     //Method to change the password
-    public void changePwd(){
+    public void changePwd() {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
 
                 LayoutInflater inflater = getLayoutInflater();
-                View dialogView = inflater.inflate(R.layout.alertdialog_custom_view,null);
+                View dialogView = inflater.inflate(R.layout.alertdialog_custom_view, null);
 
                 // Specify alert dialog is not cancelable/not ignorable
                 builder.setCancelable(false);
@@ -154,7 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
                         String passOldString = passOld.getText().toString();
                         String passNewString = passNew.getText().toString();
 
-                        if (!passOldString.equals(passNewString)){
+                        if (!passOldString.equals(passNewString)) {
                             user.updatePassword(passNewString)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -170,12 +155,12 @@ public class ProfileActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG).show();
                             dialog.cancel();
                         }
-                        if (passOldString.equals(passNewString)){
+                        if (passOldString.equals(passNewString)) {
                             Toast.makeText(getApplicationContext(), getString(R.string.password_same),
                                     Toast.LENGTH_LONG).show();
                             passNew.setTextColor(Color.RED);
                         }
-                        if (passNewString.length() < 6){
+                        if (passNewString.length() < 6) {
                             Toast.makeText(getApplicationContext(), getString(R.string.password_short),
                                     Toast.LENGTH_LONG).show();
                             passNew.setTextColor(Color.RED);
@@ -198,7 +183,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 }

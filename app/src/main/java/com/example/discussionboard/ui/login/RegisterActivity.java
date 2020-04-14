@@ -3,8 +3,10 @@ package com.example.discussionboard.ui.login;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -36,8 +38,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -53,16 +57,15 @@ public class RegisterActivity extends AppCompatActivity {
     UserViewModel viewModel;
     FirebaseUser user;
     FirebaseAuth auth;
+    //firebase objects
+    Bitmap newProfilePic;
     private EditText editEmail;
     private EditText editPassword;
     private Button choose;
     private ImageView image;
     //uri to store file
     private Uri imageUri;
-    //firebase objects
-    private StorageReference storageReference;
-    private DatabaseReference mDatabase;
-    private StorageTask mUploadTask;
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         datebaserUser1 = FirebaseDatabase.getInstance().getReference("users");
-        storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
         initializeUI();
 
@@ -156,11 +158,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void saveUser(String id, String image){
+    public void saveUser(String id) {
         String firstNameString = (firstname.getText().toString());
         String lastNameString = (lastname.getText().toString());
 
-        User user = new User(id, firstNameString, lastNameString, image,false);
+        User user = new User(id, firstNameString, lastNameString, false);
 
         UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), id);
         viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
@@ -187,14 +189,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-
     private void initializeUI() {
         editEmail = findViewById(R.id.mailRegister);
         editPassword = findViewById(R.id.passRegister);
         firstname = findViewById(R.id.fnameRegister);
         lastname = findViewById(R.id.lnameRegister);
     }
-
 
 
     public void selectImage() {
@@ -209,36 +209,48 @@ public class RegisterActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            image.setImageURI(imageUri);
+            if (data != null) {
+                // Get the URI of the selected file
+                final Uri uri = data.getData();
+                useImage(uri);
+            }
         }
     }
+
+    void useImage(Uri uri)
+    {
+        try {
+            bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+        } catch(IOException ie) {
+            ie.printStackTrace();
+        }
+        //use the bitmap as you like
+        image.setImageBitmap(bitmap);
+    }
+
+
     public void uploadImage(String id) {
-        if (imageUri != null) {
-            StorageReference fileReference = storageReference.child(System.currentTimeMillis() +
-                    "." + getFileExtension(imageUri));
-            mUploadTask = fileReference.putFile(imageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            saveUser(id,taskSnapshot.getUploadSessionUri().toString());
-                            System.out.println("URL "+taskSnapshot.getUploadSessionUri().toString());
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(RegisterActivity.this, e.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
-        }
-    }
-    //Get extension (.jpg(.png)
-    private String getFileExtension(Uri uri) {
-        ContentResolver resolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(resolver.getType(uri));
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        StorageReference pathReference = FirebaseStorage.getInstance().getReference().child("profiles/" + id + ".png");
+        UploadTask uploadTask = pathReference.putBytes(byteArray);
+        uploadTask = pathReference.putBytes(byteArray);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                saveUser(id);
+            }
+        });
+
+
     }
 
 

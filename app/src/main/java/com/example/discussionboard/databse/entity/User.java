@@ -6,10 +6,8 @@ import java.util.Map;
 public class User {
 
     private String id;
-
     private String firstname;
     private String lastname;
-    public String url;
     private boolean admin;
 
 
@@ -20,7 +18,6 @@ public class User {
     public User(String firstname, String lastname, String url, boolean admin) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.url = url;
         this.admin = admin;
     }
 
@@ -29,7 +26,6 @@ public class User {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.url = url;
         this.admin = admin;
     }
 
@@ -57,13 +53,6 @@ public class User {
         this.lastname = lastname;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public boolean getAdmin() {
         return admin;
@@ -78,7 +67,6 @@ public class User {
         result.put("firstname", firstname);
         result.put("lastname", lastname);
         result.put("admin", admin);
-        result.put("url", url);
         result.put("id", id);
 
         return result;
