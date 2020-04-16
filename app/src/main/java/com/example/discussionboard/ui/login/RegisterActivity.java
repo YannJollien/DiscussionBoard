@@ -48,12 +48,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     //constant to track image chooser intent
     private static final int PICK_IMAGE_REQUEST = 1;
-    static String id;
     public TextView firstname;
     public TextView lastname;
     Button bSave;
     UserViewModel viewModel;
-    FirebaseUser user;
     FirebaseAuth auth;
     //firebase objects
     Bitmap newProfilePic;
@@ -137,17 +135,11 @@ public class RegisterActivity extends AppCompatActivity {
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
-                        user = task.getResult().getUser();
-                        FirebaseUser user = task.getResult().getUser();
-                        System.out.println(("onComplete: uid=" + user.getUid()));
-                        id = user.getUid();
-                        uploadImage(id);
                         if (!task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                            finish();
+                            uploadImage(auth.getCurrentUser().getUid());
                         }
                     }
                 });
@@ -165,7 +157,8 @@ public class RegisterActivity extends AppCompatActivity {
         viewModel.createUser(userNew, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
-
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                finish();
             }
 
             @Override
@@ -180,8 +173,7 @@ public class RegisterActivity extends AppCompatActivity {
         lastname.setText("");
         firstname.setText("");
         lastname.setText("");
-        System.out.println(id);
-        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+        System.out.println(auth.getCurrentUser().getUid());
     }
 
 
@@ -232,24 +224,12 @@ public class RegisterActivity extends AppCompatActivity {
         StorageReference pathReference = FirebaseStorage.getInstance().getReference().child("profiles/" + id + ".png");
         UploadTask uploadTask = pathReference.putBytes(byteArray);
         uploadTask = pathReference.putBytes(byteArray);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                System.out.println("ID "+id);
+        uploadTask.addOnCompleteListener(RegisterActivity.this, task -> {
+            if(task.isSuccessful()) {
                 saveUser(id);
+            } else {
+                // do some error handling
             }
         });
-
-
     }
-
-
-
 }

@@ -1,5 +1,7 @@
 package com.example.discussionboard.databse.entity;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,20 +17,21 @@ public class User {
 
     }
     //Constructor
-    public User(String firstname, String lastname, String url, boolean admin) {
+    public User(String firstname, String lastname, boolean admin) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.admin = admin;
     }
 
     //Constructor
-    public User(String id, String firstname, String lastname, String url, boolean admin) {
+    public User(String id, String firstname, String lastname, boolean admin) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.admin = admin;
     }
 
+    @Exclude
     public String getId() {
         return id;
     }
