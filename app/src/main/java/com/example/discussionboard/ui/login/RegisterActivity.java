@@ -103,9 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //create user
-
                 registerNewUser();
-
             }
         });
 
@@ -173,7 +171,6 @@ public class RegisterActivity extends AppCompatActivity {
         lastname.setText("");
         firstname.setText("");
         lastname.setText("");
-        System.out.println(auth.getCurrentUser().getUid());
     }
 
 

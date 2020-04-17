@@ -23,7 +23,7 @@ public class UserViewModel extends AndroidViewModel {
     private MediatorLiveData<User> observableUser;
 
     public UserViewModel(@NonNull Application application,
-                         final String idUser, UserRepository repository) {
+                           final String idUser, UserRepository repository) {
         super(application);
 
         this.repository = repository;

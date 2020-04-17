@@ -8,6 +8,7 @@ import java.util.Map;
 public class User {
 
     private String id;
+
     private String firstname;
     private String lastname;
     private boolean admin;
@@ -31,7 +32,6 @@ public class User {
         this.admin = admin;
     }
 
-    @Exclude
     public String getId() {
         return id;
     }
@@ -56,8 +56,7 @@ public class User {
         this.lastname = lastname;
     }
 
-
-    public boolean getAdmin() {
+    public boolean isAdmin() {
         return admin;
     }
 

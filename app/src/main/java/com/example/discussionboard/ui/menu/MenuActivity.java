@@ -48,16 +48,6 @@ import java.util.Locale;
 
 public class MenuActivity extends AppCompatActivity {
 
-    String currentLanguage = "en", currentLang;
-    TextView sumS;
-    TextView sumP;
-    double sumStorage;
-    double sumPlantation;
-    float[] am = {0, 0, 0};
-    float[] hec = {0, 0, 0};
-    String[] typ = {"Arabica", "Robusta", "Liberica"};
-    Button profile;
-    private Locale locale;
 
     private RadioButton en;
     private RadioButton de;
@@ -104,7 +94,7 @@ public class MenuActivity extends AppCompatActivity {
                     User user1 = dataSnapshot1.getValue(User.class);
                     if (user1.getId().equals(user.getUid())) {
                         System.out.println("UserID "+user1.getId());
-                        if (user1.getAdmin()==true){
+                        if (user1.isAdmin()==true){
                             Menu nav_Menu = navigationView.getMenu();
                             nav_Menu.findItem(R.id.nav_admin).setVisible(true);
                         } else {

@@ -82,10 +82,9 @@ public class UserRepository {
                 });
     }
 
-    public LiveData<List<User>> getAllPost(String showName) {
+    public LiveData<List<User>> getAllUSer(String showName) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("users");
         return new UserListLiveData(reference);
     }
-
 }
