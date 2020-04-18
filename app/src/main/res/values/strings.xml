@@ -12,6 +12,7 @@
 
     <string name="fname">First name</string>
     <string name="lname">Last name</string>
+    <string name="profile">Profile picture</string>
     <string name="toast_user_added">User added</string>
     <string name="toast_add_error">Please enter all informations</string>
 

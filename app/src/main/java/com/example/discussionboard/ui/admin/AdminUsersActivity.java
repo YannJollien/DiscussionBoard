@@ -41,8 +41,6 @@ public class AdminUsersActivity extends AppCompatActivity {
     ArrayList<User> threadList;
     UserAdapterView adapter;
 
-    UserAdapter threadAdapter = new UserAdapter();
-
     ThreadListViewModel model;
 
     public static final String PREFS_NAME = "MyPrefsFile1";
@@ -134,6 +132,17 @@ public class AdminUsersActivity extends AppCompatActivity {
                 }
             }
         }).attachToRecyclerView(recyclerView);
+
+        userAdapter.setOnItemClickListener(new UserAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(User user) {
+                Intent intent = new Intent(AdminUsersActivity.this, AdminUserDetailActivity.class);
+                intent.putExtra("fname", user.getFirstname());
+                intent.putExtra("lname", user.getLastname());
+                intent.putExtra("admin",user.isAdmin());
+                startActivity(intent);
+            }
+        });
 
 
     }

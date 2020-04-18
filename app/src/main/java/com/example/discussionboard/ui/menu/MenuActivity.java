@@ -4,6 +4,9 @@ import android.content.Intent;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import android.util.DisplayMetrics;
@@ -35,6 +38,7 @@ import com.example.discussionboard.ui.admin.AdminActivity;
 import com.example.discussionboard.ui.chat.ChatActivity;
 import com.example.discussionboard.ui.login.LoginActivity;
 import com.example.discussionboard.ui.thread.ThreadViewActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,7 +47,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.Locale;
 
 public class MenuActivity extends AppCompatActivity {
@@ -57,8 +65,6 @@ public class MenuActivity extends AppCompatActivity {
 
     DatabaseReference reference;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-
 
     DrawerLayout drawerLayout;
 
@@ -81,6 +87,9 @@ public class MenuActivity extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+
+        //Set profile image to navView
+
 
         //Calling the items and tell them what to do
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -132,6 +141,8 @@ public class MenuActivity extends AppCompatActivity {
                             case R.id.nav_logout:
                                 Intent i4 = new Intent(MenuActivity.this, LoginActivity.class);
                                 startActivity(i4);
+                                Toast.makeText(MenuActivity.this, getString(R.string.menu_logout),
+                                        Toast.LENGTH_LONG).show();
                                 break;
                             case R.id.nav_contact:
                                 Intent i5 = new Intent(MenuActivity.this, ContactActivity.class);
@@ -141,13 +152,8 @@ public class MenuActivity extends AppCompatActivity {
                                 System.out.println(R.id.nav_lang);
                                 //calling changing langugage method
                                 changeLanguage();
-                            /*case R.id.nav_logout:
-                                Intent i4 = new Intent(MenuActivity.this, LoginActivity.class);
-                                startActivity(i4);
-                                Toast.makeText(MenuActivity.this, "Logged out",
-                                        Toast.LENGTH_LONG).show();
                                 break;
-                            case R.id.nav_about:
+                            /*case R.id.nav_about:
                                 Intent i5 = new Intent(MenuActivity.this, SettingsAboutActivity.class);
                                 startActivity(i5);
                                 break;*/
@@ -156,7 +162,27 @@ public class MenuActivity extends AppCompatActivity {
                     }
                 });
 
-        ImageButton ib = (ImageButton) navigationView.getHeaderView(0).findViewById(R.id.nav_button);
+        ImageButton ib = (ImageButton) navigationView.getHeaderView(0).findViewById(R.id.nav_button_header);
+        try {
+            final File tmpFile = File.createTempFile("img", "png");
+            StorageReference reference = FirebaseStorage.getInstance().getReference().child("profiles/");
+
+            //  "id" is name of the image file....
+
+            reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()+".png").getFile(tmpFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+
+                    Bitmap bitmap = BitmapFactory.decodeFile(tmpFile.getAbsolutePath());
+                    BitmapDrawable bdrawable = new BitmapDrawable(getApplicationContext().getResources(),bitmap);
+
+                    ib.setBackground(bdrawable);
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         ib.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

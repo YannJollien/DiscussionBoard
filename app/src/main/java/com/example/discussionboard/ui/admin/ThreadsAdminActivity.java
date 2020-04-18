@@ -176,7 +176,7 @@ public class ThreadsAdminActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(ThreadsAdminActivity.this, "Saved",
+        Toast.makeText(ThreadsAdminActivity.this, getString(R.string.toast_thread_added),
                 Toast.LENGTH_LONG).show();
 
     }

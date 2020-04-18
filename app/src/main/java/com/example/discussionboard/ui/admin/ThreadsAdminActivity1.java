@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadAdapter;
+import com.example.discussionboard.adapter.ThreadAdapterAdmin;
 import com.example.discussionboard.adapter.ThreadAdapterView;
 import com.example.discussionboard.databse.entity.Post;
 import com.example.discussionboard.databse.entity.Thread;
@@ -35,8 +36,6 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
     ArrayList<Post> postList;
     ThreadAdapterView adapter;
 
-    ThreadAdapter threadAdapter = new ThreadAdapter();
-
     ThreadListViewModel model;
 
     @Override
@@ -47,7 +46,7 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
         final RecyclerView recyclerView = findViewById(R.id.recycler_view_thread);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        final ThreadAdapter threadAdapter = new ThreadAdapter();
+        final ThreadAdapterAdmin threadAdapter = new ThreadAdapterAdmin();
         recyclerView.setAdapter(threadAdapter);
 
         threadList = new ArrayList<>();

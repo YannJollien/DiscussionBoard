@@ -16,6 +16,7 @@
 
     <string name="fname">Vorname</string>
     <string name="lname">Nachname</string>
+    <string name="profile">Profilbild</string>
 
     <string name="register_title">Benutzer hinzufügen</string>
 

@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.discussionboard.R;
-import com.example.discussionboard.databse.entity.Post;
 import com.example.discussionboard.databse.entity.User;
 
 import java.util.ArrayList;
@@ -18,6 +17,8 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
 
     private List<User> userList = new ArrayList<>();
+    private OnItemClickListener listener;
+
     @NonNull
     @Override
     public UserAdapter.UserHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -47,6 +48,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         return userList.get(position);
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(User user);
+    }
+
 
 
     class UserHolder extends RecyclerView.ViewHolder {
@@ -60,6 +69,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
             firstname = itemView.findViewById(R.id.fname_view);
             lastname = itemView.findViewById(R.id.lname_view);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    //if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(userList.get(position));
+                    // }
+                }
+            });
 
         }
     }

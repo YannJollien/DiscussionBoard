@@ -151,7 +151,7 @@ public class PostViewDetailActivity extends AppCompatActivity {
             }
         }
 
-        //reference.child(plantation.getId()).setValue(plantation);
+        //reference.child(post.getId()).setValue(post);
         PostListViewModel.Factory factory = new PostListViewModel.Factory(getApplication(), postId);
         model = ViewModelProviders.of(this, factory).get(PostListViewModel.class);
         model.updatePost(post, new OnAsyncEventListener() {
