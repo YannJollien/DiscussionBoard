@@ -13,6 +13,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,18 +51,18 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     public TextView firstname;
     public TextView lastname;
-    Button bSave;
+    private Button bSave;
     UserViewModel viewModel;
     FirebaseAuth auth;
     //firebase objects
-    Bitmap newProfilePic;
     private EditText editEmail;
     private EditText editPassword;
     private Button choose;
     private ImageView image;
-    //uri to store file
-    private Uri imageUri;
+
     Bitmap bitmap;
+
+    ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +80,14 @@ public class RegisterActivity extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
-
+        //UI
         initializeUI();
 
         setTitle("Registration");
+
+        //Progress Bar
+        progress = findViewById(R.id.load);
+        progress.setVisibility(View.INVISIBLE);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -103,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //create user
+                progress.setVisibility(View.VISIBLE);
                 registerNewUser();
             }
         });
@@ -125,22 +131,32 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Toast.makeText(RegisterActivity.this, "User created", Toast.LENGTH_SHORT).show();
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            uploadImage(auth.getCurrentUser().getUid());
+        //If no image error, else register new user
+        if(image.getDrawable() == null) {
+            Toast.makeText(RegisterActivity.this, "Please select profile picture",
+                    Toast.LENGTH_LONG).show();
+            progress.setVisibility(View.INVISIBLE);
+        }else {
+            auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+
+                            if (!task.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                uploadImage(auth.getCurrentUser().getUid());
+                            }
                         }
-                    }
-                });
+                    });
+
+        }
+
 
     }
 
@@ -225,7 +241,7 @@ public class RegisterActivity extends AppCompatActivity {
             if(task.isSuccessful()) {
                 saveUser(id);
             } else {
-                // do some error handling
+
             }
         });
     }

@@ -24,6 +24,7 @@ import com.example.discussionboard.R;
 import com.example.discussionboard.databse.entity.User;
 import com.example.discussionboard.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -72,17 +74,30 @@ public class ProfileActivity extends AppCompatActivity {
         image = findViewById(R.id.showImage);
 
 
+        //Get informations and profile picture
         if(user != null) {
             // Name, email address, and profile photo Url
             email = user.getEmail();
 
-            StorageReference pathReference = FirebaseStorage.getInstance().getReference().child("profiles/"+FirebaseAuth.getInstance().getCurrentUser().getUid()+".png");
+            try {
+                final File tmpFile = File.createTempFile("img", "png");
+                StorageReference reference = FirebaseStorage.getInstance().getReference().child("profiles/");
 
-            System.out.println("PathRef: "+pathReference.getPath());
+                //  "id" is name of the image file....
 
-            Bitmap bitmap = BitmapFactory.decodeFile(pathReference.getPath());
-            image.setImageBitmap(bitmap);
+                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()+".png").getFile(tmpFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
 
+                        Bitmap bitmap = BitmapFactory.decodeFile(tmpFile.getAbsolutePath());
+
+                        image.setImageBitmap(bitmap);
+
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             // Check if user's email is verified
             boolean emailVerified = user.isEmailVerified();

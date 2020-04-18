@@ -25,8 +25,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:text="@string/fname"
-        android:textColor="#ffffff" />l
+        android:text="@string/fname" />
 
     <EditText
         android:id="@+id/fnameRegister"
@@ -36,8 +35,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:ems="10"
-        android:inputType="text"
-        android:textColor="#ffffff" />
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/textView2"
@@ -46,8 +44,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:text="@string/lname"
-        android:textColor="#ffffff" />l
+        android:text="@string/lname" />
 
     <EditText
         android:id="@+id/lnameRegister"
@@ -57,8 +54,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:ems="10"
-        android:inputType="text"
-        android:textColor="#ffffff" />
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/textView3"
@@ -67,8 +63,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:text="@string/email"
-        android:textColor="#ffffff" />l
+        android:text="@string/email" />
 
     <EditText
         android:id="@+id/mailRegister"
@@ -78,8 +73,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="#ffffff" />
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView4"
@@ -88,8 +82,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="5dp"
-        android:text="@string/pass"
-        android:textColor="#ffffff" />
+        android:text="@string/pass" />
 
     <EditText
         android:id="@+id/passRegister"
@@ -99,9 +92,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="#ffffff"
-        android:textColorHint="#999999" />
+        android:inputType="textPersonName"/>
 
     <Button
         android:id="@+id/btnChoose"
@@ -120,14 +111,29 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"/>
 
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="5dp"
-        android:background="@drawable/custom_button2"
-        android:text="@string/button_register" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/custom_button2"
+            android:text="@string/button_register" />
+
+        <ProgressBar
+            android:id="@+id/load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_marginLeft="50dp"/>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

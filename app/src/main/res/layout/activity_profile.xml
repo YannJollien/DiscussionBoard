@@ -24,7 +24,8 @@
         android:id="@+id/showImage"
         android:layout_marginTop="100dp"
         android:layout_width="100dp"
-        android:layout_height="100dp"/>
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@+id/text_name"
@@ -44,6 +45,7 @@
         android:layout_marginTop="300dp"
         android:layout_marginLeft="10dp"
         android:padding="10dp"
-        android:background="@drawable/custom_button2"/>
+        android:background="@drawable/custom_button2"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
