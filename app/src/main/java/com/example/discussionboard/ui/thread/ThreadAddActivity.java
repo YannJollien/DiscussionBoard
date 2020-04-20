@@ -77,7 +77,7 @@ public class ThreadAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (thread.getText().toString().equals("") || category.getText().toString().equals("")) {
-                    Toast.makeText(ThreadAddActivity.this, "empty fields",
+                    Toast.makeText(ThreadAddActivity.this, getString(R.string.toast_thread_error),
                             Toast.LENGTH_LONG).show();
                 } else {
                     saveThreadTemp();
@@ -140,7 +140,7 @@ public class ThreadAddActivity extends AppCompatActivity {
         });
 
         startActivity(new Intent(ThreadAddActivity.this, ThreadViewActivity.class));
-        Toast.makeText(ThreadAddActivity.this, "Saved",
+        Toast.makeText(ThreadAddActivity.this, getString(R.string.toast_thread_added),
                 Toast.LENGTH_LONG).show();
         thread.setText("");
         category.setText("");

@@ -123,17 +123,17 @@ public class RegisterActivity extends AppCompatActivity {
         password = editPassword.getText().toString();
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.toast_register_mail), Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.toast_register_pass), Toast.LENGTH_LONG).show();
             return;
         }
 
         //If no image error, else register new user
         if(image.getDrawable() == null) {
-            Toast.makeText(RegisterActivity.this, "Please select profile picture",
+            Toast.makeText(RegisterActivity.this, getString(R.string.toast_register_profile),
                     Toast.LENGTH_LONG).show();
             progress.setVisibility(View.INVISIBLE);
         }else {
@@ -146,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
                             // signed in user can be handled in the listener.
 
                             if (!task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
+                                Toast.makeText(RegisterActivity.this, getString(R.string.toast_auth_fail) + task.getException(),
                                         Toast.LENGTH_SHORT).show();
                             }
                             else {
@@ -179,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(RegisterActivity.this, "Saved",
+        Toast.makeText(RegisterActivity.this, getString(R.string.toast_user_added),
                 Toast.LENGTH_LONG).show();
         firstname.setText("");
         lastname.setText("");

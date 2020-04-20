@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b70d0d"
+    android:background="@drawable/background_color"
     android:orientation="vertical"
     tools:context=".settings.SettingsAboutActivity">
 
@@ -27,7 +27,6 @@
         android:layout_marginRight="40dp"
         android:text="@string/creator"
         android:textAlignment="center"
-        android:textColor="#ffffff"
         android:textStyle="bold" />
 
 
@@ -41,7 +40,6 @@
         android:layout_marginRight="40dp"
         android:text="@string/contact_us"
         android:textAlignment="center"
-        android:textColor="#ffffff"
         android:textStyle="bold" />
 
     <TextView
@@ -52,8 +50,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginRight="40dp"
         android:text="Version"
-        android:textAlignment="center"
-        android:textColor="#ffffff" />
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/about_version1"
@@ -63,8 +60,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="40dp"
         android:text="Version"
-        android:textAlignment="center"
-        android:textColor="#ffffff" />
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/about_version2"
@@ -74,7 +70,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="40dp"
         android:text="Version"
-        android:textAlignment="center"
-        android:textColor="#ffffff" />
+        android:textAlignment="center" />
 
 </LinearLayout>

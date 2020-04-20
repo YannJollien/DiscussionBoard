@@ -3,13 +3,12 @@ package com.example.discussionboard.ui.menu;
 import android.content.Intent;
 
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
-import android.util.DisplayMetrics;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,12 +27,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.bumptech.glide.Glide;
 import com.example.discussionboard.R;
 import com.example.discussionboard.databse.entity.User;
 import com.example.discussionboard.settings.ContactActivity;
 import com.example.discussionboard.settings.ProfileActivity;
 
+import com.example.discussionboard.settings.SettingsAboutActivity;
 import com.example.discussionboard.ui.admin.AdminActivity;
 import com.example.discussionboard.ui.chat.ChatActivity;
 import com.example.discussionboard.ui.login.LoginActivity;
@@ -153,10 +152,10 @@ public class MenuActivity extends AppCompatActivity {
                                 //calling changing langugage method
                                 changeLanguage();
                                 break;
-                            /*case R.id.nav_about:
-                                Intent i5 = new Intent(MenuActivity.this, SettingsAboutActivity.class);
-                                startActivity(i5);
-                                break;*/
+                            case R.id.nav_about:
+                                Intent i6 = new Intent(MenuActivity.this, SettingsAboutActivity.class);
+                                startActivity(i6);
+                                break;
                         }
                         return true;
                     }

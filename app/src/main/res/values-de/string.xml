@@ -6,6 +6,13 @@
     <string name="login">Login!</string>
     <string name="email">E-mail</string>
     <string name="pass">Passwort</string>
+    <string name="toast_register_mail">Bitte E-Mail eingeben...</string>
+    <string name="toast_register_pass">Bitte Passwort eingeben...</string>
+    <string name="toast_register_profile">Bitte Profilbild wählen</string>
+    <string name="toast_password_enter">Password eingeben!</string>
+    <string name="toast_mail_enter">E-Mail eingeben!</string>
+    <string name="toast_password_short">"Passwort zu kutz"</string>
+    <string name="toast_auth_fail">"Authentikation fehlgeschlagen"</string>
     <string name="button_login">Login</string>
     <string name="button_register">Registrieren</string>
     <string name="toast_login_true">Willkommen</string>
@@ -41,6 +48,7 @@
     <string name="button_save">Speichern</string>
     <string name="toast_post_added">Post hinzugefütg</string>
     <string name="toast_post_error">Bitte alle Informationen angeben</string>
+    <string name="toast_post_progress">Upload wird durchgeführt</string>
     <string name="toast_post_delete">Post gelöscht</string>
     <string name="toast_post_notdelete">Post kann nicht gelöscht werden, Sie sind gazu nicht berechtigt</string>
     <string name="toast_post_update">Post aktualisiert</string>
@@ -116,5 +124,8 @@
     <!--Contact-->
     <string name="mail_address">E-Mail :</string>
     <string name="send_mail">E-Mail senden</string>
+
+    <!-- Chat-->
+    <string name="toast_text_error">Bitte Text eingeben!</string>
 
 </resources>

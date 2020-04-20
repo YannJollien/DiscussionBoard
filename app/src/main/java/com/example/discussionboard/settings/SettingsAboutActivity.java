@@ -1,6 +1,7 @@
 package com.example.discussionboard.settings;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -43,6 +44,8 @@ public class SettingsAboutActivity extends AppCompatActivity {
         build1 = (TextView) findViewById(R.id.about_version1);
 
         build2 = (TextView) findViewById(R.id.about_version2);
+
+        about.setPaintFlags(about.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
 
         build1.setText("VersionID " + Build.ID);

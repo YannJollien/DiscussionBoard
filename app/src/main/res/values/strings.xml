@@ -5,6 +5,13 @@
     <string name="login">Login!</string>
     <string name="email">E-mail</string>
     <string name="pass">Password</string>
+    <string name="toast_register_mail">Please enter email...</string>
+    <string name="toast_register_pass">Please enter password!</string>
+    <string name="toast_register_profile">Please select profile picture</string>
+    <string name="toast_password_enter">Enter password!</string>
+    <string name="toast_mail_enter">Enter email address!</string>
+    <string name="toast_password_short">Password to short</string>
+    <string name="toast_auth_fail">Authentication failed</string>
     <string name="button_login">Login</string>
     <string name="button_register">Register</string>
     <string name="toast_login_true">Login successful</string>
@@ -40,7 +47,8 @@
     <string name="button_update">Update</string>
     <string name="button_save">Save</string>
     <string name="toast_post_added">Post added</string>
-    <string name="toast_post_error">Post added</string>
+    <string name="toast_post_error">Empty fields</string>
+    <string name="toast_post_progress">Upload in progress</string>
     <string name="toast_post_delete">Post deleted</string>
     <string name="toast_post_notdelete">Can\'t delete, you are not the owner of the post</string>
     <string name="toast_post_update">Post updated</string>
@@ -116,6 +124,9 @@
     <!--Contact-->
     <string name="mail_address">E-Mail :</string>
     <string name="send_mail">Send E-Mail</string>
+
+    <!-- Chat-->
+    <string name="toast_text_error">Please enter some texts!</string>
 
 
 </resources>

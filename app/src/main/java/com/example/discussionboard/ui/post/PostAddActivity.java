@@ -98,11 +98,11 @@ public class PostAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (submitter.getText().toString().equals("") || text.getText().toString().equals("")) {
-                    Toast.makeText(PostAddActivity.this, "empty fields",
+                    Toast.makeText(PostAddActivity.this, getString(R.string.toast_post_error),
                             Toast.LENGTH_LONG).show();
                 } else {
                     if (mUploadTask != null && mUploadTask.isInProgress()){
-                        Toast.makeText(PostAddActivity.this, "Upload in progress",
+                        Toast.makeText(PostAddActivity.this, getString(R.string.toast_post_progress),
                                 Toast.LENGTH_LONG).show();
                     }else{
                         savePost();
@@ -169,7 +169,7 @@ public class PostAddActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(PostAddActivity.this, "Saved",
+        Toast.makeText(PostAddActivity.this, getString(R.string.toast_post_added),
                 Toast.LENGTH_LONG).show();
         submitter.setText("");
         text.setText("");

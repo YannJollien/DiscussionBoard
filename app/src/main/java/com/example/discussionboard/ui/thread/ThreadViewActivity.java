@@ -5,22 +5,19 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.adapter.ThreadAdapterView;
-import com.example.discussionboard.databse.entity.Post;
 import com.example.discussionboard.databse.entity.Thread;
-import com.example.discussionboard.ui.menu.MenuActivity;
+
 import com.example.discussionboard.ui.post.PostViewActivity;
 import com.example.discussionboard.viewmodel.thread.ThreadListViewModel;
 import com.google.firebase.database.DataSnapshot;

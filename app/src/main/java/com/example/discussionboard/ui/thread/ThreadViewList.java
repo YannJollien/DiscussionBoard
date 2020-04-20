@@ -1,17 +1,14 @@
 package com.example.discussionboard.ui.thread;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.ItemTouchHelper;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,9 +17,9 @@ import com.example.discussionboard.R;
 import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.adapter.ThreadAdapterView;
 import com.example.discussionboard.databse.entity.Thread;
-import com.example.discussionboard.util.OnAsyncEventListener;
+
 import com.example.discussionboard.viewmodel.thread.ThreadListViewModel;
-import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

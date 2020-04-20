@@ -56,7 +56,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (input.getText().toString().trim().equals("")) {
-                    Toast.makeText(ChatActivity.this, "Please enter some texts!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatActivity.this, getString(R.string.toast_text_error), Toast.LENGTH_SHORT).show();
                 } else {
                     FirebaseDatabase.getInstance()
                             .getReference("message")

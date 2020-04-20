@@ -166,7 +166,7 @@ public class PostViewDetailActivity extends AppCompatActivity {
             }
         });
         startActivity(new Intent(PostViewDetailActivity.this, PostViewActivity.class));
-        Toast.makeText(PostViewDetailActivity.this, "Saved",
+        Toast.makeText(PostViewDetailActivity.this, getString(R.string.toast_post_update),
                 Toast.LENGTH_LONG).show();
         submitter.setText("");
         text.setText("");

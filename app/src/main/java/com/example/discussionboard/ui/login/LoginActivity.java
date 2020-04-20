@@ -63,12 +63,12 @@ public class LoginActivity extends AppCompatActivity {
                  email = inputEmail.getText().toString();
                  password = inputPassword.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.toast_mail_enter), Toast.LENGTH_SHORT).show();
                     progress.setVisibility(View.INVISIBLE);
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.toast_password_enter), Toast.LENGTH_SHORT).show();
                     progress.setVisibility(View.INVISIBLE);
                     return;
                 }
@@ -83,10 +83,10 @@ public class LoginActivity extends AppCompatActivity {
                                 if (!task.isSuccessful()) {
                                     // there was an error
                                     if (password.length() < 6) {
-                                        Toast.makeText(LoginActivity.this, "Password to short", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginActivity.this, getString(R.string.toast_password_short), Toast.LENGTH_LONG).show();
                                         progress.setVisibility(View.INVISIBLE);
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginActivity.this, getString(R.string.toast_auth_fail), Toast.LENGTH_LONG).show();
                                         progress.setVisibility(View.INVISIBLE);
                                     }
                                 } else {
