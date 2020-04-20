@@ -140,6 +140,7 @@ public class AdminUsersActivity extends AppCompatActivity {
                 intent.putExtra("fname", user.getFirstname());
                 intent.putExtra("lname", user.getLastname());
                 intent.putExtra("admin",user.isAdmin());
+                intent.putExtra("id",user.getId());
                 startActivity(intent);
             }
         });

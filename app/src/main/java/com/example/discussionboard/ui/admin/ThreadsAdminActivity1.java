@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.discussionboard.R;
-import com.example.discussionboard.adapter.ThreadAdapter;
 import com.example.discussionboard.adapter.ThreadAdapterAdmin;
 import com.example.discussionboard.adapter.ThreadAdapterView;
 import com.example.discussionboard.databse.entity.Post;
 import com.example.discussionboard.databse.entity.Thread;
-
 import com.example.discussionboard.viewmodel.thread.ThreadListViewModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,9 +54,10 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
         referencePost.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Post post = dataSnapshot1.getValue(Post.class);
                     postList.add(post);
+                    System.out.println("PostList "+postList.get(0).getThreadId());
                 }
             }
 
@@ -72,7 +71,7 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
         referenceThread.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Thread thread = dataSnapshot1.getValue(Thread.class);
                     threadList.add(thread);
                 }
@@ -89,8 +88,6 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
 
         //set Titel of View
         setTitle("Thread");
-
-
 
 
         // my_child_toolbar is defined in the layout file
@@ -115,15 +112,15 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 int position = viewHolder.getAdapterPosition();
 
-                Thread thread = adapter.getThread(position);
-
-                for (int j = 0 ; i < postList.size();j++){
-                    if (thread.getId().equals(postList.get(j).getThreadId())){
+                for (int j = 0; i < postList.size(); j++) {
+                    System.out.println("Current ID"+adapter.getThread(position).getId());
+                    System.out.println(" ID Thread from PostList "+postList.get(j).getThreadId());
+                    if (adapter.getThread(position).getId().equals(postList.get(j).getThreadId())) {
                         referencePost.child(postList.get(j).getId()).removeValue();
                     }
                 }
 
-
+                Thread thread = adapter.getThread(position);
 
                 referenceThread.child(thread.getId()).removeValue();
 
@@ -135,6 +132,5 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
 
 
     }
-
 
 }

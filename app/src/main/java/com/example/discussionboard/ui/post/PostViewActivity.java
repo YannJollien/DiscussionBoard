@@ -80,8 +80,10 @@ public class PostViewActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Post post = dataSnapshot1.getValue(Post.class);
-                    if (threadId.equals(post.getThreadId()) && intent.getExtras() != null) {
-                        postList.add(post);
+                    if (intent.getExtras() != null) {
+                        if (threadId.equals(post.getThreadId()) ){ //Refractoring nessecary here
+                            postList.add(post);
+                        }
                     }
                 }
                 postAdapter.setPost(postList);
@@ -123,7 +125,7 @@ public class PostViewActivity extends AppCompatActivity {
 
                 Post post = adapter.getPost(position);
 
-                if (post.getId().equals(currentUserId)) {
+                if (post.getUserId().equals(currentUserId)) {
                     reference.child(post.getId()).removeValue();
                     startActivity(new Intent(PostViewActivity.this, ThreadViewActivity.class));
                     Toast.makeText(getApplicationContext(), getString(R.string.toast_post_delete),

@@ -60,6 +60,7 @@ public class AdminUserDetailActivity extends AppCompatActivity {
         fname = getIntent().getExtras().getString("fname");
         lname = getIntent().getExtras().getString("lname");
         adm = getIntent().getExtras().getBoolean("admin");
+        id = getIntent().getExtras().getString("id");
 
         System.out.println("LNAME"+ lname);
 
@@ -98,11 +99,7 @@ public class AdminUserDetailActivity extends AppCompatActivity {
             adm = false;
         }
 
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        User user = new User(fnameString,lnameString,adm);
-        user.setId(id);
-        //reference.child(post.getId()).setValue(post);
+        User user = new User(id,fnameString,lnameString,adm);
         UserListViewModel.Factory factory = new UserListViewModel.Factory(getApplication(), id);
         model = ViewModelProviders.of(this, factory).get(UserListViewModel.class);
         model.updateUser(user, new OnAsyncEventListener() {
