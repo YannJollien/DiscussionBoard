@@ -81,8 +81,9 @@
 
     <!--Change password-->
     <string name="change_pwd">Change Password</string>
-    <string name="hint_old">Old password</string>
-    <string name="hint_new">New password</string>
+    <string name="hint_new1">New password</string>
+    <string name="hint_new">Retype new password</string>
+    <string name="password_fail">Please check entries</string>
     <string name="password_short">At least 6 characters</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>

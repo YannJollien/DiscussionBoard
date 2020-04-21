@@ -46,9 +46,11 @@ public class PostViewActivity extends AppCompatActivity {
     PostAdapterView adapter;
     PostAdapter postAdapter = new PostAdapter();
     PostListViewModel model;
-    String threadId;
+    String idThread;
     String currentUserId;
     FirebaseUser currentFirebaseUser;
+
+    ThreadViewActivity showThreads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +67,6 @@ public class PostViewActivity extends AppCompatActivity {
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         currentUserId = currentFirebaseUser.getUid();
 
-        //Check if incoming intent
-        Intent intent = getIntent();
-        if (intent.getExtras() != null) {
-            threadId = getIntent().getExtras().getString("threadId", "defaultKey");
-        }
-
-
         postList = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference().child("post");
@@ -80,11 +75,11 @@ public class PostViewActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Post post = dataSnapshot1.getValue(Post.class);
-                    if (intent.getExtras() != null) {
-                        if (threadId.equals(post.getThreadId()) ){ //Refractoring nessecary here
+                    showThreads = new ThreadViewActivity();
+                    idThread = showThreads.threadId;
+                        if (idThread.equals(post.getThreadId()) ){ //Refractoring nessecary here
                             postList.add(post);
                         }
-                    }
                 }
                 postAdapter.setPost(postList);
                 adapter = new PostAdapterView(getApplicationContext(), postList);
@@ -168,7 +163,8 @@ public class PostViewActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_add:
                 Intent intent = new Intent(PostViewActivity.this, PostAddActivity.class);
-                intent.putExtra("threadId", threadId);
+                idThread = showThreads.threadId;
+                intent.putExtra("threadId", idThread);
                 startActivity(intent);
                 return true;
             default:

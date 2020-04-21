@@ -41,6 +41,8 @@ public class ThreadViewActivity extends AppCompatActivity {
 
     ThreadListViewModel model;
 
+    public static String threadId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +81,7 @@ public class ThreadViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Thread thread) {
                 Intent intent = new Intent(ThreadViewActivity.this, PostViewActivity.class);
-                intent.putExtra("threadId", thread.getId());
+                threadId = thread.getId();
                 startActivity(intent);
             }
         });

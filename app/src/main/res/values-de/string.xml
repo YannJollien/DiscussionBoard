@@ -82,8 +82,9 @@
 
     <!--Change password-->
     <string name="change_pwd">Passwort ändern</string>
-    <string name="hint_old">Altes Passwort</string>
-    <string name="hint_new">Neues Passwort</string>
+    <string name="hint_new1">Neues Passwort</string>
+    <string name="hint_new">Neues Passwort erneut eingeben</string>
+    <string name="password_fail">Bitte Eingaben prüfen</string>
     <string name="password_short">Mindestens 6 Zeichen</string>
     <string name="ok">Ok</string>
     <string name="cancel">Abbrechen</string>

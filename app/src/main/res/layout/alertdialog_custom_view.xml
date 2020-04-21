@@ -17,10 +17,10 @@
         android:textSize="15dp"
         />
     <EditText
-        android:id="@+id/passwordOld"
+        android:id="@+id/passwordNew1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_old"
+        android:hint="@string/hint_new1"
         android:textSize="15dp"
         android:layout_below="@id/dialog_title"
         />
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/hint_new"
         android:textSize="15dp"
-        android:layout_below="@id/passwordOld"
+        android:layout_below="@id/passwordNew1"
         />
     <Button
         android:id="@+id/dialog_positive_btn"

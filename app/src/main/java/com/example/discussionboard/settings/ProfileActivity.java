@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
     LoginActivity main = new LoginActivity();
 
     String email;
-    EditText passOld;
+    EditText passNew1;
     EditText passNew;
     ImageView image;
     DatabaseReference reference;
@@ -139,7 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
                 // Get the custom alert dialog view widgets reference
                 Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
                 Button btn_negative = (Button) dialogView.findViewById(R.id.dialog_negative_btn);
-                passOld = (EditText) dialogView.findViewById(R.id.passwordOld);
+                passNew1 = (EditText) dialogView.findViewById(R.id.passwordNew1);
                 passNew = (EditText) dialogView.findViewById(R.id.passwordNew);
 
                 // Create the alert dialog
@@ -151,10 +151,10 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         // Dismiss the alert dialog
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        String passOldString = passOld.getText().toString();
+                        String passNew1String = passNew1.getText().toString();
                         String passNewString = passNew.getText().toString();
 
-                        if (!passOldString.equals(passNewString)) {
+                        if (passNew1String.equals(passNewString) && passNewString.length() >= 6) {
                             user.updatePassword(passNewString)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -169,16 +169,11 @@ public class ProfileActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), getString(R.string.password_ok),
                                     Toast.LENGTH_LONG).show();
                             dialog.cancel();
-                        }
-                        if (passOldString.equals(passNewString)) {
-                            Toast.makeText(getApplicationContext(), getString(R.string.password_same),
-                                    Toast.LENGTH_LONG).show();
+                        }else {
+                            passNew1.setTextColor(Color.RED);
                             passNew.setTextColor(Color.RED);
-                        }
-                        if (passNewString.length() < 6) {
-                            Toast.makeText(getApplicationContext(), getString(R.string.password_short),
+                            Toast.makeText(getApplicationContext(), getString(R.string.password_fail),
                                     Toast.LENGTH_LONG).show();
-                            passNew.setTextColor(Color.RED);
                         }
                     }
                 });
