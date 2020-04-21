@@ -64,7 +64,7 @@ public class PostAddActivity extends AppCompatActivity {
         databasePost = FirebaseDatabase.getInstance().getReference("post");
 
 
-        setTitle("Add Post");
+        setTitle(getString(R.string.post_add_title));
 
         Toolbar myChildToolbar =
                 (Toolbar) findViewById(R.id.add_post_toolbar);

@@ -57,7 +57,6 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Post post = dataSnapshot1.getValue(Post.class);
                     postList.add(post);
-                    System.out.println("PostList "+postList.get(0).getThreadId());
                 }
             }
 
@@ -112,14 +111,14 @@ public class ThreadsAdminActivity1 extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 int position = viewHolder.getAdapterPosition();
 
-                for (int j = 0; i < postList.size(); j++) {
-                    System.out.println("Current ID"+adapter.getThread(position).getId());
-                    System.out.println(" ID Thread from PostList "+postList.get(j).getThreadId());
+                //Deleting corresponding posts
+                for (int j = 0; j < postList.size(); j++) {
                     if (adapter.getThread(position).getId().equals(postList.get(j).getThreadId())) {
                         referencePost.child(postList.get(j).getId()).removeValue();
                     }
                 }
 
+                //Deleting Thread
                 Thread thread = adapter.getThread(position);
 
                 referenceThread.child(thread.getId()).removeValue();

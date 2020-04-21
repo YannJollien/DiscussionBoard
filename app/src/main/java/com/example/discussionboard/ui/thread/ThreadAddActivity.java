@@ -52,7 +52,7 @@ public class ThreadAddActivity extends AppCompatActivity {
         databaseThread = FirebaseDatabase.getInstance().getReference("thread");
 
 
-        setTitle("Add Thread");
+        setTitle(getString(R.string.thread_add_title));
 
         Toolbar myChildToolbar =
                 (Toolbar) findViewById(R.id.thread_toolbar);

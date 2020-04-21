@@ -96,7 +96,7 @@ public class ThreadViewActivity extends AppCompatActivity {
             }
         });
         //set Titel of View
-        setTitle("Thread");
+        setTitle(getString(R.string.thread_title));
 
 
 

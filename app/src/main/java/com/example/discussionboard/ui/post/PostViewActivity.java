@@ -94,7 +94,7 @@ public class PostViewActivity extends AppCompatActivity {
 
 
         //set Titel of View
-        setTitle("Post");
+        setTitle(getString(R.string.post_title));
 
 
         // my_child_toolbar is defined in the layout file
